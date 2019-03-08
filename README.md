@@ -1,19 +1,44 @@
-QYBot SDK
+QYBot SDK For E
 ---
 [![License](https://img.shields.io/github/license/Hstb1230/qybot-sdk.svg)](LICENSE)
 [![Q群](https://img.shields.io/badge/Q%20%E7%BE%A4-529483966-orange.svg)](https://jq.qq.com/?_wv=1027&k=5McnWRW)
 [![社区](https://img.shields.io/badge/%E7%A4%BE%E5%8C%BA-qyue.cc-blue.svg)](https://qyue.cc)
 
-此项目(_`repo`_)用于收录 契约机器人 的各种语言SDK
-
+目录结构
 ---
+```
+- [面向对象]Json.ec  json模块
+- QYPluginSDK.ec  API模块
+- QYPluginSDK.e  API模块源码
+- com.contract.testapp.e  插件Demo
+```
 
-| 语言 | API版本 | 作者 | 托管平台 | 地址导向 |
-| --- | --- | --- | --- | --- |
-| C++ | `2018` | Hstb1230 | github | [tree/cpp](https://github.com/Hstb1230/qybot-sdk/tree/cpp) |
-| C++ | `2018` | huise | gitee | [shangg/QYSDK-VC](https://gitee.com/shangg/QYSDK-VC) |
-| C# | `2018` | huise | gitee | [shangg/QYSDK-NET](https://gitee.com/shangg/QYSDK-NET) |
-| E | `2018` | 机器人作者 | github | [tree/e](https://github.com/Hstb1230/qybot-sdk/tree/e) |
+* 模块为插件的依赖文件，如无特殊需求(改变解析方法等)，请不要随意修改模块，以免升级时带来不便。
 
-注：
-* 部分SDK使用 _`branch`_ 直接收录于此 _`repo`_ 下，想要补充的同学发起PR请求即可。
+开发
+---
+* demo中已包含一些示例代码，仅依赖于`系统核心支持库`，请自行参考、修改、删除。
+* 插件事件函数均在`程序集1`，可以根据你的喜好更换至不同程序集中，但要记得√上`公开`。
+* 请不要修改除`菜单`函数以外的事件函数，这里指 `参数` 和 `返回值类型`。
+* 大部分事件函数的 `函数名` 是可以修改的，除了 _`Initialize`_ 、 _`AppInfo`_ 。不过能改的那些函数，也要在 _`AppInfo()`_ 修改对应字段值。
+* 如果不想用 `Json模块`，可以将 _`AppInfo`_ 的返回值 变成 `长文本常量`。
+* `API模块` 是必须用的，除非你基于 `模块源码` 开发。
+* 如果一定要做上一句，请记得把 `程序类型` 改成 `Windows动态链接库`。
+* 部分API需要在插件信息中声明权限后才可调用，如 `取Cookies` 需要声明 `权限20`。
+* 很多API在被调用时，日志不会输出相关信息，所以有时候要用 `QY.添加日志()` 确认代码逻辑是否正确。
+* 如果需要存储文件，尽可能放在 `QY.取应用目录 ()` 得到的目录内。
+* 在注明 `在主线程中调用` 的函数中，尽可能不要使用 `载入(窗口1， ， 真)` 之类的 同步函数。
+* 同步函数：与 `异步函数`不同，外线程调用此类函数时，**必须等待函数执行完毕**，因此在某些极端情况下，外线程可能会出现假死现象。
+* 收到消息时，并不是通过 `返回(回复内容)` 发送消息，(因为类型不对(文本型→整数型))，而是通过调用API，如：`QY.发送群消息(QQID，fromGroup，回复内容)`。
+* 因为demo中已有很多注释，所以其余内容不再展开。
+* ……
+
+编译
+---
+* 尽量使用静态、黑月等方法进行编译。
+* 编译前请确保 **未运行机器人** 或 **未加载插件** 。
+* 插件文件名应与 _`appid`_ 一致，后缀应为 _`.qyk.dll`_ 或 _`.qyk`_ 。
+
+其他
+---
+* 有问题就加群或到社区反馈吧~
