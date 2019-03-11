@@ -1,2 +1,1 @@
-# qybot-sdk
-QYBot SDK —— 目前仅有C++
+# QYBot SDK For C++
