@@ -1,0 +1,137 @@
+{
+  "ret": 1, // 返回码，固定为1
+  "apiver": 2018, // Api版本，本SDK为2018
+  "appid": "com.demo.cpp", // 其中 appid 需与文件名(不含后缀)一致, 如appid=com.demo.cpp, 则文件名为com.demo.cpp.qyk(或.qyk.dll)
+  "name": "契约样例应用(C++)", // 应用名称
+  "version": "1.0.0", // 应用版本
+  "version_id": 1, // 应用顺序版本（每次发布时至少+1）
+  "author": "demo", // 应用作者
+  "description": "C++样例应用(v2018应用机制)", // 应用说明，需要换行请使用\r\n
+  "event": [ 
+    // 事件列表（发布前请删除无用事件）
+    {
+      "id": 1001, //事件ID
+      "type": 1001, //事件类型
+      "name": "QY启动事件", // 事件名称
+      "function": "QY_Event_Startup", // 事件对应函数
+      "priority": 30000 // 事件优先级 最小10000 最大50000
+    },
+    {
+      "id": 1002,
+      "type": 1002,
+      "name": "QY关闭事件",
+      "function": "QY_Event_Exit",
+      "priority": 30000
+    },
+    {
+      "id": 1003,
+      "type": 1003,
+      "name": "应用已被启用",
+      "function": "QY_Event_Enable",
+      "priority": 30000
+    },
+    {
+      "id": 1004,
+      "type": 1004,
+      "name": "应用将被停用",
+      "function": "QY_Event_Disable",
+      "priority": 30000
+    },
+    {
+      "id": 1,
+      "type": 166,
+      "name": "私聊消息处理",
+      "function": "QY_Event_PrivateMsg",
+      "priority": 30000
+    },
+    {
+      "id": 2,
+      "type": 82,
+      "name": "群消息处理",
+      "function": "QY_Event_GroupMsg",
+      "priority": 30000
+    },
+    {
+      "id": 3,
+      "type": 83,
+      "name": "讨论组消息处理",
+      "function": "QY_Event_DiscussMsg",
+      "priority": 30000
+    },
+    {
+      "id": 4,
+      "type": 101,
+      "name": "推送消息事件",
+      "function": "QY_Event_PushMsgEvent",
+      "priority": 30000
+    },
+    {
+      "id": 5,
+      "type": 102,
+      "name": "群管理变动事件处理",
+      "function": "QY_Event_System_GroupAdmin",
+      "priority": 30000
+    },
+    {
+      "id": 6,
+      "type": 103,
+      "name": "群成员减少事件处理",
+      "function": "QY_Event_System_GroupMemberDecrease",
+      "priority": 30000
+    },
+    {
+      "id": 7,
+      "type": 104,
+      "name": "群成员增加事件处理",
+      "function": "QY_Event_System_GroupMemberIncrease",
+      "priority": 30000
+    },
+    {
+      "id": 8,
+      "type": 201,
+      "name": "好友事件处理",
+      "function": "QY_Event_FriendEvent",
+      "priority": 30000
+    },
+    {
+      "id": 9,
+      "type": 301,
+      "name": "好友添加请求处理",
+      "function": "QY_Event_Request_AddFriend",
+      "priority": 30000
+    },
+    {
+      "id": 10,
+      "type": 302,
+      "name": "群添加请求处理",
+      "function": "QY_Event_Request_AddGroup",
+      "priority": 30000
+    }
+  ],
+  "menu": [
+    // 设置菜单（发布前请删除无用菜单，如果无需设置菜单请全部删除）
+    {
+      "name": "设置A",
+      "function": "_menuA"
+    },
+    {
+      "name": "设置B",
+      "function": "_menuB"
+    }
+  ],
+  "auth": [
+    // 应用权限（发布前请删除无用权限）
+    // 注意逗号
+    101, // 发送好友消息          sendFriendMsg
+    102, // 发送群消息            sendGroupMsg
+    103, // 发送群临时消息        sendGroupTmpMsg
+    104, // 发送讨论组消息        sendDiscussMsg
+    105, // 发送讨论组临时消息    sendDiscussTmpMsg
+    // 110, // [敏感]取Cookies       getCookies/getCsrfToken
+    111, // 发送名片点赞          sendLikeFavorite
+    // 112, //[敏感]置退出群       setExitGroupChat
+    // 113, //[敏感]置退出讨论组   setExitDiscussChat
+    114, //置移除群员             setGroupMembersKick
+    115  //置移除讨论组成员      setDiscussMembersKick
+  ]
+}
