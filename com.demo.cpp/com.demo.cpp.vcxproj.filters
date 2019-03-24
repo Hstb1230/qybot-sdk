@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\utils">
+      <UniqueIdentifier>{31fce282-499f-4339-824c-7f89e02ef6e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\utils">
+      <UniqueIdentifier>{d05f29fe-afbc-411a-bd73-edee9a3d5af1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\qy">
+      <UniqueIdentifier>{be6c8bc9-2377-4d95-a5bc-3e5f31d4df83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\qy">
+      <UniqueIdentifier>{73855e8b-a01f-47d2-b75e-35b239f4c02c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\base64.h">
+      <Filter>头文件\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\bins.h">
+      <Filter>头文件\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\pack.h">
+      <Filter>头文件\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\unPack.h">
+      <Filter>头文件\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\utils.h">
+      <Filter>头文件\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="qy\api.h">
+      <Filter>头文件\qy</Filter>
+    </ClInclude>
+    <ClInclude Include="qy\dll.h">
+      <Filter>头文件\qy</Filter>
+    </ClInclude>
+    <ClInclude Include="qy\log.h">
+      <Filter>头文件\qy</Filter>
+    </ClInclude>
+    <ClInclude Include="qy\logInfo.h">
+      <Filter>头文件\qy</Filter>
+    </ClInclude>
+    <ClInclude Include="typedef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="qy\infoAnalyze.h">
+      <Filter>头文件\qy</Filter>
+    </ClInclude>
+    <ClInclude Include="qy\typedef.h">
+      <Filter>头文件\qy</Filter>
+    </ClInclude>
+    <ClInclude Include="qy\code.h">
+      <Filter>头文件\qy</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="event.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\base64.cpp">
+      <Filter>源文件\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\bins.cpp">
+      <Filter>源文件\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\pack.cpp">
+      <Filter>源文件\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\unPack.cpp">
+      <Filter>源文件\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="resource.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="qy\api.cpp">
+      <Filter>源文件\qy</Filter>
+    </ClCompile>
+    <ClCompile Include="qy\log.cpp">
+      <Filter>源文件\qy</Filter>
+    </ClCompile>
+    <ClCompile Include="qy\logInfo.cpp">
+      <Filter>源文件\qy</Filter>
+    </ClCompile>
+    <ClCompile Include="qy\infoAnalyze.cpp">
+      <Filter>源文件\qy</Filter>
+    </ClCompile>
+    <ClCompile Include="qy\code.cpp">
+      <Filter>源文件\qy</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="info.json">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="events.def">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="com.demo.cpp.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="qy\dll.lib">
+      <Filter>头文件\qy</Filter>
+    </Library>
+  </ItemGroup>
+</Project>
