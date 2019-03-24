@@ -1,0 +1,19 @@
+LIBRARY
+EXPORTS
+AppInfo @ 1
+Initialize @ 2
+_menuA @ 3
+_menuB @ 4
+QY_Event_Enable @ 5
+QY_Event_Disable @ 6
+QY_Event_Startup @ 7
+QY_Event_Exit @ 8
+QY_Event_PrivateMsg @ 9
+QY_Event_GroupMsg @ 10
+QY_Event_DiscussMsg @ 11
+QY_Event_PushMsgEvent @ 12
+QY_Event_System_GroupAdmin @ 13
+QY_Event_System_GroupMemberDecrease @ 14
+QY_Event_FriendEvent @ 15
+QY_Event_Request_AddFriend @ 16
+QY_Event_Request_AddGroup @ 17
