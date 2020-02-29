@@ -724,13 +724,28 @@ QYEVENT(INT32) QY_Event_Request_AddGroup(
  */
 QYEVENT(INT32) _menuA()
 {
-	MessageBox(NULL, "这是menuA，在这里载入窗口，或者进行其他工作。", "信息框", 0);
+	/*
+		写成这样, 
+		一方面是为了兼容乱改字符集的操作,
+		一方面是为了提醒你注意编码.
+	*/
+#ifdef UNICODE
+	//MessageBox(NULL, L"这是menuA，在这里载入窗口，或者进行其他工作。", L"信息框", 0);
+	MessageBoxA(NULL, "这是menuA，在这里载入窗口，或者进行其他工作。", "信息框", 0);
+#else
+	MessageBoxA(NULL, "这是menuA，在这里载入窗口，或者进行其他工作。", "信息框", 0);
+#endif // !UNICODE
 	return 0; //请固定返回0
 }
 
 QYEVENT(INT32) _menuB()
 {
-	MessageBox(NULL, "这是menuB，在这里载入窗口，或者进行其他工作。", "信息框", 0);
+#ifdef UNICODE
+	//MessageBox(NULL, L"这是menuB，在这里载入窗口，或者进行其他工作。", L"信息框", 0);
+	MessageBoxA(NULL, "这是menuB，在这里载入窗口，或者进行其他工作。", "信息框", 0);
+#else
+	MessageBoxA(NULL, "这是menuB，在这里载入窗口，或者进行其他工作。", "信息框", 0);
+#endif // !UNICODE
 	return 0; //请固定返回0
 }
 
