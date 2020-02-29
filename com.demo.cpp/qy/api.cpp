@@ -1,4 +1,4 @@
-#include "../stdafx.h"
+ï»¿#include "../stdafx.h"
 #include "../utils/utils.h"
 #include "../resource.h"
 #include "api.h"
@@ -6,7 +6,7 @@
 #include <qy\dll.h>
 
 #ifndef QYAPI_TOLOG
-#define QYAPI_TOLOG true // µ÷ÓÃAPIÊ±Êä³öµ÷ÊÔÈÕÖ¾£¬ÓÃÀ´ÅĞ¶ÏÊÇ·ñ´¥·¢API
+#define QYAPI_TOLOG true // è°ƒç”¨APIæ—¶è¾“å‡ºè°ƒè¯•æ—¥å¿—ï¼Œç”¨æ¥åˆ¤æ–­æ˜¯å¦è§¦å‘API
 #endif // !QYAPI_TOLOG
 
 
@@ -18,8 +18,8 @@ string QYAPI::appDirectory = "";
 
 
 /**
- * È¡²å¼şµÄJsonĞÅÏ¢
- * @return	CSTRING		jsonÎÄ±¾
+ * å–æ’ä»¶çš„Jsonä¿¡æ¯
+ * @return	CSTRING		jsonæ–‡æœ¬
  */
 CSTRING QYAPI::getJsonInfo()
 {
@@ -38,7 +38,7 @@ CSTRING QYAPI::getJsonInfo()
 	uint32_t indexNote = 0;
 
 	while(true) {
-		/* »ñÈ¡Ã¿ĞĞÎÄ±¾£¬ÒòÎªĞĞÎ²¿ÉÄÜÊÇ\n\r¡¢\n£¬ËùÒÔ·´¸´²éÕÒ */
+		/* è·å–æ¯è¡Œæ–‡æœ¬ï¼Œå› ä¸ºè¡Œå°¾å¯èƒ½æ˜¯\n\rã€\nï¼Œæ‰€ä»¥åå¤æŸ¥æ‰¾ */
 		indexLine = source.find("\n\r", index);
 		if(indexLine == (uint32_t)string::npos)
 			indexLine = source.find("\n", index);
@@ -46,30 +46,30 @@ CSTRING QYAPI::getJsonInfo()
 			? source.substr(index) : source.substr(index, (indexLine - index));
 		//out << lineText << " " << lineText.length() << endl;
 
-		/* ¼òµ¥¹ıÂËµ¥ĞĞ×¢ÊÍ */
+		/* ç®€å•è¿‡æ»¤å•è¡Œæ³¨é‡Š */
 		indexNote = 0;
 		while(true) {
 			indexNote = lineText.find("//", indexNote);
 			if(indexNote == (uint32_t)string::npos) break;
-			/* È¡³öÇ°ÃæÎÄ±¾£¬¸ù¾İÒıºÅÊıÁ¿ÅĞ¶ÏÊÇ·ñÎª×¢ÊÍ */
-			int qm = 0; //ÒıºÅÊıÁ¿
+			/* å–å‡ºå‰é¢æ–‡æœ¬ï¼Œæ ¹æ®å¼•å·æ•°é‡åˆ¤æ–­æ˜¯å¦ä¸ºæ³¨é‡Š */
+			int qm = 0; //å¼•å·æ•°é‡
 			const char * head = lineText.substr(0, indexNote).c_str();
 			for(int i = 0; head[i] != '\0'; i++) {
 				if(head[i] == '"' && (i > 0 && head[i - 1] != '\\')) ++qm;
 			}
 			//out << "qm = " << qm << " ";
 			if(qm % 2 == 0) {
-				//ÊÇ×¢ÊÍ
+				//æ˜¯æ³¨é‡Š
 				lineText = lineText.substr(0, indexNote);
 				break;
 			}
 			indexNote += 2;
 		}
-		/* ÅĞ¶ÏÊÇ·ñÎª¿ÕÎÄ±¾ĞĞ(´¿¿Õ¸ñ) */
+		/* åˆ¤æ–­æ˜¯å¦ä¸ºç©ºæ–‡æœ¬è¡Œ(çº¯ç©ºæ ¼) */
 		int nSpace = 0;
 		const char * s = lineText.c_str();
 		for(int i = 0; s[i] == ' '; i++) nSpace++;
-		/* ÊÇ¿ÕÎÄ±¾ĞĞ¾Í²»·µ»Ø */
+		/* æ˜¯ç©ºæ–‡æœ¬è¡Œå°±ä¸è¿”å› */
 		if(nSpace != lineText.length()) {
 			json += lineText; // +"\n\r";
 			//out << lineText << " [E]" << endl;
@@ -80,29 +80,29 @@ CSTRING QYAPI::getJsonInfo()
 
 
 	//out << endl << endl;
-	//²»ÖªµÀÎªÊ²Ã´ÎÄÄ©ÂÒÂë£¬×ÜÖ®ÔÙ½ØÈ¡Ò»´Î¾Íover
+	//ä¸çŸ¥é“ä¸ºä»€ä¹ˆæ–‡æœ«ä¹±ç ï¼Œæ€»ä¹‹å†æˆªå–ä¸€æ¬¡å°±over
 	json = json.substr(0, json.find_last_of('}') + 1);
 	//out << json;
-	//MessageBoxA(NULL, json.c_str(), "ĞÅÏ¢¿ò", 0);
+	//MessageBoxA(NULL, json.c_str(), "ä¿¡æ¯æ¡†", 0);
 	info = new char[json.length() + 1];
 	strcpy_s(info, json.length() + 1, json.c_str());
 	return info;
 }
 
 /**
- * ÖÃAuthCode
- * @param	INT32	authCode	Ó¦ÓÃ±êÊ¶
+ * ç½®AuthCode
+ * @param	INT32	authCode	åº”ç”¨æ ‡è¯†
  */
 void QYAPI::setAuthCode(
-	INT32	authCode	// Ó¦ÓÃ±êÊ¶
+	INT32	authCode	// åº”ç”¨æ ‡è¯†
 )
 {
 	QYAPI::authCode = authCode;
 }
 
 /**
- * È¡AuthCode
- * @return	INT32	authCode	Ó¦ÓÃ±êÊ¶
+ * å–AuthCode
+ * @return	INT32	authCode	åº”ç”¨æ ‡è¯†
  */
 INT32 QYAPI::getAuthCode()
 {
@@ -110,19 +110,19 @@ INT32 QYAPI::getAuthCode()
 }
 
 /**
- * ÖÃProtocolType
- * @param	INT32	ProtocolType	Ğ­ÒéÀàĞÍ 1/°²×¿QQĞ­Òé 2/PCQQĞ­Òé
+ * ç½®ProtocolType
+ * @param	INT32	ProtocolType	åè®®ç±»å‹ 1/å®‰å“QQåè®® 2/PCQQåè®®
  */
 void QYAPI::setProtocolType(
-	INT32	protocolType	// Ğ­ÒéÀàĞÍ 1/°²×¿QQĞ­Òé 2/PCQQĞ­Òé
+	INT32	protocolType	// åè®®ç±»å‹ 1/å®‰å“QQåè®® 2/PCQQåè®®
 )
 {
 	QYAPI::protocolType = protocolType;
 }
 
 /**
- * È¡ProtocolType
- * @return	INT32	ProtocolType	Ğ­ÒéÀàĞÍ 1/°²×¿QQĞ­Òé 2/PCQQĞ­Òé
+ * å–ProtocolType
+ * @return	INT32	ProtocolType	åè®®ç±»å‹ 1/å®‰å“QQåè®® 2/PCQQåè®®
  */
 INT32 QYAPI::getProtocolType()
 {
@@ -130,8 +130,8 @@ INT32 QYAPI::getProtocolType()
 }
 
 /**
- * ÖÃ²å¼şÆôÓÃ×´Ì¬
- * @param	bool	state	ÆôÓÃ×´Ì¬
+ * ç½®æ’ä»¶å¯ç”¨çŠ¶æ€
+ * @param	bool	state	å¯ç”¨çŠ¶æ€
  */
 void QYAPI::setAppEnable(
 	bool state
@@ -141,8 +141,8 @@ void QYAPI::setAppEnable(
 }
 
 /**
- * È¡²å¼şÆôÓÃ×´Ì¬
- * @return	bool	AppEnable	ÆôÓÃ×´Ì¬
+ * å–æ’ä»¶å¯ç”¨çŠ¶æ€
+ * @return	bool	AppEnable	å¯ç”¨çŠ¶æ€
  */
 bool QYAPI::getAppEnable()
 {
@@ -150,8 +150,8 @@ bool QYAPI::getAppEnable()
 }
 
 /**
- * È¡¿ò¼ÜÃû
- * @return	string		¿ò¼ÜÃû
+ * å–æ¡†æ¶å
+ * @return	string		æ¡†æ¶å
  */
 string QYAPI::getFrameName()
 {
@@ -161,37 +161,37 @@ string QYAPI::getFrameName()
 }
 
 /*
- * ÖÃÓ¦ÓÃ×ÔÍ£ÓÃ
- * @param	INT64	waitTime		µÈ´ıÊ±¼ä£¬µ¥Î»£ººÁÃë
+ * ç½®åº”ç”¨è‡ªåœç”¨
+ * @param	INT64	waitTime		ç­‰å¾…æ—¶é—´ï¼Œå•ä½ï¼šæ¯«ç§’
  * @return	INT32	unknown
  */
 INT32 QYAPI::setAppSelfDiscontinue(
-	INT64 waitTime	// µÈ´ıÊ±¼ä
+	INT64 waitTime	// ç­‰å¾…æ—¶é—´
 )
 {
 	if(QYAPI_TOLOG)
-		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(true), __func__, "µÈ´ıÊ±¼ä£º" + to_string(waitTime));
+		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(true), __func__, "ç­‰å¾…æ—¶é—´ï¼š" + to_string(waitTime));
 	return QY_setAppSelfDiscontinue(QYAPI::authCode, waitTime);
 }
 
 /*
- * ÖÃÓ¦ÓÃ×ÔĞ¶ÔØ
- * @param	INT64	waitTime	µÈ´ıÊ±¼ä£¬µ¥Î»£ººÁÃë
+ * ç½®åº”ç”¨è‡ªå¸è½½
+ * @param	INT64	waitTime	ç­‰å¾…æ—¶é—´ï¼Œå•ä½ï¼šæ¯«ç§’
  * @return	INT32	unknown
  */
 INT32 QYAPI::setAppSelfUninstall(
-	INT64 waitTime		//µÈ´ıÊ±¼ä
+	INT64 waitTime		//ç­‰å¾…æ—¶é—´
 )
 {
 	if(QYAPI_TOLOG)
-		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(true), __func__, "µÈ´ıÊ±¼ä£º" + to_string(waitTime));
+		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(true), __func__, "ç­‰å¾…æ—¶é—´ï¼š" + to_string(waitTime));
 	return QY_setAppSelfUninstall(QYAPI::authCode, waitTime);
 }
 
 /**
- * È¡Ó¦ÓÃÄ¿Â¼
- * ·µ»ØµÄÂ·¾¶Ä©Î²´ø¡¸\¡¹
- * @return	string		Ó¦ÓÃÄ¿Â¼
+ * å–åº”ç”¨ç›®å½•
+ * è¿”å›çš„è·¯å¾„æœ«å°¾å¸¦ã€Œ\ã€
+ * @return	string		åº”ç”¨ç›®å½•
  */
 string QYAPI::getAppDirectory()
 {
@@ -204,14 +204,14 @@ string QYAPI::getAppDirectory()
 }
 
 /**
- * ½âÎö_µ½µÇÂ¼QQÁĞ±í
+ * è§£æ_åˆ°ç™»å½•QQåˆ—è¡¨
  * @param	string		strLoginQQList
  * @param	INT64List	bindLoginQQList
- * @return	bool		½âÎöÊÇ·ñ³É¹¦
+ * @return	bool		è§£ææ˜¯å¦æˆåŠŸ
  */
 bool decodeLoginQQList(
-	string		strLoginQQList,		// ´Ó½Ó¿Ú»ñÈ¡µÄ±àÂëÎÄ±¾
-	INT64List &	bindLoginQQList		// µÇÂ¼QQÊı×é
+	string		strLoginQQList,		// ä»æ¥å£è·å–çš„ç¼–ç æ–‡æœ¬
+	INT64List &	bindLoginQQList		// ç™»å½•QQæ•°ç»„
 )
 {
 	if(!strLoginQQList.length()) return false;
@@ -225,12 +225,12 @@ bool decodeLoginQQList(
 	return true;
 }
 /**
- * È¡µÇÂ¼QQÁĞ±í
+ * å–ç™»å½•QQåˆ—è¡¨
  * @param	INT64List	bindLoginQQList
- * @return	bool		Ö´ĞĞ½á¹û
+ * @return	bool		æ‰§è¡Œç»“æœ
  */
 bool QYAPI::getLoginQQList(
-	INT64List & bindLoginQQList	// µÇÂ¼QQÊı×é
+	INT64List & bindLoginQQList	// ç™»å½•QQæ•°ç»„
 )
 {
 	if(QYAPI_TOLOG)
@@ -241,14 +241,14 @@ bool QYAPI::getLoginQQList(
 }
 
 /**
- * È¡µÇÂ¼QQÁĞ±í(º¬ÔÚÏß×´Ì¬)
- * @param	bool		getState			È¡ÔÚÏß×´Ì¬
- * @param	LoginQQList	bindLoginQQList		µÇÂ¼QQÁĞ±í£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
- * @return	bool		Ö´ĞĞ½á¹û
+ * å–ç™»å½•QQåˆ—è¡¨(å«åœ¨çº¿çŠ¶æ€)
+ * @param	bool		getState			å–åœ¨çº¿çŠ¶æ€
+ * @param	LoginQQList	bindLoginQQList		ç™»å½•QQåˆ—è¡¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+ * @return	bool		æ‰§è¡Œç»“æœ
  */
 bool QYAPI::getLoginQQList(
-	bool getState,							// È¡ÔÚÏß×´Ì¬
-	QYTYPE::LoginQQList & bindLoginQQList	// µÇÂ¼QQÁĞ±í
+	bool getState,							// å–åœ¨çº¿çŠ¶æ€
+	QYTYPE::LoginQQList & bindLoginQQList	// ç™»å½•QQåˆ—è¡¨
 )
 {
 	INT64List intLoginQQList;
@@ -265,9 +265,9 @@ bool QYAPI::getLoginQQList(
 
 #include <random>
 /**
- * Ëæ»úÈ¡Ò»¸öµÇÂ¼QQ
- * @param	useCache	Ê¹ÓÃ»º´æ
- * @return	INT64		µÇÂ¼QQ
+ * éšæœºå–ä¸€ä¸ªç™»å½•QQ
+ * @param	useCache	ä½¿ç”¨ç¼“å­˜
+ * @return	INT64		ç™»å½•QQ
  */
 INT64 QYAPI::getRandomLoginQQ(bool useCache)
 {
@@ -283,90 +283,90 @@ INT64 QYAPI::getRandomLoginQQ(bool useCache)
 }
 
 /*
- * È¡¿ò¼ÜÕËºÅ×´Ì¬
- * @param	INT64	robotID		Òª²éÑ¯µÄÕËºÅ
- * @return	INT32	ÕËºÅ×´Ì¬		0/ÀëÏß 1/ÔÚÏß
+ * å–æ¡†æ¶è´¦å·çŠ¶æ€
+ * @param	INT64	robotID		è¦æŸ¥è¯¢çš„è´¦å·
+ * @return	INT32	è´¦å·çŠ¶æ€		0/ç¦»çº¿ 1/åœ¨çº¿
  */
 INT32 QYAPI::getFrameAccountState(
 	INT64 robotID
 )
 {
 	if(QYAPI_TOLOG)
-		QYAPI::addLog::Debug(robotID, __func__, "»úÆ÷ÈËQQ£º" + to_string(robotID));
+		QYAPI::addLog::Debug(robotID, __func__, "æœºå™¨äººQQï¼š" + to_string(robotID));
 	return QY_getFrameAccountState(QYAPI::authCode, robotID);
 }
 
 /**
- * È¡Ö¸¶¨»úÆ÷ÈËµÄêÇ³Æ
- * @param	INT64		robotID		Òª²éÑ¯êÇ³ÆµÄ»úÆ÷ÈËQQ
- * @return	string		nick		¸Ã»úÆ÷ÈËµÄêÇ³Æ
+ * å–æŒ‡å®šæœºå™¨äººçš„æ˜µç§°
+ * @param	INT64		robotID		è¦æŸ¥è¯¢æ˜µç§°çš„æœºå™¨äººQQ
+ * @return	string		nick		è¯¥æœºå™¨äººçš„æ˜µç§°
  */
 string QYAPI::getLoginQQName(
-	INT64 robotID // Òª²éÑ¯êÇ³ÆµÄÒÑµÇÂ¼QQ
+	INT64 robotID // è¦æŸ¥è¯¢æ˜µç§°çš„å·²ç™»å½•QQ
 )
 {
 	if(QYAPI_TOLOG)
-		QYAPI::addLog::Debug(robotID, __func__, "»úÆ÷ÈËQQ£º" + to_string(robotID));
+		QYAPI::addLog::Debug(robotID, __func__, "æœºå™¨äººQQï¼š" + to_string(robotID));
 	return QY_getLoginNick(QYAPI::authCode, robotID);
 }
 
 /**
- * È¡Ö¸¶¨»úÆ÷ÈËµÄCookies
- * @param	INT64		robotID		Òª²éÑ¯µÄ»úÆ÷ÈËQQ
- * @return	string		cookies		¸Ã»úÆ÷ÈËµÄCookies
+ * å–æŒ‡å®šæœºå™¨äººçš„Cookies
+ * @param	INT64		robotID		è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+ * @return	string		cookies		è¯¥æœºå™¨äººçš„Cookies
  */
 string QYAPI::getCookies(
-	INT64 robotID	// Òª²éÑ¯êÇ³ÆµÄ»úÆ÷ÈËQQ
+	INT64 robotID	// è¦æŸ¥è¯¢æ˜µç§°çš„æœºå™¨äººQQ
 ) 
 {
 	if(QYAPI_TOLOG)
-		QYAPI::addLog::Debug(robotID, __func__, "»úÆ÷ÈËQQ£º" + to_string(robotID));
+		QYAPI::addLog::Debug(robotID, __func__, "æœºå™¨äººQQï¼š" + to_string(robotID));
 	return QY_getCookies(QYAPI::authCode, robotID);
 }
 
 /**
- * È¡Ö¸¶¨»úÆ÷ÈËµÄcsrfToken
- * @param	INT64	robotID		Òª²éÑ¯µÄ»úÆ÷ÈËQQ
- * @return	INT32	csrfToken	¸Ã»úÆ÷ÈËµÄcsrfToken
+ * å–æŒ‡å®šæœºå™¨äººçš„csrfToken
+ * @param	INT64	robotID		è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+ * @return	INT32	csrfToken	è¯¥æœºå™¨äººçš„csrfToken
  */
 INT32 QYAPI::getCsrfToken(
-	INT64 robotID	// Òª²éÑ¯µÄ»úÆ÷ÈËQQ
+	INT64 robotID	// è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
 )
 {
 	if(QYAPI_TOLOG)
-		QYAPI::addLog::Debug(robotID, __func__, "»úÆ÷ÈËQQ£º" + to_string(robotID));
+		QYAPI::addLog::Debug(robotID, __func__, "æœºå™¨äººQQï¼š" + to_string(robotID));
 	return QY_getCsrfToken(QYAPI::authCode, robotID);
 }
 
 /**
- * È¡Ö¸¶¨ÓòÃûµÄcookie
- * @param	INT64		robotID		Òª²éÑ¯µÄ»úÆ÷ÈËQQ
- * @param	string		domain		Òª»ñÈ¡cookiesµÄÓòÃû£¬http://qun.qq.com »ò http://qun.qzone.qq.com
- * @return	string		cookies		µÇÂ¼Ö¸¶¨ÓòÃûÔÚÌø×ª³É¹¦ºóµÄcookies
+ * å–æŒ‡å®šåŸŸåçš„cookie
+ * @param	INT64		robotID		è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+ * @param	string		domain		è¦è·å–cookiesçš„åŸŸåï¼Œhttp://qun.qq.com æˆ– http://qun.qzone.qq.com
+ * @return	string		cookies		ç™»å½•æŒ‡å®šåŸŸååœ¨è·³è½¬æˆåŠŸåçš„cookies
  */
 string QYAPI::getDomainCookies(
-	INT64	robotID,	// Òª²éÑ¯µÄ»úÆ÷ÈËQQ
-	string	domain		// Òª»ñÈ¡cookiesµÄÓòÃû£¬http://qun.qq.com »ò http://qun.qzone.qq.com
+	INT64	robotID,	// è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+	string	domain		// è¦è·å–cookiesçš„åŸŸåï¼Œhttp://qun.qq.com æˆ– http://qun.qzone.qq.com
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__, 
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬Òª»ñÈ¡cookiesµÄÓòÃû£º" + domain
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œè¦è·å–cookiesçš„åŸŸåï¼š" + domain
 		);
 	if(domain == "") domain = "http://qun.qq.com";
 	return QY_getDomainCookie(QYAPI::authCode, robotID, domain.c_str());
 }
 
 /**
- * ½âÎö_µ½ºÃÓÑÁĞ±í
+ * è§£æ_åˆ°å¥½å‹åˆ—è¡¨
  * @param	string		strFriendList
  * @param	FriendList	bindFriendList
- * @return	bool		½âÎöÊÇ·ñ³É¹¦
+ * @return	bool		è§£ææ˜¯å¦æˆåŠŸ
  */
 bool decodeFriendList(
-	string strFriendList,					// ´Ó½Ó¿Ú»ñÈ¡µÄ±àÂëÊı¾İ
-	QYTYPE::FriendList & bindFriendList		// ºÃÓÑÁĞ±íµÄÒıÓÃ
+	string strFriendList,					// ä»æ¥å£è·å–çš„ç¼–ç æ•°æ®
+	QYTYPE::FriendList & bindFriendList		// å¥½å‹åˆ—è¡¨çš„å¼•ç”¨
 )
 {
 	if(!strFriendList.length()) return false;
@@ -382,18 +382,18 @@ bool decodeFriendList(
 	return true;
 }
 /**
- * È¡ºÃÓÑÁĞ±í
- * @param	INT64		robotID			Òª²éÑ¯µÄ»úÆ÷ÈËQQ
- * @param	FriendList	bindFriendList	ºÃÓÑÁĞ±íµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
- * @return	bool		Ö´ĞĞ½á¹û
+ * å–å¥½å‹åˆ—è¡¨
+ * @param	INT64		robotID			è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+ * @param	FriendList	bindFriendList	å¥½å‹åˆ—è¡¨çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+ * @return	bool		æ‰§è¡Œç»“æœ
  */
 bool QYAPI::getFriendList(
-	INT64 robotID,							// Òª²éÑ¯µÄ»úÆ÷ÈËQQ
-	Type::FriendList & bindFriendList		// ºÃÓÑÁĞ±íµÄÒıÓÃ
+	INT64 robotID,							// è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+	Type::FriendList & bindFriendList		// å¥½å‹åˆ—è¡¨çš„å¼•ç”¨
 )
 {
 	if(QYAPI_TOLOG)
-		QYAPI::addLog::Debug(robotID, __func__, "»úÆ÷ÈËQQ£º" + to_string(robotID));
+		QYAPI::addLog::Debug(robotID, __func__, "æœºå™¨äººQQï¼š" + to_string(robotID));
 	string strFriendList = QY_getFriendList(QYAPI::authCode, robotID);
 	if(!strFriendList.length()) return false;
 	return decodeFriendList(strFriendList, bindFriendList);
@@ -401,14 +401,14 @@ bool QYAPI::getFriendList(
 
 #include <ctime>
 /**
- * ½âÎö_µ½QQ¸ÅÒªĞÅÏ¢
+ * è§£æ_åˆ°QQæ¦‚è¦ä¿¡æ¯
  * @param	string			strSummaryInfo
  * @param	QQSummaryInfo	bindQSummaryInfo
- * @return	bool			½âÎöÊÇ·ñ³É¹¦
+ * @return	bool			è§£ææ˜¯å¦æˆåŠŸ
  */
 bool decodeQQSummaryInfo(
-	string strSummaryInfo,						// ´Ó½Ó¿Ú»ñÈ¡µÄ±àÂëÊı¾İ
-	QYTYPE::QQSummaryInfo &	bindQSummaryInfo	// QQ¸ÅÒªĞÅÏ¢µÄÒıÓÃ
+	string strSummaryInfo,						// ä»æ¥å£è·å–çš„ç¼–ç æ•°æ®
+	QYTYPE::QQSummaryInfo &	bindQSummaryInfo	// QQæ¦‚è¦ä¿¡æ¯çš„å¼•ç”¨
 )
 {
 	if(!strSummaryInfo.length()) return false;
@@ -425,7 +425,7 @@ bool decodeQQSummaryInfo(
 	if(bindQSummaryInfo.birthday == "0/0/0" || bindQSummaryInfo.birthday == "")
 		bindQSummaryInfo.age = -1;
 	else {
-		// »ñÈ¡Êµ¼ÊÊ±¼ä
+		// è·å–å®é™…æ—¶é—´
 		int AgeYear = static_cast<int>(strtoll(bindQSummaryInfo.birthday.c_str(), nullptr, 10));
 		int AgeMonth = static_cast<int>(
 			strtoll(
@@ -441,7 +441,7 @@ bool decodeQQSummaryInfo(
 		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(), "TransformBirthday", 
 			to_string(AgeYear) + "/" + to_string(AgeMonth) + "/" + to_string(AgeDay));
 		*/
-		// »ñÈ¡µ±Ç°Ê±¼ä
+		// è·å–å½“å‰æ—¶é—´
 		time_t timeStamp = time(NULL);
 		struct tm NowTime;
 		localtime_s(&NowTime, &timeStamp);
@@ -450,7 +450,7 @@ bool decodeQQSummaryInfo(
 		NowTime.tm_wday;
 
 		bindQSummaryInfo.age = NowTime.tm_year - AgeYear;
-		//ÅĞ¶ÏÊÇ·ñĞèÒª¼õ1(ÊÇ·ñÂúËê)
+		//åˆ¤æ–­æ˜¯å¦éœ€è¦å‡1(æ˜¯å¦æ»¡å²)
 		if(AgeMonth > NowTime.tm_mon || (AgeMonth == NowTime.tm_mon && AgeDay > NowTime.tm_wday))
 			--bindQSummaryInfo.age;
 	}
@@ -461,22 +461,22 @@ bool decodeQQSummaryInfo(
 	return true;
 }
 /**
- * È¡QQ¸ÅÒªĞÅÏ¢
- * @param	INT64			robotID				Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64			uin					²éÑ¯QQ
- * @param	QQSummaryInfo	bindQSummaryInfo	QQ¸ÅÒªĞÅÏ¢µÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
- * @return	bool			Ö´ĞĞ½á¹û
+ * å–QQæ¦‚è¦ä¿¡æ¯
+ * @param	INT64			robotID				ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64			uin					æŸ¥è¯¢QQ
+ * @param	QQSummaryInfo	bindQSummaryInfo	QQæ¦‚è¦ä¿¡æ¯çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+ * @return	bool			æ‰§è¡Œç»“æœ
  */
 bool QYAPI::getQQSummaryInfo(
-	INT64 robotID,								// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 uin,									// ²éÑ¯QQ
-	QYTYPE::QQSummaryInfo & bindQSummaryInfo	// QQ¸ÅÒªĞÅÏ¢µÄÒıÓÃ
+	INT64 robotID,								// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 uin,									// æŸ¥è¯¢QQ
+	QYTYPE::QQSummaryInfo & bindQSummaryInfo	// QQæ¦‚è¦ä¿¡æ¯çš„å¼•ç”¨
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__, 
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬²éÑ¯µÄQQ£º" + to_string(uin)
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼ŒæŸ¥è¯¢çš„QQï¼š" + to_string(uin)
 		);
 	string strSummaryInfo = QY_getSummaryInfo(QYAPI::authCode, robotID, uin);
 	if(!strSummaryInfo.length()) return false;
@@ -484,14 +484,14 @@ bool QYAPI::getQQSummaryInfo(
 }
 
 /**
- * ½âÎö_µ½ÈºÁĞ±í
+ * è§£æ_åˆ°ç¾¤åˆ—è¡¨
  * @param	string		strGroupList
  * @param	GroupList	bindGroupList
- * @return	bool		½âÎöÊÇ·ñ³É¹¦
+ * @return	bool		è§£ææ˜¯å¦æˆåŠŸ
  */
 bool decodeGroupList(
-	string strGroupList,				// ´Ó½Ó¿Ú»ñÈ¡µÄ±àÂëÊı¾İ
-	QYTYPE::GroupList &	bindGroupList	// ÈºÁĞ±íÊı×éµÄÒıÓÃ
+	string strGroupList,				// ä»æ¥å£è·å–çš„ç¼–ç æ•°æ®
+	QYTYPE::GroupList &	bindGroupList	// ç¾¤åˆ—è¡¨æ•°ç»„çš„å¼•ç”¨
 )
 {
 	if(!strGroupList.length()) return false;
@@ -508,19 +508,19 @@ bool decodeGroupList(
 	return true;
 }
 /**
- * È¡ÈºÁĞ±í
- * @param	INT64		robotID			Òª²éÑ¯µÄ»úÆ÷ÈËQQ
- * @param	GroupList	bindGroupList	ÈºÁĞ±íµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
- * @return	bool		Ö´ĞĞ½á¹û
+ * å–ç¾¤åˆ—è¡¨
+ * @param	INT64		robotID			è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+ * @param	GroupList	bindGroupList	ç¾¤åˆ—è¡¨çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+ * @return	bool		æ‰§è¡Œç»“æœ
  */
 bool QYAPI::getGroupList(
-	INT64 robotID,						// Òª²éÑ¯µÄ»úÆ÷ÈËQQ
-	QYTYPE::GroupList & bindGroupList	// ÈºÁĞ±íµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
+	INT64 robotID,						// è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+	QYTYPE::GroupList & bindGroupList	// ç¾¤åˆ—è¡¨çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID)
+			"æœºå™¨äººQQï¼š" + to_string(robotID)
 		);
 	string strGroupList = QY_getGroupList(QYAPI::authCode, robotID);
 	if(!strGroupList.length()) return false;
@@ -528,14 +528,14 @@ bool QYAPI::getGroupList(
 }
 
 /**
- * ½âÎö_µ½Èº×ÊÁÏ
+ * è§£æ_åˆ°ç¾¤èµ„æ–™
  * @param	string		strGroupInfo
  * @param	GroupInfo	bindGroupInfo
- * @return	bool		½âÎöÊÇ·ñ³É¹¦
+ * @return	bool		è§£ææ˜¯å¦æˆåŠŸ
  */
 bool decodeGroupInfo(
-	string strGroupInfo,				// ´Ó½Ó¿Ú»ñÈ¡µÄ±àÂëÊı¾İ
-	QYTYPE::GroupInfo &	bindGroupInfo	// ÈºĞÅÏ¢µÄÒıÓÃ
+	string strGroupInfo,				// ä»æ¥å£è·å–çš„ç¼–ç æ•°æ®
+	QYTYPE::GroupInfo &	bindGroupInfo	// ç¾¤ä¿¡æ¯çš„å¼•ç”¨
 )
 {
 	if(!strGroupInfo.length()) return false;
@@ -555,22 +555,22 @@ bool decodeGroupInfo(
 	return true;
 }
 /**
- * È¡Èº×ÊÁÏ
- * @param	INT64		robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64		dwGroup			Òª²éÑ¯µÄÈººÅ
- * @param	GroupInfo	bindGroupInfo	Èº×ÊÁÏµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
- * @return	bool		Ö´ĞĞ½á¹û
+ * å–ç¾¤èµ„æ–™
+ * @param	INT64		robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64		dwGroup			è¦æŸ¥è¯¢çš„ç¾¤å·
+ * @param	GroupInfo	bindGroupInfo	ç¾¤èµ„æ–™çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+ * @return	bool		æ‰§è¡Œç»“æœ
  */
 bool QYAPI::getGroupInfo(
-	INT64 robotID,						// Òª²éÑ¯µÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,						// Òª²éÑ¯µÄÈººÅ
-	QYTYPE::GroupInfo & bindGroupInfo	// Èº×ÊÁÏµÄÒıÓÃ
+	INT64 robotID,						// è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+	INT64 dwGroup,						// è¦æŸ¥è¯¢çš„ç¾¤å·
+	QYTYPE::GroupInfo & bindGroupInfo	// ç¾¤èµ„æ–™çš„å¼•ç”¨
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬²éÑ¯µÄÈº£º" + to_string(dwGroup)
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼ŒæŸ¥è¯¢çš„ç¾¤ï¼š" + to_string(dwGroup)
 		);
 	string strGroupInfo = QY_getGroupInfo(QYAPI::authCode, robotID, dwGroup);
 	if(!strGroupInfo.length()) return false;
@@ -578,14 +578,14 @@ bool QYAPI::getGroupInfo(
 }
 
 /**
- * ½âÎö_µ½Èº¹ÜÀíÔ±ÁĞ±í
+ * è§£æ_åˆ°ç¾¤ç®¡ç†å‘˜åˆ—è¡¨
  * @param	string			strGroupAdminList
  * @param	GroupAdminList	bindGroupAdminList
- * @return	bool			½âÎöÊÇ·ñ³É¹¦
+ * @return	bool			è§£ææ˜¯å¦æˆåŠŸ
  */
 bool decodeGroupAdminList(
-	string strGroupAdminList,					// ´Ó½Ó¿Ú»ñÈ¡µÄ±àÂëÊı¾İ
-	QYTYPE::GroupAdminList & bindGroupAdminList	// Èº¹ÜÀíÔ±Êı×éµÄÒıÓÃ
+	string strGroupAdminList,					// ä»æ¥å£è·å–çš„ç¼–ç æ•°æ®
+	QYTYPE::GroupAdminList & bindGroupAdminList	// ç¾¤ç®¡ç†å‘˜æ•°ç»„çš„å¼•ç”¨
 )
 {
 	if(!strGroupAdminList.length()) return false;
@@ -600,24 +600,25 @@ bool decodeGroupAdminList(
 	}
 	return true;
 }
+
 /**
- * È¡Èº¹ÜÀíÔ±ÁĞ±í
- * °üÀ¨ÈºÖ÷
- * @param	INT64			robotID					Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64			dwGroup					Òª²éÑ¯µÄÈººÅ
- * @param	GroupAdminList	bindGroupAdminList		Èº¹ÜÀíÊı×éµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
- * @return	bool			Ö´ĞĞ½á¹û
+ * å–ç¾¤ç®¡ç†å‘˜åˆ—è¡¨
+ * åŒ…æ‹¬ç¾¤ä¸»
+ * @param	INT64			robotID					ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64			dwGroup					è¦æŸ¥è¯¢çš„ç¾¤å·
+ * @param	GroupAdminList	bindGroupAdminList		ç¾¤ç®¡ç†æ•°ç»„çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+ * @return	bool			æ‰§è¡Œç»“æœ
  */
 bool QYAPI::getGroupAdminList(
-	INT64 robotID,									// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,									// Òª²éÑ¯µÄÈººÅ
-	QYTYPE::GroupAdminList & bindGroupAdminList		// Èº¹ÜÀíÊı×éµÄÒıÓÃ
+	INT64 robotID,									// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,									// è¦æŸ¥è¯¢çš„ç¾¤å·
+	QYTYPE::GroupAdminList & bindGroupAdminList		// ç¾¤ç®¡ç†æ•°ç»„çš„å¼•ç”¨
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬²éÑ¯µÄÈº£º" + to_string(dwGroup)
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼ŒæŸ¥è¯¢çš„ç¾¤ï¼š" + to_string(dwGroup)
 		);
 	string strAdminList = QY_getGroupAdminList(QYAPI::authCode, robotID, dwGroup);
 	if(strAdminList == "") return false;
@@ -625,14 +626,44 @@ bool QYAPI::getGroupAdminList(
 }
 
 /**
- * ½âÎö_µ½Èº³ÉÔ±ĞÅÏ¢
+ * å–ç¾¤æˆå‘˜ä¿¡æ¯
+ * PCåè®®åªèƒ½è·å–QQå’Œç®¡ç†æƒé™
+ * @param	INT64			robotID					ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64			dwGroup					è¦æŸ¥è¯¢çš„ç¾¤å·
+ * @param	INT64			uin						è¦æŸ¥è¯¢çš„æˆå‘˜ä¿¡æ¯
+ * @param	GroupMember		bindGroupMember			ç¾¤æˆå‘˜ä¿¡æ¯çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+ * @return	bool			æ‰§è¡Œç»“æœ
+ */
+bool QYAPI::getGroupMemberInfo(
+	INT64 robotID,
+	INT64 dwGroup,
+	INT64 uin,
+	QYTYPE::GroupMember & bindGroupMember
+)
+{
+	/*
+		æ¡†æ¶æœªæä¾›æŸ¥è¯¢å•ç”¨æˆ·çš„API, å› æ­¤å…ˆè·å–å…¨éƒ¨æˆå‘˜ä¿¡æ¯, å†è¿›è¡Œç­›é€‰.
+	*/
+	QYTYPE::GroupMemberList gMemberList;
+	if(!QYAPI::getGroupMemberList(robotID, dwGroup, gMemberList)) return false;
+	for(auto i : gMemberList) {
+		if(i.uin == uin) {
+			bindGroupMember = i;
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
+ * è§£æ_åˆ°ç¾¤æˆå‘˜ä¿¡æ¯
  * @param	string			bytesGroupMember
  * @param	GroupMember		gMember
- * @return	bool			½âÎöÊÇ·ñ³É¹¦
+ * @return	bool			è§£ææ˜¯å¦æˆåŠŸ
  */
 bool decodeGroupMember(
-	BYTES bytesGroupMember,			// ´Ó½Ó¿Ú»ñÈ¡µÄ±àÂëÊı¾İ
-	QYTYPE::GroupMember & gMember	// Èº³ÉÔ±Êı¾İ
+	BYTES bytesGroupMember,			// ä»æ¥å£è·å–çš„ç¼–ç æ•°æ®
+	QYTYPE::GroupMember & gMember	// ç¾¤æˆå‘˜æ•°æ®
 )
 {
 	if(bytesGroupMember.size() < 40) return false;
@@ -654,14 +685,14 @@ bool decodeGroupMember(
 	return true;
 }
 /**
- * ½âÎö_µ½Èº³ÉÔ±ÁĞ±í
+ * è§£æ_åˆ°ç¾¤æˆå‘˜åˆ—è¡¨
  * @param	string			strGroupMemberList
  * @param	GroupMemberList	gMemberList
- * @return	bool			½âÎöÊÇ·ñ³É¹¦
+ * @return	bool			è§£ææ˜¯å¦æˆåŠŸ
  */
 bool decodeGroupMemberList(
-	string strGroupMemberList,				// ´Ó½Ó¿Ú»ñÈ¡µÄ±àÂëÊı¾İ
-	QYTYPE::GroupMemberList & gMemberList	// Èº³ÉÔ±Êı×é
+	string strGroupMemberList,				// ä»æ¥å£è·å–çš„ç¼–ç æ•°æ®
+	QYTYPE::GroupMemberList & gMemberList	// ç¾¤æˆå‘˜æ•°ç»„
 )
 {
 	if(!strGroupMemberList.length()) return false;
@@ -677,23 +708,23 @@ bool decodeGroupMemberList(
 	return true;
 }
 /**
- * È¡Èº³ÉÔ±ÁĞ±í
- * PCĞ­Òé»ñÈ¡Ö»ÓĞQQºÍ¹ÜÀíÈ¨ÏŞ
- * @param	INT64			robotID					Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64			dwGroup					Òª²éÑ¯µÄÈººÅ
- * @param	GroupMemberList	bindGroupMemberList		Èº³ÉÔ±Êı×éµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
- * @return	bool			Ö´ĞĞ½á¹û
+ * å–ç¾¤æˆå‘˜åˆ—è¡¨
+ * PCåè®®è·å–åªæœ‰QQå’Œç®¡ç†æƒé™
+ * @param	INT64			robotID					ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64			dwGroup					è¦æŸ¥è¯¢çš„ç¾¤å·
+ * @param	GroupMemberList	bindGroupMemberList		ç¾¤æˆå‘˜æ•°ç»„çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+ * @return	bool			æ‰§è¡Œç»“æœ
  */
 bool QYAPI::getGroupMemberList(
-	INT64 robotID,									// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,									// Òª²éÑ¯µÄÈººÅ
-	QYTYPE::GroupMemberList & bindGroupMemberList	// Èº³ÉÔ±Êı×éµÄÒıÓÃ
+	INT64 robotID,									// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,									// è¦æŸ¥è¯¢çš„ç¾¤å·
+	QYTYPE::GroupMemberList & bindGroupMemberList	// ç¾¤æˆå‘˜æ•°ç»„çš„å¼•ç”¨
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬²éÑ¯µÄÈº£º" + to_string(dwGroup)
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼ŒæŸ¥è¯¢çš„ç¾¤ï¼š" + to_string(dwGroup)
 		);
 	string strGroupMemberList = QY_getGroupMemberList(QYAPI::authCode, robotID, dwGroup);
 	if(strGroupMemberList == "") return false;
@@ -701,16 +732,16 @@ bool QYAPI::getGroupMemberList(
 }
 
 /**
- * ½âÎö_µ½ÈºÃûÆ¬
+ * è§£æ_åˆ°ç¾¤åç‰‡
  * @param	string	strGroupMemberCard
  * @param	string	card
  * @param	bool	useNick
- * @return	bool	½âÎöÊÇ·ñ³É¹¦
+ * @return	bool	è§£ææ˜¯å¦æˆåŠŸ
  */
 bool decodeGroupAdminList(
-	string strGroupMemberCard,		// ´Ó½Ó¿Ú»ñÈ¡µÄ±àÂëÊı¾İ
-	string & card,					// ÈºÃûÆ¬
-	bool useNick					// Ê¹ÓÃêÇ³Æ
+	string strGroupMemberCard,		// ä»æ¥å£è·å–çš„ç¼–ç æ•°æ®
+	string & card,					// ç¾¤åç‰‡
+	bool useNick					// ä½¿ç”¨æ˜µç§°
 )
 {
 	if(!strGroupMemberCard.length()) return false;
@@ -723,29 +754,29 @@ bool decodeGroupAdminList(
 	return true;
 }
 /**
- * È¡Èº³ÉÔ±ÃûÆ¬
- * @param	INT64		robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64		dwGroup			ËùÔÚÈº
- * @param	INT64		QQUin			Òª²éÑ¯µÄQQºÅ
- * @param	bool		useNick			Ê¹ÓÃêÇ³Æ£¬Ä¬ÈÏ²»Ê¹ÓÃ¡£Ê¹ÓÃÊ±£¬ÈôÃûÆ¬Îª¿ÕÔò·µ»ØêÇ³Æ£»²»Ê¹ÓÃÔò·µ»ØÃûÆ¬
- * @param	bool		useCache		Ê¹ÓÃ»º´æ£¬Ä¬ÈÏÊ¹ÓÃ
- * @return	string		¸ÃÈº³ÉÔ±µÄÃûÆ¬
+ * å–ç¾¤æˆå‘˜åç‰‡
+ * @param	INT64		robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64		dwGroup			æ‰€åœ¨ç¾¤
+ * @param	INT64		QQUin			è¦æŸ¥è¯¢çš„QQå·
+ * @param	bool		useNick			ä½¿ç”¨æ˜µç§°ï¼Œé»˜è®¤ä¸ä½¿ç”¨ã€‚ä½¿ç”¨æ—¶ï¼Œè‹¥åç‰‡ä¸ºç©ºåˆ™è¿”å›æ˜µç§°ï¼›ä¸ä½¿ç”¨åˆ™è¿”å›åç‰‡
+ * @param	bool		useCache		ä½¿ç”¨ç¼“å­˜ï¼Œé»˜è®¤ä½¿ç”¨
+ * @return	string		è¯¥ç¾¤æˆå‘˜çš„åç‰‡
  */
 string QYAPI::getGroupMemberCard(
-	INT64	robotID,	// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64	dwGroup,	// ËùÔÚÈº
-	INT64	uin,		// Òª²éÑ¯µÄQQºÅ
-	bool	useNick,	// Ê¹ÓÃêÇ³Æ
-	bool	useCache	// Ê¹ÓÃ»º´æ
+	INT64	robotID,	// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64	dwGroup,	// æ‰€åœ¨ç¾¤
+	INT64	uin,		// è¦æŸ¥è¯¢çš„QQå·
+	bool	useNick,	// ä½¿ç”¨æ˜µç§°
+	bool	useCache	// ä½¿ç”¨ç¼“å­˜
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬²éÑ¯µÄQQ£º" + to_string(uin) \
-			+ "£¬ËùÔÚÈº£º" + to_string(dwGroup) \
-			+ "£¬" + (useNick ? "" : "²»") + "Ê¹ÓÃêÇ³Æ" \
-			+ "£¬" + (useCache ? "" : "²»") + "Ê¹ÓÃ»º´æ"
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼ŒæŸ¥è¯¢çš„QQï¼š" + to_string(uin) \
+			+ "ï¼Œæ‰€åœ¨ç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œ" + (useNick ? "" : "ä¸") + "ä½¿ç”¨æ˜µç§°" \
+			+ "ï¼Œ" + (useCache ? "" : "ä¸") + "ä½¿ç”¨ç¼“å­˜"
 		);
 	string strGroupMemberCard = QY_getGroupMemberCard(QYAPI::authCode, robotID, dwGroup, uin, !useCache);
 	if(strGroupMemberCard == "") return false;
@@ -755,14 +786,14 @@ string QYAPI::getGroupMemberCard(
 }
 
 /**
- * ½âÎö_µ½ÌÖÂÛ×éÁĞ±í
+ * è§£æ_åˆ°è®¨è®ºç»„åˆ—è¡¨
  * @param	string			strDiscussList
  * @param	DiscussList		DiscussList
- * @return	bool			½âÎöÊÇ·ñ³É¹¦
+ * @return	bool			è§£ææ˜¯å¦æˆåŠŸ
  */
 bool decodeDiscussList(
-	string	strDiscussList,					// ´Ó½Ó¿Ú»ñÈ¡µÄ±àÂëÊı¾İ
-	QYTYPE::DiscussList & bindDiscussList	// ÌÖÂÛ×éÁĞ±íÊı×é
+	string	strDiscussList,					// ä»æ¥å£è·å–çš„ç¼–ç æ•°æ®
+	QYTYPE::DiscussList & bindDiscussList	// è®¨è®ºç»„åˆ—è¡¨æ•°ç»„
 )
 {
 	if(!strDiscussList.length()) return false;
@@ -775,7 +806,7 @@ bool decodeDiscussList(
 		bindDiscussList[i].id = u.GetLong();
 		bindDiscussList[i].nameBuffer = u.GetToken();
 		bindDiscussList[i].name = u.GetLenStr();
-		u.GetInt();  // ´íÎó´úÂë
+		u.GetInt();  // é”™è¯¯ä»£ç 
 		bindDiscussList[i].createTimeStamp = u.GetInt();
 		bindDiscussList[i].createUin = u.GetLong();
 		bindDiscussList[i].infoSeq = u.GetInt();
@@ -794,19 +825,19 @@ bool decodeDiscussList(
 	return true;
 }
 /**
- * È¡ÌÖÂÛ×éÁĞ±í
- * @param	INT64			robotID				Òª²éÑ¯µÄ»úÆ÷ÈËQQ
- * @param	DiscussList		bindDiscussList		ÌÖÂÛ×éÁĞ±í£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
- * @return	bool			Ö´ĞĞ½á¹û
+ * å–è®¨è®ºç»„åˆ—è¡¨
+ * @param	INT64			robotID				è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+ * @param	DiscussList		bindDiscussList		è®¨è®ºç»„åˆ—è¡¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+ * @return	bool			æ‰§è¡Œç»“æœ
  */
 bool QYAPI::getDiscussList(
-	INT64 robotID,							// Òª²éÑ¯µÄ»úÆ÷ÈËQQ
-	QYTYPE::DiscussList & bindDiscussList	// ÌÖÂÛ×éÁĞ±í
+	INT64 robotID,							// è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+	QYTYPE::DiscussList & bindDiscussList	// è®¨è®ºç»„åˆ—è¡¨
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) 
+			"æœºå™¨äººQQï¼š" + to_string(robotID) 
 		);
 	string strDiscussList = QY_getDiscussList(QYAPI::authCode, robotID);
 	if(strDiscussList == "") return false;
@@ -814,12 +845,12 @@ bool QYAPI::getDiscussList(
 }
 
 /**
- * ±àÂë_UTF8×ªAnsi
- * @param	BYTES		contents		UTF-8±àÂëÎÄ±¾
- * @return	CSTRING		GB2312±àÂëÎÄ±¾
+ * ç¼–ç _UTF8è½¬Ansi
+ * @param	BYTES		contents		UTF-8ç¼–ç æ–‡æœ¬
+ * @return	CSTRING		GB2312ç¼–ç æ–‡æœ¬
  */
 CSTRING QYAPI::convertUtf8ToAnsi(
-	BYTES contents	// UTF-8±àÂëÎÄ±¾
+	BYTES contents	// UTF-8ç¼–ç æ–‡æœ¬
 )
 {
 	BYTE * bin = new BYTE[contents.size()];
@@ -830,34 +861,34 @@ CSTRING QYAPI::convertUtf8ToAnsi(
 	return QY_setEncodeUtf8ToAnsi(QYAPI::authCode, str.c_str());
 }
 /**
- * ±àÂë_UTF8×ªAnsi
- * @param	string		contents		UTF-8±àÂëÎÄ±¾
- * @return	CSTRING		GB2312±àÂëÎÄ±¾
+ * ç¼–ç _UTF8è½¬Ansi
+ * @param	string		contents		UTF-8ç¼–ç æ–‡æœ¬
+ * @return	CSTRING		GB2312ç¼–ç æ–‡æœ¬
  */
 CSTRING QYAPI::convertUtf8ToAnsi(
-	string contents	// UTF-8±àÂëÎÄ±¾
+	string contents	// UTF-8ç¼–ç æ–‡æœ¬
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(true), __func__,
-			"´ı½âÂëµÄutf-8ÎÄ±¾£º" + contents
+			"å¾…è§£ç çš„utf-8æ–‡æœ¬ï¼š" + contents
 		);
 	BYTES bin(contents.cbegin(), contents.cend());
 	return QYAPI::convertUtf8ToAnsi(bin);
 }
 
 /**
- * ±àÂë_GB2312×ªUTF8
- * @param	string		contents	GB2312±àÂëÎÄ±¾
- * @return	BYTES		UTF-8±àÂëÎÄ±¾
+ * ç¼–ç _GB2312è½¬UTF8
+ * @param	string		contents	GB2312ç¼–ç æ–‡æœ¬
+ * @return	BYTES		UTF-8ç¼–ç æ–‡æœ¬
  */
 BYTES QYAPI::convertAnsiToUtf8(
-	string contents	// GB2312±àÂëÎÄ±¾
+	string contents	// GB2312ç¼–ç æ–‡æœ¬
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(true), __func__,
-			"´ı½âÂëµÄgb2312ÎÄ±¾£º" + contents
+			"å¾…è§£ç çš„gb2312æ–‡æœ¬ï¼š" + contents
 		);
 	string utf8 = QY_setEncodeAnsiToUtf8(QYAPI::authCode, contents.c_str());
 	if(utf8 == "") return BYTES();
@@ -867,10 +898,10 @@ BYTES QYAPI::convertAnsiToUtf8(
 }
 
 /**
- * ½âÎöµ½ÄäÃûĞÅÏ¢
- * @param	string		strAnonymousInfo	ÄäÃûÊı¾İ
- * @param	Anonymous	bindAnonymousInfo	ÄäÃûĞÅÏ¢µÄÒıÓÃ
- * @return	bool		½âÎö½á¹û
+ * è§£æåˆ°åŒ¿åä¿¡æ¯
+ * @param	string		strAnonymousInfo	åŒ¿åæ•°æ®
+ * @param	Anonymous	bindAnonymousInfo	åŒ¿åä¿¡æ¯çš„å¼•ç”¨
+ * @return	bool		è§£æç»“æœ
  */
 bool QYAPI::decodeAnonymousInfo(
 	string strAnonymousInfo,
@@ -889,14 +920,14 @@ bool QYAPI::decodeAnonymousInfo(
 }
 
 /**
- * ½âÎöµ½Èº¸½¼ÓĞÅÏ¢
- * @param	string					strGroupAdditionalInfo		Èº¸½¼ÓĞÅÏ¢Êı¾İ
- * @param	GroupAdditionalInfo		bindGroupAdditionalInfo		Èº¸½¼ÓĞÅÏ¢µÄÒıÓÃ£¬½âÎö³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
- * @return	bool					½âÎö½á¹û
+ * è§£æåˆ°ç¾¤é™„åŠ ä¿¡æ¯
+ * @param	string					strGroupAdditionalInfo		ç¾¤é™„åŠ ä¿¡æ¯æ•°æ®
+ * @param	GroupAdditionalInfo		bindGroupAdditionalInfo		ç¾¤é™„åŠ ä¿¡æ¯çš„å¼•ç”¨ï¼Œè§£ææˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+ * @return	bool					è§£æç»“æœ
  */
 bool QYAPI::decodeGroupAdditionalInfo(
-	string strGroupAdditionalInfo,							// Èº¸½¼ÓĞÅÏ¢Êı¾İ
-	QYTYPE::GroupAdditionalInfo & bindGroupAdditionalInfo	// Èº¸½¼ÓĞÅÏ¢µÄÒıÓÃ
+	string strGroupAdditionalInfo,							// ç¾¤é™„åŠ ä¿¡æ¯æ•°æ®
+	QYTYPE::GroupAdditionalInfo & bindGroupAdditionalInfo	// ç¾¤é™„åŠ ä¿¡æ¯çš„å¼•ç”¨
 )
 {
 	if(strGroupAdditionalInfo == "") return false;
@@ -914,14 +945,14 @@ bool QYAPI::decodeGroupAdditionalInfo(
 }
 
 /**
- * ½âÎöµ½×ÖÌåĞÅÏ¢
- * @param	string		strFontInfo		×ÖÌåÊı¾İ
- * @param	Font		bindFontInfo	×ÖÌåĞÅÏ¢µÄÒıÓÃ£¬½âÎö³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
- * @return	bool		½âÎö½á¹û
+ * è§£æåˆ°å­—ä½“ä¿¡æ¯
+ * @param	string		strFontInfo		å­—ä½“æ•°æ®
+ * @param	Font		bindFontInfo	å­—ä½“ä¿¡æ¯çš„å¼•ç”¨ï¼Œè§£ææˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+ * @return	bool		è§£æç»“æœ
  */
 bool QYAPI::decodeFontInfo(
-	string strFontInfo,				// ×ÖÌåÊı¾İ
-	QYTYPE::Font & bindFontInfo		// ×ÖÌåĞÅÏ¢µÄÒıÓÃ
+	string strFontInfo,				// å­—ä½“æ•°æ®
+	QYTYPE::Font & bindFontInfo		// å­—ä½“ä¿¡æ¯çš„å¼•ç”¨
 )
 {
 	if(strFontInfo == "") return false;
@@ -937,14 +968,14 @@ bool QYAPI::decodeFontInfo(
 }
 
 /**
- * ½âÎöµ½ÈºÎÄ¼şĞÅÏ¢
- * @param	string		strFileInfo		ÎÄ¼şÊı¾İ
- * @param	File		bindFileInfo	ÎÄ¼şĞÅÏ¢µÄÒıÓÃ£¬½âÎö³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
- * @return	bool		½âÎö½á¹û
+ * è§£æåˆ°ç¾¤æ–‡ä»¶ä¿¡æ¯
+ * @param	string		strFileInfo		æ–‡ä»¶æ•°æ®
+ * @param	File		bindFileInfo	æ–‡ä»¶ä¿¡æ¯çš„å¼•ç”¨ï¼Œè§£ææˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+ * @return	bool		è§£æç»“æœ
  */
 bool QYAPI::decodeFileInfo(
-	string strFileInfo,				// ÎÄ¼şÊı¾İ
-	QYTYPE::File & bindFileInfo		// ÎÄ¼şĞÅÏ¢µÄÒıÓÃ
+	string strFileInfo,				// æ–‡ä»¶æ•°æ®
+	QYTYPE::File & bindFileInfo		// æ–‡ä»¶ä¿¡æ¯çš„å¼•ç”¨
 )
 {
 	if(strFileInfo == "") return false;
@@ -960,39 +991,39 @@ bool QYAPI::decodeFileInfo(
 }
 
 /**
- * ÖÃÖÂÃü´íÎóÌáÊ¾
- * @param	string		errMsg		´íÎóĞÅÏ¢
+ * ç½®è‡´å‘½é”™è¯¯æç¤º
+ * @param	string		errMsg		é”™è¯¯ä¿¡æ¯
  * @return	INT32		unknown
  */
 INT32 QYAPI::setFatal(
-	string errMsg	// ´íÎóĞÅÏ¢
+	string errMsg	// é”™è¯¯ä¿¡æ¯
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(true), __func__,
-			"´íÎóĞÅÏ¢£º" + errMsg
+			"é”™è¯¯ä¿¡æ¯ï¼š" + errMsg
 		);
 	return QY_setFatal(QYAPI::authCode, errMsg.c_str());
 }
 
 /**
- * ·¢ËÍÃûÆ¬ÔŞ
- * @param	INT64	robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	uin			Ä¿±ê¶ÔÏó
- * @param	INT32	count		µãÔŞ´ÎÊı
- * @return	INT32	¹Ì¶¨·µ»Ø0
+ * å‘é€åç‰‡èµ
+ * @param	INT64	robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	uin			ç›®æ ‡å¯¹è±¡
+ * @param	INT32	count		ç‚¹èµæ¬¡æ•°
+ * @return	INT32	å›ºå®šè¿”å›0
  */
 INT32 QYAPI::sendLikeFavorite(
-	INT64 robotID,	// »úÆ÷ÈËQQ
-	INT64 uin,		// Ä¿±êQQ
-	INT32 count		// ´ÎÊı
+	INT64 robotID,	// æœºå™¨äººQQ
+	INT64 uin,		// ç›®æ ‡QQ
+	INT32 count		// æ¬¡æ•°
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬¶ÔÏó£º" + to_string(uin) \
-			+ "£¬´ÎÊı£º" + to_string(count)
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œå¯¹è±¡ï¼š" + to_string(uin) \
+			+ "ï¼Œæ¬¡æ•°ï¼š" + to_string(count)
 		);
 	for(INT32 i = 0; i < count; i++) {
 		QY_sendLikeFavorite(QYAPI::authCode, robotID, uin);
@@ -1001,191 +1032,191 @@ INT32 QYAPI::sendLikeFavorite(
 }
 
 /*
- * ·¢ËÍºÃÓÑÏûÏ¢
- * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 uin		Ä¿±êQQ
- * @param	CSTRING	 msg		ÏûÏ¢ÄÚÈİ
- * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+ * å‘é€å¥½å‹æ¶ˆæ¯
+ * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 uin		ç›®æ ‡QQ
+ * @param	CSTRING	 msg		æ¶ˆæ¯å†…å®¹
+ * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::sendFriendMsg(
-	INT64 robotID,	// Ê¹ÓÃ»úÆ÷ÈËQQ
-	INT64 uin,		// Ä¿±êQQ
-	string msg		// ÏûÏ¢ÄÚÈİ
+	INT64 robotID,	// ä½¿ç”¨æœºå™¨äººQQ
+	INT64 uin,		// ç›®æ ‡QQ
+	string msg		// æ¶ˆæ¯å†…å®¹
 )
 {
 	if(msg == "") return -1;
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬·¢ËÍµ½ºÃÓÑ£º" + to_string(uin) \
-			+ "£¬ÏûÏ¢ÄÚÈİ£º" + msg
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œå‘é€åˆ°å¥½å‹ï¼š" + to_string(uin) \
+			+ "ï¼Œæ¶ˆæ¯å†…å®¹ï¼š" + msg
 		);
 	return QY_sendFriendMsg(QYAPI::authCode, robotID, uin, msg.c_str());
 }
 
 /*
- * ·¢ËÍÈºÏûÏ¢
- * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup	Ä¿±êÈº
- * @param	CSTRING	 msg		ÏûÏ¢ÄÚÈİ
- * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+ * å‘é€ç¾¤æ¶ˆæ¯
+ * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup	ç›®æ ‡ç¾¤
+ * @param	CSTRING	 msg		æ¶ˆæ¯å†…å®¹
+ * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::sendGroupMsg(
-	INT64 robotID,	// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,	// Ä¿±êÈº
-	string msg		// ÏûÏ¢ÄÚÈİ
+	INT64 robotID,	// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,	// ç›®æ ‡ç¾¤
+	string msg		// æ¶ˆæ¯å†…å®¹
 )
 {
 	if(msg == "") return -1;
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬·¢ËÍµ½Èº£º" + to_string(dwGroup) \
-			+ "£¬ÏûÏ¢ÄÚÈİ£º" + msg
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œå‘é€åˆ°ç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œæ¶ˆæ¯å†…å®¹ï¼š" + msg
 		);
 	return QY_sendGroupMsg(QYAPI::authCode, robotID, dwGroup, msg.c_str());
 }
 
 /*
- * ·¢ËÍÈºÁÙÊ±ÏûÏ¢
- * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup	ËùÔÚÈº
- * @param	INT64	 uin		Ä¿±êQQ
- * @param	string	 msg		ÏûÏ¢ÄÚÈİ
- * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+ * å‘é€ç¾¤ä¸´æ—¶æ¶ˆæ¯
+ * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup	æ‰€åœ¨ç¾¤
+ * @param	INT64	 uin		ç›®æ ‡QQ
+ * @param	string	 msg		æ¶ˆæ¯å†…å®¹
+ * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::sendGroupTmpMsg(
-	INT64 robotID,	// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,	// ËùÔÚÈº
-	INT64 uin,		// Ä¿±êQQ
-	string msg		// ÏûÏ¢ÄÚÈİ
+	INT64 robotID,	// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,	// æ‰€åœ¨ç¾¤
+	INT64 uin,		// ç›®æ ‡QQ
+	string msg		// æ¶ˆæ¯å†…å®¹
 )
 {
 	if(msg == "") return -1;
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬·¢ËÍµ½ÁÙÊ±¶ÔÏó£º" + to_string(uin) \
-			+ "£¬ËùÔÚÈº£º" + to_string(dwGroup) \
-			+ "£¬ÏûÏ¢ÄÚÈİ£º" + msg
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œå‘é€åˆ°ä¸´æ—¶å¯¹è±¡ï¼š" + to_string(uin) \
+			+ "ï¼Œæ‰€åœ¨ç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œæ¶ˆæ¯å†…å®¹ï¼š" + msg
 		);
 	return QY_sendGroupTmpMsg(QYAPI::authCode, robotID, dwGroup, uin, msg.c_str());
 }
 
 /*
- * ·¢ËÍÌÖÂÛ×éÏûÏ¢
- * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwDiscuss	Ä¿±êÌÖÂÛ×é
- * @param	string	 msg		ÏûÏ¢ÄÚÈİ
- * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+ * å‘é€è®¨è®ºç»„æ¶ˆæ¯
+ * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwDiscuss	ç›®æ ‡è®¨è®ºç»„
+ * @param	string	 msg		æ¶ˆæ¯å†…å®¹
+ * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::sendDiscussMsg(
-	INT64 robotID,		// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwDiscuss,	// Ä¿±êÌÖÂÛ×é
-	string msg			// ÏûÏ¢ÄÚÈİ
+	INT64 robotID,		// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwDiscuss,	// ç›®æ ‡è®¨è®ºç»„
+	string msg			// æ¶ˆæ¯å†…å®¹
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬·¢ËÍµ½ÌÖÂÛ×é£º" + to_string(dwDiscuss) \
-			+ "£¬ÏûÏ¢ÄÚÈİ£º" + msg
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œå‘é€åˆ°è®¨è®ºç»„ï¼š" + to_string(dwDiscuss) \
+			+ "ï¼Œæ¶ˆæ¯å†…å®¹ï¼š" + msg
 		);
 	return QY_sendDiscussMsg(QYAPI::authCode, robotID, dwDiscuss, msg.c_str());
 }
 
 /*
- * ·¢ËÍÌÖÂÛ×éÁÙÊ±ÏûÏ¢
- * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwDiscuss	ËùÔÚÌÖÂÛ×é
- * @param	INT64	 uin		Ä¿±êQQ
- * @param	string	 msg		ÏûÏ¢ÄÚÈİ
- * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+ * å‘é€è®¨è®ºç»„ä¸´æ—¶æ¶ˆæ¯
+ * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwDiscuss	æ‰€åœ¨è®¨è®ºç»„
+ * @param	INT64	 uin		ç›®æ ‡QQ
+ * @param	string	 msg		æ¶ˆæ¯å†…å®¹
+ * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::sendDiscussTmpMsg(
-	INT64 robotID,		// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwDiscuss,	// ËùÔÚÌÖÂÛ×é
-	INT64 uin,			// Ä¿±êQQ
-	string msg			// ÏûÏ¢ÄÚÈİ
+	INT64 robotID,		// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwDiscuss,	// æ‰€åœ¨è®¨è®ºç»„
+	INT64 uin,			// ç›®æ ‡QQ
+	string msg			// æ¶ˆæ¯å†…å®¹
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬·¢ËÍµ½ÁÙÊ±¶ÔÏó£º" + to_string(uin) \
-			+ "£¬ËùÔÚÌÖÂÛ×é£º" + to_string(dwDiscuss) \
-			+ "£¬ÏûÏ¢ÄÚÈİ£º" + msg
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œå‘é€åˆ°ä¸´æ—¶å¯¹è±¡ï¼š" + to_string(uin) \
+			+ "ï¼Œæ‰€åœ¨è®¨è®ºç»„ï¼š" + to_string(dwDiscuss) \
+			+ "ï¼Œæ¶ˆæ¯å†…å®¹ï¼š" + msg
 		);
 	return QY_sendDiscussTmpMsg(QYAPI::authCode, robotID, dwDiscuss, uin, msg.c_str());
 }
 
 /*
- * ·¢ËÍÀëÏßÎÄ¼ş
- * ÈçĞèÉÏ´«ÈºÎÄ¼şµ½Ö¸¶¨Ä¿Â¼£¬ÇëÊ¹ÓÃ¡¸setGroupFileUpload¡¹
- * @param	INT64		robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT32		dwMsgType		ÏûÏ¢ÀàĞÍ£¬1/ºÃÓÑ 2/Èº 3/ÌÖÂÛ×é 4/ÈºÁÙÊ± 5/ÌÖÂÛ×éÁÙÊ±
- * @param	INT64		dwGroup			ËùÔÚÈº×éµÄ ÈººÅ / ÌÖÂÛ×éID
- * @param	INT64		dwUin			QQºÅ£¬·¢ËÍ¸öÈËÏûÏ¢Ê±Ê¹ÓÃ(°üÀ¨ÁÙÊ±ÏûÏ¢)
- * @param	CSTRING		strLocalPath	ÎÄ¼şÂ·¾¶
- * @return	INT32		unknown			(ÍÆ²â)×´Ì¬Âë
+ * å‘é€ç¦»çº¿æ–‡ä»¶
+ * å¦‚éœ€ä¸Šä¼ ç¾¤æ–‡ä»¶åˆ°æŒ‡å®šç›®å½•ï¼Œè¯·ä½¿ç”¨ã€ŒsetGroupFileUploadã€
+ * @param	INT64		robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT32		dwMsgType		æ¶ˆæ¯ç±»å‹ï¼Œ1/å¥½å‹ 2/ç¾¤ 3/è®¨è®ºç»„ 4/ç¾¤ä¸´æ—¶ 5/è®¨è®ºç»„ä¸´æ—¶
+ * @param	INT64		dwGroup			æ‰€åœ¨ç¾¤ç»„çš„ ç¾¤å· / è®¨è®ºç»„ID
+ * @param	INT64		dwUin			QQå·ï¼Œå‘é€ä¸ªäººæ¶ˆæ¯æ—¶ä½¿ç”¨(åŒ…æ‹¬ä¸´æ—¶æ¶ˆæ¯)
+ * @param	CSTRING		strLocalPath	æ–‡ä»¶è·¯å¾„
+ * @return	INT32		unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::sendOfflineFile(
-	INT64 robotID,			// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT32 dwMsgType,		// ÏûÏ¢ÀàĞÍ
-	INT64 dwGroup,			// Èº×éºÅ
-	INT64 dwUin,			// QQºÅ
-	string strLocalPath		// ÎÄ¼şÂ·¾¶
+	INT64 robotID,			// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT32 dwMsgType,		// æ¶ˆæ¯ç±»å‹
+	INT64 dwGroup,			// ç¾¤ç»„å·
+	INT64 dwUin,			// QQå·
+	string strLocalPath		// æ–‡ä»¶è·¯å¾„
 )
 {
 	switch(dwMsgType)
 	{
-		case 1: // ºÃÓÑÏûÏ¢
+		case 1: // å¥½å‹æ¶ˆæ¯
 		{
 			if(QYAPI_TOLOG)
 				QYAPI::addLog::Debug(robotID, __func__,
-					"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-					+ "£¬·¢ËÍµ½ºÃÓÑ£º" + to_string(dwUin) \
-					+ "£¬ÎÄ¼şÂ·¾¶£º" + strLocalPath
+					"æœºå™¨äººQQï¼š" + to_string(robotID) \
+					+ "ï¼Œå‘é€åˆ°å¥½å‹ï¼š" + to_string(dwUin) \
+					+ "ï¼Œæ–‡ä»¶è·¯å¾„ï¼š" + strLocalPath
 				);
 			return QY_sendOfflineFile(QYAPI::authCode, robotID, dwUin, dwUin, 166, 0, strLocalPath.c_str());
 		}
 
-		case 2: // ÈºÏûÏ¢
+		case 2: // ç¾¤æ¶ˆæ¯
 		{
 			return QYAPI::setGroupFileUpload(robotID, dwGroup, "/", strLocalPath);
 		}
 
-		case 3: // ÌÖÂÛ×é
+		case 3: // è®¨è®ºç»„
 		{
 			if(QYAPI_TOLOG)
 				QYAPI::addLog::Debug(robotID, __func__,
-					"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-					+ "£¬·¢ËÍµ½ÌÖÂÛ×é£º" + to_string(dwGroup) \
-					+ "£¬ÎÄ¼şÂ·¾¶£º" + strLocalPath
+					"æœºå™¨äººQQï¼š" + to_string(robotID) \
+					+ "ï¼Œå‘é€åˆ°è®¨è®ºç»„ï¼š" + to_string(dwGroup) \
+					+ "ï¼Œæ–‡ä»¶è·¯å¾„ï¼š" + strLocalPath
 				);
 			return QY_sendOfflineFile(QYAPI::authCode, robotID, dwGroup, 0, 83, 0, strLocalPath.c_str());
 		}
 
-		case 4: // ÈºÁÙÊ±
+		case 4: // ç¾¤ä¸´æ—¶
 		{
 			if(QYAPI_TOLOG)
 				QYAPI::addLog::Debug(robotID, __func__,
-					"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-					+ "£¬·¢ËÍµ½ÁÙÊ±¶ÔÏó£º" + to_string(dwUin) \
-					+ "£¬ËùÔÚÈº£º" + to_string(dwGroup) \
-					+ "£¬ÎÄ¼şÂ·¾¶£º" + strLocalPath
+					"æœºå™¨äººQQï¼š" + to_string(robotID) \
+					+ "ï¼Œå‘é€åˆ°ä¸´æ—¶å¯¹è±¡ï¼š" + to_string(dwUin) \
+					+ "ï¼Œæ‰€åœ¨ç¾¤ï¼š" + to_string(dwGroup) \
+					+ "ï¼Œæ–‡ä»¶è·¯å¾„ï¼š" + strLocalPath
 				);
 			return QY_sendOfflineFile(QYAPI::authCode, robotID, dwGroup, dwUin, 141, 0, strLocalPath.c_str());
 		}
 
-		case 5: // ÌÖÂÛ×éÁÙÊ±
+		case 5: // è®¨è®ºç»„ä¸´æ—¶
 		{
 			if(QYAPI_TOLOG)
 				QYAPI::addLog::Debug(robotID, __func__,
-					"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-					+ "£¬·¢ËÍµ½ÁÙÊ±¶ÔÏó£º" + to_string(dwUin) \
-					+ "£¬ËùÔÚÌÖÂÛ×é£º" + to_string(dwGroup) \
-					+ "£¬ÎÄ¼şÂ·¾¶£º" + strLocalPath
+					"æœºå™¨äººQQï¼š" + to_string(robotID) \
+					+ "ï¼Œå‘é€åˆ°ä¸´æ—¶å¯¹è±¡ï¼š" + to_string(dwUin) \
+					+ "ï¼Œæ‰€åœ¨è®¨è®ºç»„ï¼š" + to_string(dwGroup) \
+					+ "ï¼Œæ–‡ä»¶è·¯å¾„ï¼š" + strLocalPath
 				);
 			return QY_sendOfflineFile(QYAPI::authCode, robotID, dwGroup, dwUin, 141, 1, strLocalPath.c_str());
 		}
@@ -1194,186 +1225,186 @@ INT32 QYAPI::sendOfflineFile(
 }
 
 /**
- * ÖÃÏûÏ¢³·»Ø
- * @param	INT64		robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	string		msgInfo		ÏûÏ¢ĞÅÏ¢
- * @return	INT32		²Ù×÷½á¹û
+ * ç½®æ¶ˆæ¯æ’¤å›
+ * @param	INT64		robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	string		msgInfo		æ¶ˆæ¯ä¿¡æ¯
+ * @return	INT32		æ“ä½œç»“æœ
  */
 INT32 QYAPI::setMessageSvcMsgWithDraw(
-	INT64 robotID,		// Ê¹ÓÃµÄ»úÆ÷ÈË
-	string msgInfo		// ÏûÏ¢ĞÅÏ¢
+	INT64 robotID,		// ä½¿ç”¨çš„æœºå™¨äºº
+	string msgInfo		// æ¶ˆæ¯ä¿¡æ¯
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬msgInfo£º" + msgInfo
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼ŒmsgInfoï¼š" + msgInfo
 		);
 	return QY_setMessageSvcMsgWithDraw(QYAPI::authCode, robotID, msgInfo.c_str());
 }
 
 /*
- * É¾³ıºÃÓÑ
- * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 QQUin		Ä¿±êQQ
- * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+ * åˆ é™¤å¥½å‹
+ * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 QQUin		ç›®æ ‡QQ
+ * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setFriendDelete(
-	INT64 robotID,	// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 uin		// Ä¿±êQQ
+	INT64 robotID,	// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 uin		// ç›®æ ‡QQ
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬Ä¿±êQQ£º" + to_string(uin)
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œç›®æ ‡QQï¼š" + to_string(uin)
 		);
 	return QY_setDelFriend(QYAPI::authCode, robotID, uin);
 }
 
 /*
- * ÖÃÈºÎÄ¼şÉÏ´«
- * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup			Ä¿±êÈº
- * @param	string	 strParentFolder	ÈºÎÄ¼ş¼ĞÂ·¾¶£¬Èç ¡¸/¡¹Îª¸ùÄ¿Â¼
- * @param	string	 strLocalPath		±¾µØÎÄ¼şÂ·¾¶
- * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤æ–‡ä»¶ä¸Šä¼ 
+ * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup			ç›®æ ‡ç¾¤
+ * @param	string	 strParentFolder	ç¾¤æ–‡ä»¶å¤¹è·¯å¾„ï¼Œå¦‚ ã€Œ/ã€ä¸ºæ ¹ç›®å½•
+ * @param	string	 strLocalPath		æœ¬åœ°æ–‡ä»¶è·¯å¾„
+ * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupFileUpload(
-	INT64 robotID,				// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,				// Ä¿±êÈº
-	string strParentFolder,		// ÈºÎÄ¼ş¼ĞÂ·¾¶
-	string strLocalPath			// ±¾µØÎÄ¼şÂ·¾¶
+	INT64 robotID,				// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,				// ç›®æ ‡ç¾¤
+	string strParentFolder,		// ç¾¤æ–‡ä»¶å¤¹è·¯å¾„
+	string strLocalPath			// æœ¬åœ°æ–‡ä»¶è·¯å¾„
 )
 {
 	if(strLocalPath == "") return -1;
 	if(strParentFolder == "") strParentFolder = "/";
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬Ä¿±êÈº£º" + to_string(dwGroup) \
-			+ "£¬ÈºÎÄ¼ş¼ĞÄ¿Â¼£º" + strParentFolder \
-			+ "£¬±¾µØÎÄ¼şÂ·¾¶£º" + strLocalPath
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œç›®æ ‡ç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œç¾¤æ–‡ä»¶å¤¹ç›®å½•ï¼š" + strParentFolder \
+			+ "ï¼Œæœ¬åœ°æ–‡ä»¶è·¯å¾„ï¼š" + strLocalPath
 		);
 	return QY_setGroupFileUpload(QYAPI::authCode, robotID, dwGroup, strParentFolder.c_str(), strLocalPath.c_str());
 }
 
 /*
- * ÖÃÈºÎÄ¼şÉ¾³ı
- * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup			Ä¿±êÈº
- * @param	INT64	 fileBusID			ÎÄ¼ş×ÜÏßID
- * @param	string	 strParentFolder	¸¸ÎÄ¼ş¼ĞID Ä¿±ê ÈºÎÄ¼ş¼ĞÂ·¾¶£¬Èç ¡¸/¡¹Îª¸ùÄ¿Â¼
- * @param	string	 fileID				ÎÄ¼şID£¬²»¿É¿Õ
- * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤æ–‡ä»¶åˆ é™¤
+ * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup			ç›®æ ‡ç¾¤
+ * @param	INT64	 fileBusID			æ–‡ä»¶æ€»çº¿ID
+ * @param	string	 strParentFolder	çˆ¶æ–‡ä»¶å¤¹ID ç›®æ ‡ ç¾¤æ–‡ä»¶å¤¹è·¯å¾„ï¼Œå¦‚ ã€Œ/ã€ä¸ºæ ¹ç›®å½•
+ * @param	string	 fileID				æ–‡ä»¶IDï¼Œä¸å¯ç©º
+ * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupFileDelete(
-	INT64 robotID,				// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,				// Ä¿±êÈº
-	INT64 fileBusID,			// ÎÄ¼ş×ÜÏßID
-	string strParentFolder,		// ¸¸ÎÄ¼ş¼ĞID
-	string fileID				// ÎÄ¼şID
+	INT64 robotID,				// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,				// ç›®æ ‡ç¾¤
+	INT64 fileBusID,			// æ–‡ä»¶æ€»çº¿ID
+	string strParentFolder,		// çˆ¶æ–‡ä»¶å¤¹ID
+	string fileID				// æ–‡ä»¶ID
 )
 {
 	if(fileID == "") return -1;
 	if(strParentFolder == "") strParentFolder = "/";
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬Ä¿±êÈº£º" + to_string(dwGroup) \
-			+ "£¬ÎÄ¼ş×ÜÏßID£º" + to_string(fileBusID) \
-			+ "£¬¸¸ÎÄ¼ş¼ĞID£º" + strParentFolder \
-			+ "£¬ÎÄ¼şID£º" + fileID
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œç›®æ ‡ç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œæ–‡ä»¶æ€»çº¿IDï¼š" + to_string(fileBusID) \
+			+ "ï¼Œçˆ¶æ–‡ä»¶å¤¹IDï¼š" + strParentFolder \
+			+ "ï¼Œæ–‡ä»¶IDï¼š" + fileID
 		);
 	return QY_setDelGroupFile(QYAPI::authCode, robotID, dwGroup, fileBusID, strParentFolder.c_str(), fileID.c_str());
 }
 
 /*
- * ÖÃÈºÔ±ÒÆ³ı
- * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
- * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup			ËùÔÚÈº
- * @param	INT64	 uin				Ä¿±êQQ
- * @param	bool	 rejectAddRequest	²»ÔÙ½ÓÊÕ´ËÈË¼ÓÈºÉêÇë£¬ÇëÉ÷ÓÃ
- * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤å‘˜ç§»é™¤
+ * éœ€è¦ç®¡ç†å‘˜æƒé™
+ * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup			æ‰€åœ¨ç¾¤
+ * @param	INT64	 uin				ç›®æ ‡QQ
+ * @param	bool	 rejectAddRequest	ä¸å†æ¥æ”¶æ­¤äººåŠ ç¾¤ç”³è¯·ï¼Œè¯·æ…ç”¨
+ * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupMembersKick(
-	INT64 robotID,				// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,				// ËùÔÚÈº
-	INT64 uin,					// Ä¿±êQQ
-	bool rejectAddRequest		// ²»ÔÙ½ÓÊÕ´ËÈË¼ÓÈºÉêÇë
+	INT64 robotID,				// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,				// æ‰€åœ¨ç¾¤
+	INT64 uin,					// ç›®æ ‡QQ
+	bool rejectAddRequest		// ä¸å†æ¥æ”¶æ­¤äººåŠ ç¾¤ç”³è¯·
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬ËùÔÚÈº£º" + to_string(dwGroup) \
-			+ "£¬Ä¿±êQQ£º" + to_string(uin) \
-			+ "£¬" + (rejectAddRequest ? "²»ÔÙ½ÓÊÕ´ËÈË¼ÓÈºÉêÇë" : "ÔÊĞíÏÂ´Î¼ÓÈº")
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œæ‰€åœ¨ç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œç›®æ ‡QQï¼š" + to_string(uin) \
+			+ "ï¼Œ" + (rejectAddRequest ? "ä¸å†æ¥æ”¶æ­¤äººåŠ ç¾¤ç”³è¯·" : "å…è®¸ä¸‹æ¬¡åŠ ç¾¤")
 		);
 	return QY_setGroupMembersKick(QYAPI::authCode, robotID, dwGroup, uin, int(rejectAddRequest));
 }
 
 /*
- * ÖÃÈ«Èº½ûÑÔ
- * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		Ä¿±êÈº
- * @param	bool	 newStatus		ÒªÉèÖÃµÄĞÂ×´Ì¬£¬true/¿ªÆô½ûÑÔ false/¹Ø±Õ½ûÑÔ
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®å…¨ç¾¤ç¦è¨€
+ * éœ€è¦ç®¡ç†å‘˜æƒé™
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		ç›®æ ‡ç¾¤
+ * @param	bool	 newStatus		è¦è®¾ç½®çš„æ–°çŠ¶æ€ï¼Œtrue/å¼€å¯ç¦è¨€ false/å…³é—­ç¦è¨€
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupWholeBanSpeak(
-	INT64 robotID,		// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,		// ËùÔÚÈº
-	bool newStatus		// ÒªÉèÖÃµÄĞÂ×´Ì¬
+	INT64 robotID,		// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,		// æ‰€åœ¨ç¾¤
+	bool newStatus		// è¦è®¾ç½®çš„æ–°çŠ¶æ€
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬Èº£º" + to_string(dwGroup) \
-			+ "£¬" + (newStatus ? "¿ªÆô" : "¹Ø±Õ") + "È«Èº½ûÑÔ"
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œ" + (newStatus ? "å¼€å¯" : "å…³é—­") + "å…¨ç¾¤ç¦è¨€"
 		);
 	return QY_setGroupWholeBanSpeak(QYAPI::authCode, robotID, dwGroup, int(newStatus));
 }
 
 /*
- * ÖÃÈºÔ±½ûÑÔ
- * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		ËùÔÚÈº
- * @param	INT64	 uin			Ä¿±êQQ
- * @param	INT64	 timeStamp		½ûÑÔÊ±¼ä£¬µ¥Î»ÎªÃë¡£Èç¹ûÒª½â½û£¬ÕâÀïÌîĞ´0
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤å‘˜ç¦è¨€
+ * éœ€è¦ç®¡ç†å‘˜æƒé™
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+ * @param	INT64	 uin			ç›®æ ‡QQ
+ * @param	INT64	 timeStamp		ç¦è¨€æ—¶é—´ï¼Œå•ä½ä¸ºç§’ã€‚å¦‚æœè¦è§£ç¦ï¼Œè¿™é‡Œå¡«å†™0
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupMemberBanSpeak(
-	INT64 robotID,		// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,		// ËùÔÚÈº
-	INT64 uin,			// Ä¿±êQQ
-	INT64 timeStamp		// ½ûÑÔÊ±¼ä
+	INT64 robotID,		// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,		// æ‰€åœ¨ç¾¤
+	INT64 uin,			// ç›®æ ‡QQ
+	INT64 timeStamp		// ç¦è¨€æ—¶é—´
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬ËùÔÚÈº£º" + to_string(dwGroup) \
-			+ "£¬Ä¿±êQQ£º" + to_string(uin) \
-			+ "£¬" + (timeStamp ? ("½ûÑÔ" + to_string(timeStamp) + "Ãë") : "½â³ı½ûÑÔ")
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œæ‰€åœ¨ç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œç›®æ ‡QQï¼š" + to_string(uin) \
+			+ "ï¼Œ" + (timeStamp ? ("ç¦è¨€" + to_string(timeStamp) + "ç§’") : "è§£é™¤ç¦è¨€")
 		);
 	return QY_setGroupMembersBanSpeak(QYAPI::authCode, robotID, dwGroup, uin, timeStamp);
 }
 
 /*
- * ÖÃÈºÄäÃû³ÉÔ±½ûÑÔ
- * ½ûÑÔºóÎŞ·¨½â³ı
- * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		ËùÔÚÈº
- * @param	INT64	 headMark		ÄäÃûÓÃ»§µÄÍ·Ïñ±êÊ¶
- * @param	BYTES	 token			ÄäÃûÓÃ»§Token
- * @param	string	 card			ÄäÃûÓÃ»§ÃûÆ¬
- * @param	INT64	 timeStamp		½ûÑÔÊ±¼ä£¬µ¥Î»ÎªÃë
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤åŒ¿åæˆå‘˜ç¦è¨€
+ * ç¦è¨€åæ— æ³•è§£é™¤
+ * éœ€è¦ç®¡ç†å‘˜æƒé™
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+ * @param	INT64	 headMark		åŒ¿åç”¨æˆ·çš„å¤´åƒæ ‡è¯†
+ * @param	BYTES	 token			åŒ¿åç”¨æˆ·Token
+ * @param	string	 card			åŒ¿åç”¨æˆ·åç‰‡
+ * @param	INT64	 timeStamp		ç¦è¨€æ—¶é—´ï¼Œå•ä½ä¸ºç§’
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupAnonymousBanSpeak(
 	INT64 robotID,
@@ -1390,299 +1421,299 @@ INT32 QYAPI::setGroupAnonymousBanSpeak(
 	string strToken = base64_encode(bin, token.size());
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬ËùÔÚÈº£º" + to_string(dwGroup) \
-			+ "£¬Í·Ïñ±êÊ¶£º" + to_string(headMark) \
-			+ "£¬Token£º" + strToken \
-			+ "£¬ÃûÆ¬£º" + card \
-			+ "£¬½ûÑÔ£º" + to_string(timeStamp) + "Ãë"
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œæ‰€åœ¨ç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œå¤´åƒæ ‡è¯†ï¼š" + to_string(headMark) \
+			+ "ï¼ŒTokenï¼š" + strToken \
+			+ "ï¼Œåç‰‡ï¼š" + card \
+			+ "ï¼Œç¦è¨€ï¼š" + to_string(timeStamp) + "ç§’"
 		);
 	return QY_setGroupAnonymousBanSpeak(QYAPI::authCode, robotID, dwGroup, (INT32)headMark, strToken.c_str(), card.c_str(), timeStamp);
 }
 
 /*
- * ÉèÖÃÈºÄäÃûÁÄÌì¿ª¹Ø
- * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		Ä¿±êÈº
- * @param	bool	 newStatus		ÒªÉèÖÃµÄĞÂ×´Ì¬
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * è®¾ç½®ç¾¤åŒ¿åèŠå¤©å¼€å…³
+ * éœ€è¦ç®¡ç†å‘˜æƒé™
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		ç›®æ ‡ç¾¤
+ * @param	bool	 newStatus		è¦è®¾ç½®çš„æ–°çŠ¶æ€
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupAnonymousBan(
-	INT64 robotID,		// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,		// Ä¿±êÈº
-	bool newStatus		// ÒªÉèÖÃµÄĞÂ×´Ì¬
+	INT64 robotID,		// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,		// ç›®æ ‡ç¾¤
+	bool newStatus		// è¦è®¾ç½®çš„æ–°çŠ¶æ€
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬Èº£º" + to_string(dwGroup) \
-			+ "£¬" + (newStatus ? "ÔÊĞí" : "½ûÖ¹") + "ÄäÃûÁÄÌì"
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œ" + (newStatus ? "å…è®¸" : "ç¦æ­¢") + "åŒ¿åèŠå¤©"
 		);
 	return QY_setGroupAnonymousBan(QYAPI::authCode, robotID, dwGroup, int(newStatus));
 }
 
 /*
- * ÖÃÈºÁÙÊ±»á»°¿ª¹Ø
- * ĞèÒªÈºÖ÷È¨ÏŞ
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		Ä¿±êÈº
- * @param	bool	 newStatus		ÒªÉèÖÃµÄĞÂ×´Ì¬
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤ä¸´æ—¶ä¼šè¯å¼€å…³
+ * éœ€è¦ç¾¤ä¸»æƒé™
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		ç›®æ ‡ç¾¤
+ * @param	bool	 newStatus		è¦è®¾ç½®çš„æ–°çŠ¶æ€
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupPrivateSession(
-	INT64 robotID,		// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,		// Ä¿±êÈº
-	bool newStatus		// ÒªÉèÖÃµÄĞÂ×´Ì¬
+	INT64 robotID,		// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,		// ç›®æ ‡ç¾¤
+	bool newStatus		// è¦è®¾ç½®çš„æ–°çŠ¶æ€
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬Èº£º" + to_string(dwGroup) \
-			+ "£¬" + (newStatus ? "ÔÊĞí" : "½ûÖ¹") + "Í¨¹ıÈº·¢ÆğÁÙÊ±»á»°"
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œ" + (newStatus ? "å…è®¸" : "ç¦æ­¢") + "é€šè¿‡ç¾¤å‘èµ·ä¸´æ—¶ä¼šè¯"
 		);
 	return QY_setGroupPrivateSession(QYAPI::authCode, robotID, dwGroup, int(newStatus));
 }
 
 /*
- * ÖÃÈº³ÉÔ±·¢Æğ¶àÈËÁÄÌì¿ª¹Ø
- * ĞèÒªÈºÖ÷È¨ÏŞ
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		Ä¿±êÈº
- * @param	INT32	 Switch			¿ª¹Ø
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤æˆå‘˜å‘èµ·å¤šäººèŠå¤©å¼€å…³
+ * éœ€è¦ç¾¤ä¸»æƒé™
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		ç›®æ ‡ç¾¤
+ * @param	INT32	 Switch			å¼€å…³
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupManyPeopleChat(
-	INT64 robotID,		// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,		// Ä¿±êÈº
-	bool newStatus		// ÒªÉèÖÃµÄĞÂ×´Ì¬
+	INT64 robotID,		// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,		// ç›®æ ‡ç¾¤
+	bool newStatus		// è¦è®¾ç½®çš„æ–°çŠ¶æ€
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬Èº£º" + to_string(dwGroup) \
-			+ "£¬" + (newStatus ? "ÔÊĞí" : "½ûÖ¹") + "Í¨¹ıÈº·¢Æğ¶àÈËÁÄÌì"
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œ" + (newStatus ? "å…è®¸" : "ç¦æ­¢") + "é€šè¿‡ç¾¤å‘èµ·å¤šäººèŠå¤©"
 		);
 	return QY_setGroupManyPeopleChat(QYAPI::authCode, robotID, dwGroup, int(newStatus));
 }
 
 /*
- * ÉèÖÃÈº¹ÜÀíÔ±
- * ĞèÒªÈºÖ÷È¨ÏŞ
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		ËùÔÚÈº
- * @param	INT64	 uin			Ä¿±êQQ
- * @param	bool	 newStatus		true/ÉèÖÃ false/È¡Ïû
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * è®¾ç½®ç¾¤ç®¡ç†å‘˜
+ * éœ€è¦ç¾¤ä¸»æƒé™
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+ * @param	INT64	 uin			ç›®æ ‡QQ
+ * @param	bool	 newStatus		true/è®¾ç½® false/å–æ¶ˆ
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupAdmini(
-	INT64 robotID,		// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,		// ËùÔÚÈº
-	INT64 uin,			// Ä¿±êQQ
-	bool newStatus		// ÒªÉèÖÃµÄĞÂ×´Ì¬
+	INT64 robotID,		// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,		// æ‰€åœ¨ç¾¤
+	INT64 uin,			// ç›®æ ‡QQ
+	bool newStatus		// è¦è®¾ç½®çš„æ–°çŠ¶æ€
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬Èº£º" + to_string(dwGroup) \
-			+ "£¬" + (newStatus ? "ÉèÖÃ" : "È¡Ïû") + "¹ÜÀíÔ±£º" + to_string(uin)
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œ" + (newStatus ? "è®¾ç½®" : "å–æ¶ˆ") + "ç®¡ç†å‘˜ï¼š" + to_string(uin)
 		);
 	return QY_setGroupAdmini(QYAPI::authCode, robotID, dwGroup, uin, int(newStatus));
 }
 
 /*
- * ÉèÖÃÈº³ÉÔ±ÃûÆ¬
- * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		ËùÔÚÈº
- * @param	INT64	 QQUin			Ä¿±êQQ
- * @param	string	 newCard		ĞÂÃûÆ¬
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * è®¾ç½®ç¾¤æˆå‘˜åç‰‡
+ * éœ€è¦ç®¡ç†å‘˜æƒé™
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+ * @param	INT64	 QQUin			ç›®æ ‡QQ
+ * @param	string	 newCard		æ–°åç‰‡
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupMemberCard(
-	INT64 robotID,		// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,		// ËùÔÚÈº
-	INT64 uin,			// Ä¿±êQQ
-	string newCard		// ĞÂÃûÆ¬
+	INT64 robotID,		// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,		// æ‰€åœ¨ç¾¤
+	INT64 uin,			// ç›®æ ‡QQ
+	string newCard		// æ–°åç‰‡
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬ËùÔÚÈº£º" + to_string(dwGroup) \
-			+ "£¬Ä¿±êQQ£º" + to_string(uin) \
-			+ "£¬" + (newCard.length() ? ("ĞÂÃûÆ¬£º" + newCard) : "É¾³ıÃûÆ¬")
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œæ‰€åœ¨ç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œç›®æ ‡QQï¼š" + to_string(uin) \
+			+ "ï¼Œ" + (newCard.length() ? ("æ–°åç‰‡ï¼š" + newCard) : "åˆ é™¤åç‰‡")
 		);
 	return QY_setModifyGroupMemberCard(QYAPI::authCode, robotID, dwGroup, uin, newCard.c_str());
 }
 
 /*
- * ÉèÖÃÈº³ÉÔ±×¨ÊôÍ·ÏÎ
- * ĞèÒªÈºÖ÷È¨ÏŞ
- * Ä¿Ç°½ö°²×¿QQĞ­ÒéÖ§³Ö
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		ËùÔÚÈº
- * @param	INT64	 uin			Ä¿±êQQ
- * @param	CSTRING	 specialTitle	Í·ÏÎ£¬ÈçĞèÉ¾³ı£¬ÇëÌî¿ÕÎÄ±¾
- * @param	INT32	 ExpireTime		ÓĞĞ§ÆÚ£¬µ¥Î»ÎªÃë¡£Èç¹ûÓÀ¾ÃÓĞĞ§£¬ÇëÌî-1
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * è®¾ç½®ç¾¤æˆå‘˜ä¸“å±å¤´è¡”
+ * éœ€è¦ç¾¤ä¸»æƒé™
+ * ç›®å‰ä»…å®‰å“QQåè®®æ”¯æŒ
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+ * @param	INT64	 uin			ç›®æ ‡QQ
+ * @param	CSTRING	 specialTitle	å¤´è¡”ï¼Œå¦‚éœ€åˆ é™¤ï¼Œè¯·å¡«ç©ºæ–‡æœ¬
+ * @param	INT32	 ExpireTime		æœ‰æ•ˆæœŸï¼Œå•ä½ä¸ºç§’ã€‚å¦‚æœæ°¸ä¹…æœ‰æ•ˆï¼Œè¯·å¡«-1
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupSpecialTitle(
-	INT64 robotID,			// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,			// ËùÔÚÈº
-	INT64 uin,				// Ä¿±êQQ
-	string specialTitle,	// Í·ÏÎ
-	INT32 expireTime		// ÓĞĞ§ÆÚ
+	INT64 robotID,			// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,			// æ‰€åœ¨ç¾¤
+	INT64 uin,				// ç›®æ ‡QQ
+	string specialTitle,	// å¤´è¡”
+	INT32 expireTime		// æœ‰æ•ˆæœŸ
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬ËùÔÚÈº£º" + to_string(dwGroup) \
-			+ "£¬Ä¿±êQQ£º" + to_string(uin) \
-			+ "£¬" + (specialTitle.length() ? ("ÉèÖÃĞÂÍ·ÏÎ£º" + specialTitle + "£¬ÓĞĞ§Ê±¼ä£º" + (expireTime == -1 ? "ÓÀ¾Ã" : (to_string(expireTime) + "Ãë"))) : "É¾³ıÍ·ÏÎ")
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œæ‰€åœ¨ç¾¤ï¼š" + to_string(dwGroup) \
+			+ "ï¼Œç›®æ ‡QQï¼š" + to_string(uin) \
+			+ "ï¼Œ" + (specialTitle.length() ? ("è®¾ç½®æ–°å¤´è¡”ï¼š" + specialTitle + "ï¼Œæœ‰æ•ˆæ—¶é—´ï¼š" + (expireTime == -1 ? "æ°¸ä¹…" : (to_string(expireTime) + "ç§’"))) : "åˆ é™¤å¤´è¡”")
 		);
 	return QY_setGroupSpecialTitle(QYAPI::authCode, robotID, dwGroup, uin, specialTitle.c_str(), expireTime);
 }
 
 /*
- * ÖÃÈºÍË³ö
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		Ä¿±êÈº
- * @param	bool	 Disband		ÊÇ·ñ½âÉ¢Èº£¬true/½âÉ¢ false/ÍË³ö
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤é€€å‡º
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		ç›®æ ‡ç¾¤
+ * @param	bool	 Disband		æ˜¯å¦è§£æ•£ç¾¤ï¼Œtrue/è§£æ•£ false/é€€å‡º
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupExit(
-	INT64 robotID,	// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,	// Ä¿±êÈº
-	bool disband	// ÊÇ·ñ½âÉ¢Èº
+	INT64 robotID,	// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,	// ç›®æ ‡ç¾¤
+	bool disband	// æ˜¯å¦è§£æ•£ç¾¤
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬" + (disband ? "½âÉ¢" : "ÍË³ö") + "Èº£º" + to_string(dwGroup)
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œ" + (disband ? "è§£æ•£" : "é€€å‡º") + "ç¾¤ï¼š" + to_string(dwGroup)
 		);
 	return QY_setExitGroupChat(QYAPI::authCode, robotID, dwGroup, int(disband));
 }
 
 /*
- * ÖÃÌÖÂÛ×éÍË³ö
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwDiscuss		Ä¿±êÌÖÂÛ×é
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®è®¨è®ºç»„é€€å‡º
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwDiscuss		ç›®æ ‡è®¨è®ºç»„
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setDiscussExit(
-	INT64 robotID,		// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwDiscuss		// Ä¿±êÌÖÂÛ×é
+	INT64 robotID,		// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwDiscuss		// ç›®æ ‡è®¨è®ºç»„
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬ÍË³öÌÖÂÛ×é£º" + to_string(dwDiscuss)
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œé€€å‡ºè®¨è®ºç»„ï¼š" + to_string(dwDiscuss)
 		);
 	return QY_setExitDiscussChat(QYAPI::authCode, robotID, dwDiscuss);
 }
 
 /*
- * ÖÃÌÖÂÛ×é³ÉÔ±ÒÆ³ı
- * ĞèÒª´´½¨ÕßÈ¨ÏŞ
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwDiscuss		ËùÔÚÌÖÂÛ×é
- * @param	INT64	 uin			Ä¿±êQQ
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®è®¨è®ºç»„æˆå‘˜ç§»é™¤
+ * éœ€è¦åˆ›å»ºè€…æƒé™
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwDiscuss		æ‰€åœ¨è®¨è®ºç»„
+ * @param	INT64	 uin			ç›®æ ‡QQ
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setDiscussMembersKick(
-	INT64 robotID,		// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwDiscuss,	// Ä¿±êÌÖÂÛ×é
-	INT64 uin			// Ä¿±êQQ
+	INT64 robotID,		// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwDiscuss,	// ç›®æ ‡è®¨è®ºç»„
+	INT64 uin			// ç›®æ ‡QQ
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬´ÓÌÖÂÛ×é£º" + to_string(dwDiscuss) \
-			+ "ÖĞÌß³ö³ÉÔ±£º" + to_string(uin)
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œä»è®¨è®ºç»„ï¼š" + to_string(dwDiscuss) \
+			+ "ä¸­è¸¢å‡ºæˆå‘˜ï¼š" + to_string(uin)
 		);
 	return QY_setDiscussMembersKick(QYAPI::authCode, robotID, dwDiscuss, uin);
 }
 
 /*
- * ÖÃÌí¼ÓÈº
- * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup			Ä¿±êÈº
- * @param	string	 additionalMsg		¸½¼ÓĞÅÏ¢
- * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+ * ç½®æ·»åŠ ç¾¤
+ * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup			ç›®æ ‡ç¾¤
+ * @param	string	 additionalMsg		é™„åŠ ä¿¡æ¯
+ * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupAdd(
-	INT64 robotID,			// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	INT64 dwGroup,			// Ä¿±êÈº
-	string additionalMsg	// ¸½¼ÓĞÅÏ¢
+	INT64 robotID,			// ä½¿ç”¨çš„æœºå™¨äººQQ
+	INT64 dwGroup,			// ç›®æ ‡ç¾¤
+	string additionalMsg	// é™„åŠ ä¿¡æ¯
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬ÏòÈº£º" + to_string(dwGroup)  + "·¢³ö¼ÓÈºÉêÇë"\
-			+ "£¬¸½¼ÓĞÅÏ¢£º" + additionalMsg
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œå‘ç¾¤ï¼š" + to_string(dwGroup)  + "å‘å‡ºåŠ ç¾¤ç”³è¯·"\
+			+ "ï¼Œé™„åŠ ä¿¡æ¯ï¼š" + additionalMsg
 		);
 	return QY_setAddGroup(QYAPI::authCode, robotID, dwGroup, additionalMsg.c_str());
 }
 
 /*
- * ÖÃ´¦ÀíÈºÌí¼ÓÇëÇó
- * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	string	 responseFlag		ÇëÇóÊÂ¼şÊÕµ½µÄ¡¸·´À¡±êÊ¶¡¹²ÎÊı
- * @param	INT32	 requestType		ÇëÇóÀàĞÍ£¬ÑûÇë/REQUEST_GROUP_INVITE »ò ¼ÓÈº/REQUEST_GROUP_INVITE
- * @param	INT32	 resultFlag			´¦Àí½á¹û£¬Í¨¹ı/REQUEST_ALLOW »ò ¾Ü¾ø/REQUEST_DENY
- * @param	string	 reason				¾Ü¾øÀíÓÉ£¬½öÔÚ ¾Ü¾ø Ê±¿ÉÓÃ
- * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+ * ç½®å¤„ç†ç¾¤æ·»åŠ è¯·æ±‚
+ * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	string	 responseFlag		è¯·æ±‚äº‹ä»¶æ”¶åˆ°çš„ã€Œåé¦ˆæ ‡è¯†ã€å‚æ•°
+ * @param	INT32	 requestType		è¯·æ±‚ç±»å‹ï¼Œé‚€è¯·/REQUEST_GROUP_INVITE æˆ– åŠ ç¾¤/REQUEST_GROUP_INVITE
+ * @param	INT32	 resultFlag			å¤„ç†ç»“æœï¼Œé€šè¿‡/REQUEST_ALLOW æˆ– æ‹’ç»/REQUEST_DENY
+ * @param	string	 reason				æ‹’ç»ç†ç”±ï¼Œä»…åœ¨ æ‹’ç» æ—¶å¯ç”¨
+ * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setGroupAddRequest(
-	INT64 robotID,			// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	string responseFlag,	// ·´À¡±êÊ¶
-	INT32 requestType,		// ÇëÇóÀàĞÍ
-	INT32 resultFlag,		// ´¦Àí½á¹û
-	string reason			// ¾Ü¾øÀíÓÉ
+	INT64 robotID,			// ä½¿ç”¨çš„æœºå™¨äººQQ
+	string responseFlag,	// åé¦ˆæ ‡è¯†
+	INT32 requestType,		// è¯·æ±‚ç±»å‹
+	INT32 resultFlag,		// å¤„ç†ç»“æœ
+	string reason			// æ‹’ç»ç†ç”±
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬·´À¡±êÊ¶£º" + responseFlag \
-			+ "£¬ÇëÇóÀàĞÍ£º" + to_string(requestType) \
-			+ "£¬´¦Àí½á¹û£º" + ((resultFlag == REQUEST_ALLOW) ? "Í¨¹ı" : "¾Ü¾ø") \
-			+ ((resultFlag == REQUEST_DENY) ? ("£¬¾Ü¾øÀíÓÉ£º" + reason) : "")
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œåé¦ˆæ ‡è¯†ï¼š" + responseFlag \
+			+ "ï¼Œè¯·æ±‚ç±»å‹ï¼š" + to_string(requestType) \
+			+ "ï¼Œå¤„ç†ç»“æœï¼š" + ((resultFlag == REQUEST_ALLOW) ? "é€šè¿‡" : "æ‹’ç»") \
+			+ ((resultFlag == REQUEST_DENY) ? ("ï¼Œæ‹’ç»ç†ç”±ï¼š" + reason) : "")
 		);
 	return QY_setGroupAddRequest(QYAPI::authCode, robotID, responseFlag.c_str(), requestType, resultFlag, reason.c_str());
 }
 
 /*
- * ÖÃ´¦ÀíºÃÓÑÌí¼ÓÇëÇó
- * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	string	 responseFlag		ÇëÇóÊÂ¼şÊÕµ½µÄ¡¸·´À¡±êÊ¶¡¹²ÎÊı
- * @param	INT32	 resultFlag			´¦Àí½á¹û£¬Í¨¹ı/REQUEST_ALLOW »ò ¾Ü¾ø/REQUEST_DENY
- * @param	string	 remarks			Í¨¹ıÊ±ÎªÌí¼ÓºóµÄºÃÓÑ±¸×¢£¬¾Ü¾øÊ±Îª¾Ü¾øÀíÓÉ
- * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+ * ç½®å¤„ç†å¥½å‹æ·»åŠ è¯·æ±‚
+ * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	string	 responseFlag		è¯·æ±‚äº‹ä»¶æ”¶åˆ°çš„ã€Œåé¦ˆæ ‡è¯†ã€å‚æ•°
+ * @param	INT32	 resultFlag			å¤„ç†ç»“æœï¼Œé€šè¿‡/REQUEST_ALLOW æˆ– æ‹’ç»/REQUEST_DENY
+ * @param	string	 remarks			é€šè¿‡æ—¶ä¸ºæ·»åŠ åçš„å¥½å‹å¤‡æ³¨ï¼Œæ‹’ç»æ—¶ä¸ºæ‹’ç»ç†ç”±
+ * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 INT32 QYAPI::setFriendAddRequest(
-	INT64 robotID,			// Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-	string responseFlag,	// ·´À¡±êÊ¶
-	INT32 resultFlag,		// ´¦Àí½á¹û
-	string remarks			// Í¨¹ıÊ±ÎªÌí¼ÓºóµÄºÃÓÑ±¸×¢£¬¾Ü¾øÊ±Îª¾Ü¾øÀíÓÉ
+	INT64 robotID,			// ä½¿ç”¨çš„æœºå™¨äººQQ
+	string responseFlag,	// åé¦ˆæ ‡è¯†
+	INT32 resultFlag,		// å¤„ç†ç»“æœ
+	string remarks			// é€šè¿‡æ—¶ä¸ºæ·»åŠ åçš„å¥½å‹å¤‡æ³¨ï¼Œæ‹’ç»æ—¶ä¸ºæ‹’ç»ç†ç”±
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(robotID, __func__,
-			"»úÆ÷ÈËQQ£º" + to_string(robotID) \
-			+ "£¬·´À¡±êÊ¶£º" + responseFlag \
-			+ "£¬´¦Àí½á¹û£º" + ((resultFlag == REQUEST_ALLOW) ? "Í¨¹ı" : "¾Ü¾ø") \
-			+ "£¬" + ((resultFlag == REQUEST_ALLOW) ? "±¸×¢£º" : "¾Ü¾øÀíÓÉ£º") + remarks
+			"æœºå™¨äººQQï¼š" + to_string(robotID) \
+			+ "ï¼Œåé¦ˆæ ‡è¯†ï¼š" + responseFlag \
+			+ "ï¼Œå¤„ç†ç»“æœï¼š" + ((resultFlag == REQUEST_ALLOW) ? "é€šè¿‡" : "æ‹’ç»") \
+			+ "ï¼Œ" + ((resultFlag == REQUEST_ALLOW) ? "å¤‡æ³¨ï¼š" : "æ‹’ç»ç†ç”±ï¼š") + remarks
 		);
 	return QY_setFriendAddRequest(QYAPI::authCode, robotID, responseFlag.c_str(), resultFlag, remarks.c_str());
 }

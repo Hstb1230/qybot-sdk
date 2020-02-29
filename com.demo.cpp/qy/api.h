@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "log.h"
 #include "code.h"
 #include "typedef.h"
@@ -7,558 +7,569 @@
 class QYAPI
 {
 	private:
-		static bool		appEnable;		//²å¼şÆôÓÃ×´Ì¬
-		static INT32	authCode;		//Ó¦ÓÃ±êÊ¶£¬ÓÃÓÚµ÷ÓÃAPI
-		static INT32	protocolType;	//Ğ­ÒéÀàĞÍ£¬1/°²×¿QQĞ­Òé 2/PCQQĞ­Òé
-		static string	appDirectory;	//¿ò¼Ü·ÖÅäµÄÎ¨Ò»Êı¾İ´æ·ÅÄ¿Â¼
+		static bool		appEnable;		//æ’ä»¶å¯ç”¨çŠ¶æ€
+		static INT32	authCode;		//åº”ç”¨æ ‡è¯†ï¼Œç”¨äºè°ƒç”¨API
+		static INT32	protocolType;	//åè®®ç±»å‹ï¼Œ1/å®‰å“QQåè®® 2/PCQQåè®®
+		static string	appDirectory;	//æ¡†æ¶åˆ†é…çš„å”¯ä¸€æ•°æ®å­˜æ”¾ç›®å½•
 	
 	public:
-		static const auto EVENT_IGNORE = 0;				//ÊÂ¼ş_ºöÂÔ
-		static const auto EVENT_BLOCK = 1;				//ÊÂ¼ş_À¹½Ø
+		static const auto EVENT_IGNORE = 0;				//äº‹ä»¶_å¿½ç•¥
+		static const auto EVENT_BLOCK = 1;				//äº‹ä»¶_æ‹¦æˆª
 
-		static const auto REQUEST_ALLOW = 0;			//ÇëÇó_Í¨¹ı
-		static const auto REQUEST_DENY = 1;				//ÇëÇó_¾Ü¾ø
+		static const auto REQUEST_ALLOW = 0;			//è¯·æ±‚_é€šè¿‡
+		static const auto REQUEST_DENY = 1;				//è¯·æ±‚_æ‹’ç»
 
-		static const auto REQUEST_GROUP_ADD = 0;		//ÇëÇó_ÈºÌí¼Ó
-		static const auto REQUEST_GROUP_INVITE = 1;		//ÇëÇó_ÈºÑûÇë
+		static const auto REQUEST_GROUP_ADD = 0;		//è¯·æ±‚_ç¾¤æ·»åŠ 
+		static const auto REQUEST_GROUP_INVITE = 1;		//è¯·æ±‚_ç¾¤é‚€è¯·
 
-		typedef QYLOG addLog;					// ÈÕÖ¾Àà
-		typedef QYInfoAnalyze infoAnalyze;		// ĞÅÏ¢½âÎö
-		typedef QYTYPE Type;					// ×Ô¶¨ÒåÊı¾İÀàĞÍ
-		typedef QYCODE Code;					// LQÂë
+		typedef QYLOG addLog;					// æ—¥å¿—ç±»
+		typedef QYInfoAnalyze infoAnalyze;		// ä¿¡æ¯è§£æ
+		typedef QYTYPE Type;					// è‡ªå®šä¹‰æ•°æ®ç±»å‹
+		typedef QYCODE Code;					// LQç 
 
 	public:
 		/**
-		 * È¡²å¼şµÄJsonĞÅÏ¢
-		 * ÓÃÓÚAPPInfoº¯Êı
-		 * @return	CSTRING		JsonÎÄ±¾
+		 * å–æ’ä»¶çš„Jsonä¿¡æ¯
+		 * ç”¨äºAPPInfoå‡½æ•°
+		 * @return	CSTRING		Jsonæ–‡æœ¬
 		 */
 		static CSTRING getJsonInfo();
 		
 		/**
-		 * ÖÃAuthCode
-		 * @param	INT32	authCode	Ó¦ÓÃ±êÊ¶
+		 * ç½®AuthCode
+		 * @param	INT32	authCode	åº”ç”¨æ ‡è¯†
 		 */
 		static void setAuthCode(INT32 authCode);
 
 		/**
-		 * È¡AuthCode
-		 * @return	INT32	authCode	Ó¦ÓÃ±êÊ¶
+		 * å–AuthCode
+		 * @return	INT32	authCode	åº”ç”¨æ ‡è¯†
 		 */
 		static INT32 getAuthCode();
 
 		/**
-		 * ÖÃProtocolType
-		 * @param	INT32	protocolType	Ğ­ÒéÀàĞÍ 1/°²×¿QQĞ­Òé 2/PCQQĞ­Òé
+		 * ç½®ProtocolType
+		 * @param	INT32	protocolType	åè®®ç±»å‹ 1/å®‰å“QQåè®® 2/PCQQåè®®
 		 */
 		static void setProtocolType(INT32 protocolType);
 
 		/**
-		 * È¡ProtocolType
-		 * @return	INT32	protocolType	Ğ­ÒéÀàĞÍ 1/°²×¿QQĞ­Òé 2/PCQQĞ­Òé
+		 * å–ProtocolType
+		 * @return	INT32	protocolType	åè®®ç±»å‹ 1/å®‰å“QQåè®® 2/PCQQåè®®
 		 */
 		static INT32 getProtocolType();
 
 		/**
-		 * ÖÃ²å¼şÆôÓÃ×´Ì¬
-		 * @param	bool	state	ÆôÓÃ×´Ì¬
+		 * ç½®æ’ä»¶å¯ç”¨çŠ¶æ€
+		 * @param	bool	state	å¯ç”¨çŠ¶æ€
 		 */
 		static void setAppEnable(bool state);
 
 		/**
-		 * È¡²å¼şÆôÓÃ×´Ì¬
-		 * @return	bool	state	ÆôÓÃ×´Ì¬
+		 * å–æ’ä»¶å¯ç”¨çŠ¶æ€
+		 * @return	bool	state	å¯ç”¨çŠ¶æ€
 		 */
 		static bool getAppEnable();
 
 		/**
-		 * È¡¿ò¼ÜÃû
-		 * @return	string		¿ò¼ÜÃû
+		 * å–æ¡†æ¶å
+		 * @return	string		æ¡†æ¶å
 		 */
 		static string getFrameName();
 
 		/*
-		 * ÖÃÓ¦ÓÃ×ÔÍ£ÓÃ
-		 * @param	INT64	waitTime	µÈ´ıÊ±¼ä(µ¥Î»£ººÁÃë)£¬Áô³öÒ»¶¨Ê±¼äÊ¹º¯Êıµ÷ÓÃÍê³É£¬±ÜÃâÖ±½Ó²Ù×÷³öÏÖ³åÍ»Ôì³É¿ò¼Ü±ÀÀ£
+		 * ç½®åº”ç”¨è‡ªåœç”¨
+		 * @param	INT64	waitTime	ç­‰å¾…æ—¶é—´(å•ä½ï¼šæ¯«ç§’)ï¼Œç•™å‡ºä¸€å®šæ—¶é—´ä½¿å‡½æ•°è°ƒç”¨å®Œæˆï¼Œé¿å…ç›´æ¥æ“ä½œå‡ºç°å†²çªé€ æˆæ¡†æ¶å´©æºƒ
 		 * @return	INT32	unknown
 		 */
 		static INT32 setAppSelfDiscontinue(INT64 waitTime = 1000);
 
 		/*
-		 * ÖÃÓ¦ÓÃ×ÔĞ¶ÔØ
-		 * @param	INT64	waitTime	µÈ´ıÊ±¼ä£¬µ¥Î»£ººÁÃë
+		 * ç½®åº”ç”¨è‡ªå¸è½½
+		 * @param	INT64	waitTime	ç­‰å¾…æ—¶é—´ï¼Œå•ä½ï¼šæ¯«ç§’
 		 * @return	INT32	unknown
 		 */
 		static INT32 setAppSelfUninstall(INT64 waitTime = 1000);
 
 		/**
-		 * È¡Ó¦ÓÃÄ¿Â¼
-		 * ·µ»ØµÄÂ·¾¶Ä©Î²´ø¡¸\¡¹
-		 * @return	string		Ó¦ÓÃÄ¿Â¼
+		 * å–åº”ç”¨ç›®å½•
+		 * è¿”å›çš„è·¯å¾„æœ«å°¾å¸¦ã€Œ\ã€
+		 * @return	string		åº”ç”¨ç›®å½•
 		 */
 		static string getAppDirectory();
 
 		/**
-		 * È¡µÇÂ¼QQÁĞ±í
-		 * @param	INT64List	bindLoginQQList		µÇÂ¼QQÁĞ±íµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
-		 * @return	bool		Ö´ĞĞ½á¹û
+		 * å–ç™»å½•QQåˆ—è¡¨
+		 * @param	INT64List	bindLoginQQList		ç™»å½•QQåˆ—è¡¨çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool		æ‰§è¡Œç»“æœ
 		 */
 		static bool getLoginQQList(INT64List & bindLoginQQList);
 
 		/**
-		 * È¡µÇÂ¼QQÁĞ±í(º¬ÔÚÏß×´Ì¬)
-		 * @param	bool		getState			È¡ÔÚÏß×´Ì¬
-		 * @param	LoginQQList	bindLoginQQList		µÇÂ¼QQÁĞ±íµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
-		 * @return	bool		Ö´ĞĞ½á¹û
+		 * å–ç™»å½•QQåˆ—è¡¨(å«åœ¨çº¿çŠ¶æ€)
+		 * @param	bool		getState			å–åœ¨çº¿çŠ¶æ€
+		 * @param	LoginQQList	bindLoginQQList		ç™»å½•QQåˆ—è¡¨çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool		æ‰§è¡Œç»“æœ
 		 */
 		static bool getLoginQQList(bool getState, Type::LoginQQList & bindLoginQQList);
 
 		/**
-		 * Ëæ»úÈ¡Ò»¸öµÇÂ¼QQ
-		 * @param	useCache	Ê¹ÓÃ»º´æ
-		 * @return	INT64		µÇÂ¼QQ
+		 * éšæœºå–ä¸€ä¸ªç™»å½•QQ
+		 * @param	useCache	ä½¿ç”¨ç¼“å­˜
+		 * @return	INT64		ç™»å½•QQ
 		 */
 		static INT64 getRandomLoginQQ(bool useCache = false);
 
 		/*
-		 * È¡¿ò¼ÜÕËºÅ×´Ì¬
-		 * @param	INT64	robotID		Òª²éÑ¯µÄÕËºÅ
-		 * @return	INT32	ÕËºÅ×´Ì¬		0/ÀëÏß 1/ÔÚÏß
+		 * å–æ¡†æ¶è´¦å·çŠ¶æ€
+		 * @param	INT64	robotID		è¦æŸ¥è¯¢çš„è´¦å·
+		 * @return	INT32	è´¦å·çŠ¶æ€		0/ç¦»çº¿ 1/åœ¨çº¿
 		 */
 		static INT32 getFrameAccountState(INT64 robotID);
 
 		/**
-		 * È¡Ö¸¶¨»úÆ÷ÈËµÄêÇ³Æ
-		 * @param	INT64	robotID		Òª²éÑ¯êÇ³ÆµÄ»úÆ÷ÈËQQ
-		 * @return	string	nick		¸Ã»úÆ÷ÈËµÄêÇ³Æ
+		 * å–æŒ‡å®šæœºå™¨äººçš„æ˜µç§°
+		 * @param	INT64	robotID		è¦æŸ¥è¯¢æ˜µç§°çš„æœºå™¨äººQQ
+		 * @return	string	nick		è¯¥æœºå™¨äººçš„æ˜µç§°
 		 */
 		static string getLoginQQName(INT64 robotID);
 
 		/**
-		 * È¡Ö¸¶¨»úÆ÷ÈËµÄcookies
-		 * @param	INT64		robotID		Òª²éÑ¯µÄ»úÆ÷ÈËQQ
-		 * @return	string		cookies		¸Ã»úÆ÷ÈËµÄcookies
+		 * å–æŒ‡å®šæœºå™¨äººçš„cookies
+		 * @param	INT64		robotID		è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+		 * @return	string		cookies		è¯¥æœºå™¨äººçš„cookies
 		 */
 		static string getCookies(INT64 robotID);
 
 		/**
-		 * È¡Ö¸¶¨»úÆ÷ÈËµÄcsrfToken
-		 * @param	INT64	robotID		Òª²éÑ¯µÄ»úÆ÷ÈËQQ
-		 * @return	INT32	csrfToken	¸Ã»úÆ÷ÈËµÄcsrfToken
+		 * å–æŒ‡å®šæœºå™¨äººçš„csrfToken
+		 * @param	INT64	robotID		è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+		 * @return	INT32	csrfToken	è¯¥æœºå™¨äººçš„csrfToken
 		 */
 		static INT32 getCsrfToken(INT64 robotID);
 
 		/**
-		 * È¡ÓòÃûcookie
-		 * @param	INT64		robotID		Òª²éÑ¯µÄ»úÆ÷ÈËQQ
-		 * @param	string		domain		Òª»ñÈ¡cookiesµÄÓòÃû£¬http://qun.qq.com »ò http://qun.qzone.qq.com
-		 * @return	string		cookies		µÇÂ¼Ö¸¶¨ÓòÃûÔÚÌø×ª³É¹¦ºóµÄcookies
+		 * å–åŸŸåcookie
+		 * @param	INT64		robotID		è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+		 * @param	string		domain		è¦è·å–cookiesçš„åŸŸåï¼Œhttp://qun.qq.com æˆ– http://qun.qzone.qq.com
+		 * @return	string		cookies		ç™»å½•æŒ‡å®šåŸŸååœ¨è·³è½¬æˆåŠŸåçš„cookies
 		 */
 		static string getDomainCookies(INT64 robotID, string domain = "http://qun.qq.com");
 
 		/**
-		 * È¡ºÃÓÑÁĞ±í
-		 * @param	INT64		robotID			Òª²éÑ¯µÄ»úÆ÷ÈËQQ
-		 * @param	FriendList	bindFriendList	ºÃÓÑÁĞ±íµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
-		 * @return	bool		Ö´ĞĞ½á¹û
+		 * å–å¥½å‹åˆ—è¡¨
+		 * @param	INT64		robotID			è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+		 * @param	FriendList	bindFriendList	å¥½å‹åˆ—è¡¨çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool		æ‰§è¡Œç»“æœ
 		 */
 		static bool getFriendList(INT64 robotID, Type::FriendList & bindFriendList);
 
 		/**
-		 * È¡QQ¸ÅÒªĞÅÏ¢
-		 * @param	INT64			robotID				Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64			uin					²éÑ¯QQ
-		 * @param	QQSummaryInfo	bindQSummaryInfo	QQ¸ÅÒªĞÅÏ¢µÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
-		 * @return	bool			Ö´ĞĞ½á¹û
+		 * å–QQæ¦‚è¦ä¿¡æ¯
+		 * @param	INT64			robotID				ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64			uin					æŸ¥è¯¢QQ
+		 * @param	QQSummaryInfo	bindQSummaryInfo	QQæ¦‚è¦ä¿¡æ¯çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool			æ‰§è¡Œç»“æœ
 		 */
 		static bool getQQSummaryInfo(INT64 robotID, INT64 uin, Type::QQSummaryInfo & bindQSummaryInfo);
 
 		/**
-		 * È¡ÈºÁĞ±í
-		 * @param	INT64		robotID			Òª²éÑ¯µÄ»úÆ÷ÈËQQ
-		 * @param	GroupList	bindGroupList	ÈºÁĞ±íµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
-		 * @return	bool		Ö´ĞĞ½á¹û
+		 * å–ç¾¤åˆ—è¡¨
+		 * @param	INT64		robotID			è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+		 * @param	GroupList	bindGroupList	ç¾¤åˆ—è¡¨çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool		æ‰§è¡Œç»“æœ
 		 */
 		static bool getGroupList(INT64 robotID, Type::GroupList & bindGroupList);
 
 		/**
-		 * È¡Èº×ÊÁÏ
-		 * @param	INT64		robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64		dwGroup			Òª²éÑ¯µÄÈººÅ
-		 * @param	GroupInfo	bindGroupInfo	Èº×ÊÁÏµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
-		 * @return	bool		Ö´ĞĞ½á¹û
+		 * å–ç¾¤èµ„æ–™
+		 * @param	INT64		robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64		dwGroup			è¦æŸ¥è¯¢çš„ç¾¤å·
+		 * @param	GroupInfo	bindGroupInfo	ç¾¤èµ„æ–™çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool		æ‰§è¡Œç»“æœ
 		 */
 		static bool getGroupInfo(INT64 robotID, INT64 dwGroup, Type::GroupInfo & bindGroupInfo);
 
 		/**
-		 * È¡Èº¹ÜÀíÔ±ÁĞ±í
-		 * °üÀ¨ÈºÖ÷
-		 * @param	INT64			robotID				Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64			dwGroup				Òª²éÑ¯µÄÈººÅ
-		 * @param	GroupAdminList	bindGroupAdminList	Èº¹ÜÀíÁĞ±íµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
-		 * @return	bool			Ö´ĞĞ½á¹û
+		 * å–ç¾¤ç®¡ç†å‘˜åˆ—è¡¨
+		 * åŒ…æ‹¬ç¾¤ä¸»
+		 * @param	INT64			robotID				ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64			dwGroup				è¦æŸ¥è¯¢çš„ç¾¤å·
+		 * @param	GroupAdminList	bindGroupAdminList	ç¾¤ç®¡ç†åˆ—è¡¨çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool			æ‰§è¡Œç»“æœ
 		 */
 		static bool getGroupAdminList(INT64 robotID, INT64 dwGroup, Type::GroupAdminList & bindGroupAdminList);
 
 		/**
-		 * È¡Èº³ÉÔ±ÁĞ±í
-		 * PCĞ­ÒéÖ»ÄÜ»ñÈ¡QQºÍ¹ÜÀíÈ¨ÏŞ
-		 * @param	INT64			robotID					Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64			dwGroup					Òª²éÑ¯µÄÈººÅ
-		 * @param	GroupMemberList	bindGroupMemberList		Èº³ÉÔ±ÁĞ±íµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
-		 * @return	bool			Ö´ĞĞ½á¹û
+		 * å–ç¾¤æˆå‘˜ä¿¡æ¯
+		 * PCåè®®åªèƒ½è·å–QQå’Œç®¡ç†æƒé™
+		 * @param	INT64			robotID					ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64			dwGroup					è¦æŸ¥è¯¢çš„ç¾¤å·
+		 * @param	INT64			uin						è¦æŸ¥è¯¢çš„æˆå‘˜QQå·
+		 * @param	GroupMember		bindGroupMember			ç¾¤æˆå‘˜ä¿¡æ¯çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool			æ‰§è¡Œç»“æœ
+		 */
+		static bool getGroupMemberInfo(INT64 robotID, INT64 dwGroup, INT64 uin, Type::GroupMember & bindGroupMember);
+
+		/**
+		 * å–ç¾¤æˆå‘˜åˆ—è¡¨
+		 * PCåè®®åªèƒ½è·å–QQå’Œç®¡ç†æƒé™
+		 * @param	INT64			robotID					ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64			dwGroup					è¦æŸ¥è¯¢çš„ç¾¤å·
+		 * @param	GroupMemberList	bindGroupMemberList		ç¾¤æˆå‘˜åˆ—è¡¨çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool			æ‰§è¡Œç»“æœ
 		 */
 		static bool getGroupMemberList(INT64 robotID, INT64 dwGroup, Type::GroupMemberList & bindGroupMemberList);
 
 		/**
-		 * È¡Èº³ÉÔ±ÃûÆ¬
-		 * @param	INT64		robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64		dwGroup			ËùÔÚÈº
-		 * @param	INT64		uin				Òª²éÑ¯µÄQQºÅ
-		 * @param	bool		useNick			Ê¹ÓÃêÇ³Æ£¬Ä¬ÈÏ²»Ê¹ÓÃ¡£ÈôÃûÆ¬Îª¿Õ£¬Ê¹ÓÃÊ±·µ»ØêÇ³Æ£¬²»Ê¹ÓÃÔò·µ»Ø¿Õ
-		 * @param	bool		useCache		Ê¹ÓÃ»º´æ£¬Ä¬ÈÏÊ¹ÓÃ
-		 * @return	string		¸ÃÈº³ÉÔ±µÄÃûÆ¬
+		 * å–ç¾¤æˆå‘˜åç‰‡
+		 * @param	INT64		robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64		dwGroup			æ‰€åœ¨ç¾¤
+		 * @param	INT64		uin				è¦æŸ¥è¯¢çš„QQå·
+		 * @param	bool		useNick			ä½¿ç”¨æ˜µç§°ï¼Œé»˜è®¤ä¸ä½¿ç”¨ã€‚è‹¥åç‰‡ä¸ºç©ºï¼Œä½¿ç”¨æ—¶è¿”å›æ˜µç§°ï¼Œä¸ä½¿ç”¨åˆ™è¿”å›ç©º
+		 * @param	bool		useCache		ä½¿ç”¨ç¼“å­˜ï¼Œé»˜è®¤ä½¿ç”¨
+		 * @return	string		è¯¥ç¾¤æˆå‘˜çš„åç‰‡
 		 */
 		static string getGroupMemberCard(INT64 robotID, INT64 dwGroup, INT64 uin, bool useNick = false, bool useCache = true);
 
 		/**
-		 * È¡ÌÖÂÛ×éÁĞ±í
-		 * @param	INT64			robotID				Òª²éÑ¯µÄ»úÆ÷ÈËQQ
-		 * @param	DiscussList		bindDiscussList		ÌÖÂÛ×éÁĞ±íµÄÒıÓÃ£¬Ö´ĞĞ³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
-		 * @return	bool			Ö´ĞĞ½á¹û
+		 * å–è®¨è®ºç»„åˆ—è¡¨
+		 * @param	INT64			robotID				è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+		 * @param	DiscussList		bindDiscussList		è®¨è®ºç»„åˆ—è¡¨çš„å¼•ç”¨ï¼Œæ‰§è¡ŒæˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool			æ‰§è¡Œç»“æœ
 		 */
 		static bool getDiscussList(INT64 robotID, Type::DiscussList & bindDiscussList);
 
 		/**
-		 * ±àÂë_UTF8×ªAnsi
-		 * @param	BYTES		contents		UTF-8±àÂëÎÄ±¾
-		 * @return	CSTRING		GB2312±àÂëÎÄ±¾
+		 * ç¼–ç _UTF8è½¬Ansi
+		 * @param	BYTES		contents		UTF-8ç¼–ç æ–‡æœ¬
+		 * @return	CSTRING		GB2312ç¼–ç æ–‡æœ¬
 		 */
 		static CSTRING convertUtf8ToAnsi(BYTES contents);
 		/**
-		 * ±àÂë_UTF8×ªAnsi
-		 * @param	string		contents		UTF-8±àÂëÎÄ±¾
-		 * @return	CSTRING		GB2312±àÂëÎÄ±¾
+		 * ç¼–ç _UTF8è½¬Ansi
+		 * @param	string		contents		UTF-8ç¼–ç æ–‡æœ¬
+		 * @return	CSTRING		GB2312ç¼–ç æ–‡æœ¬
 		 */
 		static CSTRING convertUtf8ToAnsi(string contents);
 
 		/**
-		 * ±àÂë_GB2312×ªUTF8
-		 * @param	string		contents	GB2312±àÂëÎÄ±¾
-		 * @return	BYTES		UTF-8±àÂëÎÄ±¾
+		 * ç¼–ç _GB2312è½¬UTF8
+		 * @param	string		contents	GB2312ç¼–ç æ–‡æœ¬
+		 * @return	BYTES		UTF-8ç¼–ç æ–‡æœ¬
 		 */
 		static BYTES convertAnsiToUtf8(string contents);
 
 		/**
-		 * ½âÎöµ½ÄäÃûĞÅÏ¢
-		 * @param	string		strAnonymousInfo	ÄäÃûÊı¾İ
-		 * @param	Anonymous	bindAnonymousInfo	ÄäÃûĞÅÏ¢µÄÒıÓÃ£¬½âÎö³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
-		 * @return	bool		½âÎö½á¹û
+		 * è§£æåˆ°åŒ¿åä¿¡æ¯
+		 * @param	string		strAnonymousInfo	åŒ¿åæ•°æ®
+		 * @param	Anonymous	bindAnonymousInfo	åŒ¿åä¿¡æ¯çš„å¼•ç”¨ï¼Œè§£ææˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool		è§£æç»“æœ
 		 */
 		static bool decodeAnonymousInfo(string strAnonymousInfo, Type::Anonymous & bindAnonymousInfo);
 
 		/**
-		 * ½âÎöµ½Èº¸½¼ÓĞÅÏ¢
-		 * @param	string					strGroupAdditionalInfo		Èº¸½¼ÓĞÅÏ¢Êı¾İ
-		 * @param	GroupAdditionalInfo		bindGroupAdditionalInfo		Èº¸½¼ÓĞÅÏ¢µÄÒıÓÃ£¬½âÎö³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
-		 * @return	bool					½âÎö½á¹û
+		 * è§£æåˆ°ç¾¤é™„åŠ ä¿¡æ¯
+		 * @param	string					strGroupAdditionalInfo		ç¾¤é™„åŠ ä¿¡æ¯æ•°æ®
+		 * @param	GroupAdditionalInfo		bindGroupAdditionalInfo		ç¾¤é™„åŠ ä¿¡æ¯çš„å¼•ç”¨ï¼Œè§£ææˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool					è§£æç»“æœ
 		 */
 		static bool decodeGroupAdditionalInfo(string strGroupAdditionalInfo, Type::GroupAdditionalInfo & bindGroupAdditionalInfo);
 
 		/**
-		 * ½âÎöµ½×ÖÌåĞÅÏ¢
-		 * @param	string		strFontInfo		×ÖÌåÊı¾İ
-		 * @param	Font		bindFontInfo	×ÖÌåĞÅÏ¢µÄÒıÓÃ£¬½âÎö³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
-		 * @return	bool		½âÎö½á¹û
+		 * è§£æåˆ°å­—ä½“ä¿¡æ¯
+		 * @param	string		strFontInfo		å­—ä½“æ•°æ®
+		 * @param	Font		bindFontInfo	å­—ä½“ä¿¡æ¯çš„å¼•ç”¨ï¼Œè§£ææˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool		è§£æç»“æœ
 		 */
 		static bool decodeFontInfo(string strFontInfo, Type::Font & bindFontInfo);
 
 		/**
-		 * ½âÎöµ½ÈºÎÄ¼şĞÅÏ¢
-		 * @param	string		strFileInfo		ÎÄ¼şÊı¾İ
-		 * @param	File		bindFileInfo	ÎÄ¼şĞÅÏ¢µÄÒıÓÃ£¬½âÎö³É¹¦ºó½«´æ·ÅÊı¾İÓÚ´Ë
-		 * @return	bool		½âÎö½á¹û
+		 * è§£æåˆ°ç¾¤æ–‡ä»¶ä¿¡æ¯
+		 * @param	string		strFileInfo		æ–‡ä»¶æ•°æ®
+		 * @param	File		bindFileInfo	æ–‡ä»¶ä¿¡æ¯çš„å¼•ç”¨ï¼Œè§£ææˆåŠŸåå°†å­˜æ”¾æ•°æ®äºæ­¤
+		 * @return	bool		è§£æç»“æœ
 		 */
 		static bool decodeFileInfo(string strFileInfo, Type::File & bindFileInfo);
 
 		/**
-		 * ÖÃÖÂÃü´íÎóÌáÊ¾
-		 * @param	string		errMsg		´íÎóĞÅÏ¢
+		 * ç½®è‡´å‘½é”™è¯¯æç¤º
+		 * @param	string		errMsg		é”™è¯¯ä¿¡æ¯
 		 * @return	INT32		unknown
 		 */
 		static INT32 setFatal(string errMsg);
 
 		/**
-		 * ·¢ËÍÃûÆ¬ÔŞ
-		 * @param	INT64	robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	uin			Ä¿±ê¶ÔÏó
-		 * @param	INT32	count		µãÔŞ´ÎÊı£¬Ä¬ÈÏµãÔŞÒ»´Î
-		 * @return	INT32	¹Ì¶¨·µ»Ø0
+		 * å‘é€åç‰‡èµ
+		 * @param	INT64	robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	uin			ç›®æ ‡å¯¹è±¡
+		 * @param	INT32	count		ç‚¹èµæ¬¡æ•°ï¼Œé»˜è®¤ç‚¹èµä¸€æ¬¡
+		 * @return	INT32	å›ºå®šè¿”å›0
 		 */
 		static INT32 sendLikeFavorite(INT64 robotID, INT64 uin, INT32 count = 1);
 
 		/*
-		 * ·¢ËÍºÃÓÑÏûÏ¢
-		 * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 uin		Ä¿±êQQ
-		 * @param	string	 msg		ÏûÏ¢ÄÚÈİ
-		 * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+		 * å‘é€å¥½å‹æ¶ˆæ¯
+		 * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 uin		ç›®æ ‡QQ
+		 * @param	string	 msg		æ¶ˆæ¯å†…å®¹
+		 * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 sendFriendMsg(INT64 robotID, INT64 uin, string msg);
 
 		/*
-		 * ·¢ËÍÈºÏûÏ¢
-		 * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup	Ä¿±êÈº
-		 * @param	string	 msg		ÏûÏ¢ÄÚÈİ
-		 * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+		 * å‘é€ç¾¤æ¶ˆæ¯
+		 * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup	ç›®æ ‡ç¾¤
+		 * @param	string	 msg		æ¶ˆæ¯å†…å®¹
+		 * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 sendGroupMsg(INT64 robotID, INT64 dwGroup, string msg);
 
 		/*
-		 * ·¢ËÍÈºÁÙÊ±ÏûÏ¢
-		 * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup	ËùÔÚÈº
-		 * @param	INT64	 uin		Ä¿±êQQ
-		 * @param	string	 msg		ÏûÏ¢ÄÚÈİ
-		 * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+		 * å‘é€ç¾¤ä¸´æ—¶æ¶ˆæ¯
+		 * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup	æ‰€åœ¨ç¾¤
+		 * @param	INT64	 uin		ç›®æ ‡QQ
+		 * @param	string	 msg		æ¶ˆæ¯å†…å®¹
+		 * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 sendGroupTmpMsg(INT64 robotID, INT64 dwGroup, INT64 uin, string msg);
 
 		/*
-		 * ·¢ËÍÌÖÂÛ×éÏûÏ¢
-		 * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwDiscuss	Ä¿±êÌÖÂÛ×é
-		 * @param	string	 msg		ÏûÏ¢ÄÚÈİ
-		 * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+		 * å‘é€è®¨è®ºç»„æ¶ˆæ¯
+		 * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwDiscuss	ç›®æ ‡è®¨è®ºç»„
+		 * @param	string	 msg		æ¶ˆæ¯å†…å®¹
+		 * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 sendDiscussMsg(INT64 robotID, INT64 dwDiscuss, string msg);
 
 		/*
-		 * ·¢ËÍÌÖÂÛ×éÁÙÊ±ÏûÏ¢
-		 * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwDiscuss	ËùÔÚÌÖÂÛ×é
-		 * @param	INT64	 uin		Ä¿±êQQ
-		 * @param	string	 msg		ÏûÏ¢ÄÚÈİ
-		 * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+		 * å‘é€è®¨è®ºç»„ä¸´æ—¶æ¶ˆæ¯
+		 * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwDiscuss	æ‰€åœ¨è®¨è®ºç»„
+		 * @param	INT64	 uin		ç›®æ ‡QQ
+		 * @param	string	 msg		æ¶ˆæ¯å†…å®¹
+		 * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 sendDiscussTmpMsg(INT64 robotID, INT64 dwDiscuss, INT64 uin, string msg);
 
 		/*
-		 * ·¢ËÍÀëÏßÎÄ¼ş
-		 * ÈçĞèÉÏ´«ÈºÎÄ¼şµ½Ö¸¶¨Ä¿Â¼£¬ÇëÊ¹ÓÃ¡¸setGroupFileUpload¡¹
-		 * @param	INT64		robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT32		dwMsgType		ÏûÏ¢ÀàĞÍ£¬1/ºÃÓÑ 2/Èº 3/ÌÖÂÛ×é 4/ÈºÁÙÊ± 5/ÌÖÂÛ×éÁÙÊ±
-		 * @param	INT64		dwGroup			ËùÔÚÈº×éµÄ ÈººÅ / ÌÖÂÛ×éID
-		 * @param	INT64		dwUin			QQºÅ£¬·¢ËÍ¸öÈËÏûÏ¢Ê±Ê¹ÓÃ
-		 * @param	string		strLocalPath	ÎÄ¼şÂ·¾¶
-		 * @return	INT32		unknown			(ÍÆ²â)×´Ì¬Âë
+		 * å‘é€ç¦»çº¿æ–‡ä»¶
+		 * å¦‚éœ€ä¸Šä¼ ç¾¤æ–‡ä»¶åˆ°æŒ‡å®šç›®å½•ï¼Œè¯·ä½¿ç”¨ã€ŒsetGroupFileUploadã€
+		 * @param	INT64		robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT32		dwMsgType		æ¶ˆæ¯ç±»å‹ï¼Œ1/å¥½å‹ 2/ç¾¤ 3/è®¨è®ºç»„ 4/ç¾¤ä¸´æ—¶ 5/è®¨è®ºç»„ä¸´æ—¶
+		 * @param	INT64		dwGroup			æ‰€åœ¨ç¾¤ç»„çš„ ç¾¤å· / è®¨è®ºç»„ID
+		 * @param	INT64		dwUin			QQå·ï¼Œå‘é€ä¸ªäººæ¶ˆæ¯æ—¶ä½¿ç”¨
+		 * @param	string		strLocalPath	æ–‡ä»¶è·¯å¾„
+		 * @return	INT32		unknown			(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 sendOfflineFile(INT64 robotID, INT32 dwMsgType, INT64 dwGroup, INT64 dwUin, string strLocalPath);
 
 		/**
-		 * ÖÃÏûÏ¢³·»Ø
-		 * @param	INT64		robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	string		msgInfo		ÏûÏ¢ĞÅÏ¢
-		 * @return	INT32		²Ù×÷½á¹û
+		 * ç½®æ¶ˆæ¯æ’¤å›
+		 * @param	INT64		robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	string		msgInfo		æ¶ˆæ¯ä¿¡æ¯
+		 * @return	INT32		æ“ä½œç»“æœ
 		 */
 		static INT32 setMessageSvcMsgWithDraw(INT64 robotID, string msgInfo);
 
 		/*
-		 * É¾³ıºÃÓÑ
-		 * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 uin		Ä¿±êQQ
-		 * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+		 * åˆ é™¤å¥½å‹
+		 * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 uin		ç›®æ ‡QQ
+		 * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setFriendDelete(INT64 robotID, INT64 uin);
 
 		/*
-		 * ÖÃÈºÎÄ¼şÉÏ´«
-		 * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup			Ä¿±êÈº
-		 * @param	string	 strParentFolder	ÈºÎÄ¼ş¼ĞÂ·¾¶£¬Èç ¡¸/¡¹Îª¸ùÄ¿Â¼
-		 * @param	string	 strLocalPath		±¾µØÎÄ¼şÂ·¾¶£¬ÇëÌîÍêÕûÂ·¾¶£¬²»¿É¿Õ
-		 * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+		 * ç½®ç¾¤æ–‡ä»¶ä¸Šä¼ 
+		 * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup			ç›®æ ‡ç¾¤
+		 * @param	string	 strParentFolder	ç¾¤æ–‡ä»¶å¤¹è·¯å¾„ï¼Œå¦‚ ã€Œ/ã€ä¸ºæ ¹ç›®å½•
+		 * @param	string	 strLocalPath		æœ¬åœ°æ–‡ä»¶è·¯å¾„ï¼Œè¯·å¡«å®Œæ•´è·¯å¾„ï¼Œä¸å¯ç©º
+		 * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupFileUpload(INT64 robotID, INT64 dwGroup, string strParentFolder = "/", string strLocalPath = "");
 
 		/*
-		 * ÖÃÈºÎÄ¼şÉ¾³ı
-		 * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup			Ä¿±êÈº
-		 * @param	INT64	 fileBusID			ÎÄ¼ş×ÜÏßID
-		 * @param	string	 strParentFolder	¸¸ÎÄ¼ş¼ĞID Ä¿±êÈºÎÄ¼ş¼ĞÂ·¾¶£¬Èç ¡¸/¡¹Îª¸ùÄ¿Â¼
-		 * @param	string	 fileID				ÎÄ¼şID£¬²»¿É¿Õ
-		 * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+		 * ç½®ç¾¤æ–‡ä»¶åˆ é™¤
+		 * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup			ç›®æ ‡ç¾¤
+		 * @param	INT64	 fileBusID			æ–‡ä»¶æ€»çº¿ID
+		 * @param	string	 strParentFolder	çˆ¶æ–‡ä»¶å¤¹ID ç›®æ ‡ç¾¤æ–‡ä»¶å¤¹è·¯å¾„ï¼Œå¦‚ ã€Œ/ã€ä¸ºæ ¹ç›®å½•
+		 * @param	string	 fileID				æ–‡ä»¶IDï¼Œä¸å¯ç©º
+		 * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupFileDelete(INT64 robotID, INT64 dwGroup, INT64 fileBusID, string strParentFolder = "/", string fileID = "");
 
 		/*
-		 * ÖÃÈºÔ±ÒÆ³ı
-		 * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
-		 * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup			ËùÔÚÈº
-		 * @param	INT64	 uin				Ä¿±êQQ
-		 * @param	bool	 ignoreAddRequest	²»ÔÙ½ÓÊÕ´ËÈË¼ÓÈºÉêÇë£¬ÎŞ·¨³·Ïú£¬ÇëÉ÷ÓÃ
-		 * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+		 * ç½®ç¾¤å‘˜ç§»é™¤
+		 * éœ€è¦ç®¡ç†å‘˜æƒé™
+		 * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup			æ‰€åœ¨ç¾¤
+		 * @param	INT64	 uin				ç›®æ ‡QQ
+		 * @param	bool	 ignoreAddRequest	ä¸å†æ¥æ”¶æ­¤äººåŠ ç¾¤ç”³è¯·ï¼Œæ— æ³•æ’¤é”€ï¼Œè¯·æ…ç”¨
+		 * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupMembersKick(INT64 robotID, INT64 dwGroup, INT64 uin, bool ignoreAddRequest = false);
 
 		/*
-		 * ÖÃÈ«Èº½ûÑÔ
-		 * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
-		 * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup		Ä¿±êÈº
-		 * @param	bool	 newStatus		ÒªÉèÖÃµÄĞÂ×´Ì¬£¬true/¿ªÆô½ûÑÔ false/¹Ø±Õ½ûÑÔ
-		 * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+		 * ç½®å…¨ç¾¤ç¦è¨€
+		 * éœ€è¦ç®¡ç†å‘˜æƒé™
+		 * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup		ç›®æ ‡ç¾¤
+		 * @param	bool	 newStatus		è¦è®¾ç½®çš„æ–°çŠ¶æ€ï¼Œtrue/å¼€å¯ç¦è¨€ false/å…³é—­ç¦è¨€
+		 * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupWholeBanSpeak(INT64 robotID, INT64 dwGroup, bool newStatus);
 
 		/*
-		 * ÖÃÈºÔ±½ûÑÔ
-		 * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
-		 * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup		ËùÔÚÈº
-		 * @param	INT64	 uin			Ä¿±êQQ
-		 * @param	INT64	 timeStamp		½ûÑÔÊ±¼ä£¬µ¥Î»ÎªÃë£¬×î³¤Îª1¸öÔÂ¡£Èç¹ûÒª½â½û£¬ÕâÀïÌîĞ´0
-		 * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+		 * ç½®ç¾¤å‘˜ç¦è¨€
+		 * éœ€è¦ç®¡ç†å‘˜æƒé™
+		 * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+		 * @param	INT64	 uin			ç›®æ ‡QQ
+		 * @param	INT64	 timeStamp		ç¦è¨€æ—¶é—´ï¼Œå•ä½ä¸ºç§’ï¼Œæœ€é•¿ä¸º1ä¸ªæœˆã€‚å¦‚æœè¦è§£ç¦ï¼Œè¿™é‡Œå¡«å†™0
+		 * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupMemberBanSpeak(INT64 robotID, INT64 dwGroup, INT64 uin, INT64 timeStamp = 0);
 
 		/*
-		 * ÖÃÈºÄäÃû³ÉÔ±½ûÑÔ
-		 * ½ûÑÔºóÎŞ·¨½â³ı
-		 * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
-		 * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup		ËùÔÚÈº
-		 * @param	INT64	 headMark		ÄäÃûÓÃ»§µÄÍ·Ïñ±êÊ¶
-		 * @param	BYTES	 token			ÄäÃûÓÃ»§Token
-		 * @param	string	 card			ÄäÃûÓÃ»§ÃûÆ¬
-		 * @param	INT64	 timeStamp		½ûÑÔÊ±¼ä£¬µ¥Î»ÎªÃë
-		 * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+		 * ç½®ç¾¤åŒ¿åæˆå‘˜ç¦è¨€
+		 * ç¦è¨€åæ— æ³•è§£é™¤
+		 * éœ€è¦ç®¡ç†å‘˜æƒé™
+		 * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+		 * @param	INT64	 headMark		åŒ¿åç”¨æˆ·çš„å¤´åƒæ ‡è¯†
+		 * @param	BYTES	 token			åŒ¿åç”¨æˆ·Token
+		 * @param	string	 card			åŒ¿åç”¨æˆ·åç‰‡
+		 * @param	INT64	 timeStamp		ç¦è¨€æ—¶é—´ï¼Œå•ä½ä¸ºç§’
+		 * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupAnonymousBanSpeak(INT64 robotID, INT64 dwGroup, INT64 headMark, BYTES token, string card, INT64 timeStamp);
 
 		/*
-		 * ÉèÖÃÈºÄäÃûÁÄÌì¿ª¹Ø
-		 * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
-		 * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup		Ä¿±êÈº
-		 * @param	bool	 newStatus		ÒªÉèÖÃµÄĞÂ×´Ì¬£¬true/ÔÊĞí¡¢false/½ûÖ¹ ÄäÃûÁÄÌì
-		 * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+		 * è®¾ç½®ç¾¤åŒ¿åèŠå¤©å¼€å…³
+		 * éœ€è¦ç®¡ç†å‘˜æƒé™
+		 * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup		ç›®æ ‡ç¾¤
+		 * @param	bool	 newStatus		è¦è®¾ç½®çš„æ–°çŠ¶æ€ï¼Œtrue/å…è®¸ã€false/ç¦æ­¢ åŒ¿åèŠå¤©
+		 * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupAnonymousBan(INT64 robotID, INT64 dwGroup, bool newStatus);
 
 		/*
-		 * ÖÃÈºÁÙÊ±»á»°¿ª¹Ø
-		 * ĞèÒªÈºÖ÷È¨ÏŞ
-		 * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup		Ä¿±êÈº
-		 * @param	bool	 newStatus		ÒªÉèÖÃµÄĞÂ×´Ì¬£¬true/ÔÊĞí¡¢false/½ûÖ¹ Í¨¹ıÈº·¢ÆğÁÙÊ±»á»°
-		 * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+		 * ç½®ç¾¤ä¸´æ—¶ä¼šè¯å¼€å…³
+		 * éœ€è¦ç¾¤ä¸»æƒé™
+		 * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup		ç›®æ ‡ç¾¤
+		 * @param	bool	 newStatus		è¦è®¾ç½®çš„æ–°çŠ¶æ€ï¼Œtrue/å…è®¸ã€false/ç¦æ­¢ é€šè¿‡ç¾¤å‘èµ·ä¸´æ—¶ä¼šè¯
+		 * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupPrivateSession(INT64 robotID, INT64 dwGroup, bool newStatus);
 
 		/*
-		 * ÖÃÈº³ÉÔ±·¢Æğ¶àÈËÁÄÌì¿ª¹Ø
-		 * ĞèÒªÈºÖ÷È¨ÏŞ
-		 * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup		Ä¿±êÈº
-		 * @param	bool	 newStatus		ÒªÉèÖÃµÄĞÂ×´Ì¬£¬true/ÔÊĞí¡¢false/½ûÖ¹ Í¨¹ıÈº·¢Æğ¶àÈËÁÄÌì
-		 * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+		 * ç½®ç¾¤æˆå‘˜å‘èµ·å¤šäººèŠå¤©å¼€å…³
+		 * éœ€è¦ç¾¤ä¸»æƒé™
+		 * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup		ç›®æ ‡ç¾¤
+		 * @param	bool	 newStatus		è¦è®¾ç½®çš„æ–°çŠ¶æ€ï¼Œtrue/å…è®¸ã€false/ç¦æ­¢ é€šè¿‡ç¾¤å‘èµ·å¤šäººèŠå¤©
+		 * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupManyPeopleChat(INT64 robotID, INT64 dwGroup, bool newStatus);
 
 		/*
-		 * ÉèÖÃÈº¹ÜÀíÔ±
-		 * ĞèÒªÈºÖ÷È¨ÏŞ
-		 * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup		ËùÔÚÈº
-		 * @param	INT64	 uin			Ä¿±êQQ
-		 * @param	bool	 newStatus		true/ÉèÖÃ false/È¡Ïû ¹ÜÀíÔ±
-		 * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+		 * è®¾ç½®ç¾¤ç®¡ç†å‘˜
+		 * éœ€è¦ç¾¤ä¸»æƒé™
+		 * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+		 * @param	INT64	 uin			ç›®æ ‡QQ
+		 * @param	bool	 newStatus		true/è®¾ç½® false/å–æ¶ˆ ç®¡ç†å‘˜
+		 * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupAdmini(INT64 robotID, INT64 dwGroup, INT64 uin, bool newStatus);
 
 		/*
-		 * ÉèÖÃÈº³ÉÔ±ÃûÆ¬
-		 * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
-		 * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup		ËùÔÚÈº
-		 * @param	INT64	 uin			Ä¿±êQQ
-		 * @param	string	 newCard		ĞÂÃûÆ¬£¬Èç¹ûÒªÉ¾³ı£¬ÇëÌî¿ÕÎÄ±¾
-		 * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+		 * è®¾ç½®ç¾¤æˆå‘˜åç‰‡
+		 * éœ€è¦ç®¡ç†å‘˜æƒé™
+		 * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+		 * @param	INT64	 uin			ç›®æ ‡QQ
+		 * @param	string	 newCard		æ–°åç‰‡ï¼Œå¦‚æœè¦åˆ é™¤ï¼Œè¯·å¡«ç©ºæ–‡æœ¬
+		 * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupMemberCard(INT64 robotID, INT64 dwGroup, INT64 uin, string newCard = "");
 
 		/*
-		 * ÉèÖÃÈº³ÉÔ±×¨ÊôÍ·ÏÎ
-		 * ĞèÒªÈºÖ÷È¨ÏŞ
-		 * Ä¿Ç°½ö°²×¿QQĞ­ÒéÖ§³Ö
-		 * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup		ËùÔÚÈº
-		 * @param	INT64	 uin			Ä¿±êQQ
-		 * @param	string	 specialTitle	Í·ÏÎ£¬ÈçĞèÉ¾³ı£¬ÇëÌî¿ÕÎÄ±¾
-		 * @param	INT32	 expireTime		ÓĞĞ§ÆÚ£¬µ¥Î»ÎªÃë¡£Èç¹ûÓÀ¾ÃÓĞĞ§£¬ÇëÌî-1
-		 * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+		 * è®¾ç½®ç¾¤æˆå‘˜ä¸“å±å¤´è¡”
+		 * éœ€è¦ç¾¤ä¸»æƒé™
+		 * ç›®å‰ä»…å®‰å“QQåè®®æ”¯æŒ
+		 * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+		 * @param	INT64	 uin			ç›®æ ‡QQ
+		 * @param	string	 specialTitle	å¤´è¡”ï¼Œå¦‚éœ€åˆ é™¤ï¼Œè¯·å¡«ç©ºæ–‡æœ¬
+		 * @param	INT32	 expireTime		æœ‰æ•ˆæœŸï¼Œå•ä½ä¸ºç§’ã€‚å¦‚æœæ°¸ä¹…æœ‰æ•ˆï¼Œè¯·å¡«-1
+		 * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupSpecialTitle(INT64 robotID, INT64 dwGroup, INT64 uin, string  specialTitle = "", INT32 rxpireTime = -1);
 
 		/*
-		 * ÖÃÈºÍË³ö
-		 * @param	INT64		robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64		dwGroup		Ä¿±êÈº
-		 * @param	newStatus	disband		ÊÇ·ñ½âÉ¢Èº£¬true/½âÉ¢ false/ÍË³ö
-		 * @return	INT32		unknown		(ÍÆ²â)×´Ì¬Âë
+		 * ç½®ç¾¤é€€å‡º
+		 * @param	INT64		robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64		dwGroup		ç›®æ ‡ç¾¤
+		 * @param	newStatus	disband		æ˜¯å¦è§£æ•£ç¾¤ï¼Œtrue/è§£æ•£ false/é€€å‡º
+		 * @return	INT32		unknown		(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupExit(INT64 robotID, INT64 dwGroup, bool disband = false);
 
 		/*
-		 * ÖÃÌÖÂÛ×éÍË³ö
-		 * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwDiscuss		Ä¿±êÌÖÂÛ×é
-		 * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+		 * ç½®è®¨è®ºç»„é€€å‡º
+		 * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwDiscuss		ç›®æ ‡è®¨è®ºç»„
+		 * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setDiscussExit(INT64 robotID, INT64 dwDiscuss);
 
 		/*
-		 * ÖÃÌÖÂÛ×é³ÉÔ±ÒÆ³ı
-		 * ĞèÒª´´½¨ÕßÈ¨ÏŞ
-		 * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwDiscuss		ËùÔÚÌÖÂÛ×é
-		 * @param	INT64	 uin			Ä¿±êQQ
-		 * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+		 * ç½®è®¨è®ºç»„æˆå‘˜ç§»é™¤
+		 * éœ€è¦åˆ›å»ºè€…æƒé™
+		 * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwDiscuss		æ‰€åœ¨è®¨è®ºç»„
+		 * @param	INT64	 uin			ç›®æ ‡QQ
+		 * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setDiscussMembersKick(INT64 robotID, INT64 dwDiscuss, INT64 uin);
 
 		/*
-		 * ÖÃÌí¼ÓÈº
-		 * ÒòÎª¸÷ÖÖÏŞÖÆ£¬¿ÉÄÜ²»³É¹¦
-		 * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	INT64	 dwGroup			Ä¿±êÈº
-		 * @param	string	 additionalMsg		¸½¼ÓĞÅÏ¢
-		 * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+		 * ç½®æ·»åŠ ç¾¤
+		 * å› ä¸ºå„ç§é™åˆ¶ï¼Œå¯èƒ½ä¸æˆåŠŸ
+		 * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	INT64	 dwGroup			ç›®æ ‡ç¾¤
+		 * @param	string	 additionalMsg		é™„åŠ ä¿¡æ¯
+		 * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupAdd(INT64 robotID, INT64 dwGroup, string additionalMsg);
 
 		/*
-		 * ÖÃ´¦ÀíÈºÌí¼ÓÇëÇó
-		 * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	string	 responseFlag		ÇëÇóÊÂ¼şÊÕµ½µÄ¡¸·´À¡±êÊ¶¡¹²ÎÊı
-		 * @param	INT32	 requestType		ÇëÇóÀàĞÍ£¬ÑûÇë/REQUEST_GROUP_INVITE »ò ¼ÓÈº/REQUEST_GROUP_INVITE
-		 * @param	INT32	 resultFlag			´¦Àí½á¹û£¬Í¨¹ı/REQUEST_ALLOW »ò ¾Ü¾ø/REQUEST_DENY
-		 * @param	string	 reason				¾Ü¾øÀíÓÉ£¬½öÔÚ ¾Ü¾ø Ê±¿ÉÓÃ
-		 * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+		 * ç½®å¤„ç†ç¾¤æ·»åŠ è¯·æ±‚
+		 * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	string	 responseFlag		è¯·æ±‚äº‹ä»¶æ”¶åˆ°çš„ã€Œåé¦ˆæ ‡è¯†ã€å‚æ•°
+		 * @param	INT32	 requestType		è¯·æ±‚ç±»å‹ï¼Œé‚€è¯·/REQUEST_GROUP_INVITE æˆ– åŠ ç¾¤/REQUEST_GROUP_INVITE
+		 * @param	INT32	 resultFlag			å¤„ç†ç»“æœï¼Œé€šè¿‡/REQUEST_ALLOW æˆ– æ‹’ç»/REQUEST_DENY
+		 * @param	string	 reason				æ‹’ç»ç†ç”±ï¼Œä»…åœ¨ æ‹’ç» æ—¶å¯ç”¨
+		 * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setGroupAddRequest(INT64 robotID, string responseFlag, INT32 requestType, INT32 resultFlag, string reason = "");
 
 		/*
-		 * ÖÃ´¦ÀíºÃÓÑÌí¼ÓÇëÇó
-		 * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
-		 * @param	string	 responseFlag		ÇëÇóÊÂ¼şÊÕµ½µÄ¡¸·´À¡±êÊ¶¡¹²ÎÊı
-		 * @param	INT32	 resultFlag			´¦Àí½á¹û£¬Í¨¹ı/REQUEST_ALLOW »ò ¾Ü¾ø/REQUEST_DENY
-		 * @param	string	 remarks			Í¨¹ıÊ±ÎªÌí¼ÓºóµÄºÃÓÑ±¸×¢£¬¾Ü¾øÊ±Îª¾Ü¾øÀíÓÉ
-		 * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+		 * ç½®å¤„ç†å¥½å‹æ·»åŠ è¯·æ±‚
+		 * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+		 * @param	string	 responseFlag		è¯·æ±‚äº‹ä»¶æ”¶åˆ°çš„ã€Œåé¦ˆæ ‡è¯†ã€å‚æ•°
+		 * @param	INT32	 resultFlag			å¤„ç†ç»“æœï¼Œé€šè¿‡/REQUEST_ALLOW æˆ– æ‹’ç»/REQUEST_DENY
+		 * @param	string	 remarks			é€šè¿‡æ—¶ä¸ºæ·»åŠ åçš„å¥½å‹å¤‡æ³¨ï¼Œæ‹’ç»æ—¶ä¸ºæ‹’ç»ç†ç”±
+		 * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
 		 */
 		static INT32 setFriendAddRequest(INT64 robotID, string responseFlag, INT32 resultFlag, string remarks = "");
 };

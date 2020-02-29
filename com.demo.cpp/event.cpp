@@ -334,13 +334,13 @@ QYEVENT(INT32) QY_Event_PrivateMsg(
 		switch(subType) {
 			case 11: // 好友消息
 			{
-				QY::sendOfflineFile(robotID, 1, 0, fromQQ, "D:\\test\\123.cpp");
+				QY::sendOfflineFile(robotID, 1, 0, fromQQ, R"(D:\QYBot\QY.robot.Update.exe)");
 				break;
 			}
 			case 2: // 群临时消息
 			case 3: // 讨论组临时消息
 			{
-				QY::sendOfflineFile(robotID, (2 + subType), fromGroup, fromQQ, "D:\\test\\123.cpp");
+				QY::sendOfflineFile(robotID, (2 + subType), fromGroup, fromQQ, R"(D:\test\123.cpp)");
 				break;
 			}
 			// 其他临时消息就不用管了，因为发不了
