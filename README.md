@@ -6,9 +6,7 @@ QYBot SDK For C++
 
 使用办法
 ---
-1.  Microsoft Visual Studio 2017
-
-    (不清楚2019对旧项目的兼容性如何, 据部分开发者反馈存在编译问题, 待测试)
+1.  Microsoft Visual Studio 2017+
     
 2.  打开「项目属性」窗口, 在最上方切换「配置」为「所有配置」, 切换「平台」为「所有平台」,
 
