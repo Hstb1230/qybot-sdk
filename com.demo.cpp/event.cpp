@@ -235,14 +235,16 @@ void test()
 				// 输出群管理员列表
 				QY::Type::GroupAdminList gAdminList;
 				if(false && QY::getGroupAdminList(rList[i], gList[j].id, gAdminList)) {
+					string card;
 					for(size_t k = 0; k < gAdminList.size(); k++) {
+						QY::getGroupMemberCard(rList[i], gList[j].id, gAdminList[k].uin, card, true);
 						QY::addLog::Debug(
 							rList[i],
 							to_string(gList[j].id),
 							to_string(gAdminList[k].uin) + " " \
 							+ to_string(gAdminList[k].permission) + " " \
 							// + QY::getGroupMemberCard(rList[i], gList[j].id, gAdminList[k].uin)
-							+ QY::getGroupMemberCard(rList[i], gList[j].id, gAdminList[k].uin, true)
+							+ card
 						);
 					}
 				}

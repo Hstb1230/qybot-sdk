@@ -226,11 +226,12 @@ class QYAPI
 		 * @param	INT64		robotID			使用的机器人QQ
 		 * @param	INT64		dwGroup			所在群
 		 * @param	INT64		uin				要查询的QQ号
+		 * @param	string		bindCard		昵称信息, 查询失败时为空
 		 * @param	bool		useNick			使用昵称，默认不使用。若名片为空，使用时返回昵称，不使用则返回空
 		 * @param	bool		useCache		使用缓存，默认使用
-		 * @return	string		该群成员的名片
+		 * @return	bool		获取结果
 		 */
-		static string getGroupMemberCard(INT64 robotID, INT64 dwGroup, INT64 uin, bool useNick = false, bool useCache = true);
+		static bool getGroupMemberCard(INT64 robotID, INT64 dwGroup, INT64 uin, string & bindCard, bool useNick = false, bool useCache = true);
 
 		/**
 		 * 取讨论组列表

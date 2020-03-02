@@ -758,16 +758,18 @@ bool decodeGroupAdminList(
  * @param	INT64		robotID			使用的机器人QQ
  * @param	INT64		dwGroup			所在群
  * @param	INT64		QQUin			要查询的QQ号
+ * @param	string		bindCard		昵称信息, 查询失败时为空
  * @param	bool		useNick			使用昵称，默认不使用。使用时，若名片为空则返回昵称；不使用则返回名片
  * @param	bool		useCache		使用缓存，默认使用
  * @return	string		该群成员的名片
  */
-string QYAPI::getGroupMemberCard(
-	INT64	robotID,	// 使用的机器人QQ
-	INT64	dwGroup,	// 所在群
-	INT64	uin,		// 要查询的QQ号
-	bool	useNick,	// 使用昵称
-	bool	useCache	// 使用缓存
+bool QYAPI::getGroupMemberCard(
+	INT64		robotID,	// 使用的机器人QQ
+	INT64		dwGroup,	// 所在群
+	INT64		uin,		// 要查询的QQ号
+	string	&	bindCard,	// 昵称信息
+	bool		useNick,	// 使用昵称
+	bool		useCache	// 使用缓存
 )
 {
 	if(QYAPI_TOLOG)
@@ -778,11 +780,10 @@ string QYAPI::getGroupMemberCard(
 			+ "，" + (useNick ? "" : "不") + "使用昵称" \
 			+ "，" + (useCache ? "" : "不") + "使用缓存"
 		);
+	bindCard.clear();
 	string strGroupMemberCard = QY_getGroupMemberCard(QYAPI::authCode, robotID, dwGroup, uin, !useCache);
 	if(strGroupMemberCard == "") return false;
-	string card;
-	decodeGroupAdminList(strGroupMemberCard, card, useNick);
-	return card;
+	return decodeGroupAdminList(strGroupMemberCard, bindCard, useNick);
 }
 
 /**

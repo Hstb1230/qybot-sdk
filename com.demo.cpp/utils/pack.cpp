@@ -53,7 +53,7 @@ void Pack::SetLong(INT64 _int_64)
 void Pack::SetStr(string str)
 {
 	BYTES bin;
-	for(CSTRING i = str.c_str(); i != '\0'; i++) 
+	for(CSTRING i = str.c_str(); *i != '\0'; i++) 
 		bin.push_back(*i);
 	this->SetBin(bin);
 }
@@ -61,7 +61,7 @@ void Pack::SetStr(string str)
 void Pack::SetLenStr(string str)
 {
 	BYTES bin;
-	for(CSTRING i = str.c_str(); i != '\0'; i++)
+	for(CSTRING i = str.c_str(); *i != '\0'; i++)
 		bin.push_back(*i);
 	this->SetToken(bin);
 }
