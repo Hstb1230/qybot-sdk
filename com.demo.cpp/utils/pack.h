@@ -6,28 +6,28 @@ class Pack
 		BYTES m_bin;
 
 	public:
-		/* Çå³ı */
+		/* æ¸…é™¤ */
 		void Empty();
-		/* È¡È«²¿Êı¾İ */
-		BYTES & GetAll();
-		/* È¡³¤¶È */
+		/* å–å…¨éƒ¨æ•°æ® */
+		BYTES GetAll();
+		/* å–é•¿åº¦ */
 		size_t Len();
-		/* ÖÃ×Ö½Ú¼¯ */
+		/* ç½®å­—èŠ‚é›† */
 		void SetBin(BYTES);
-		/* ÖÃ×Ö½Ú */
+		/* ç½®å­—èŠ‚ */
 		void SetByte(BYTE);
-		/* ÖÃÀàÊı¾İ */
+		/* ç½®ç±»æ•°æ® */
 		void SetData(BYTES);
-		/* ÖÃÕûÊı */
+		/* ç½®æ•´æ•° */
 		void SetInt(INT32);
-		/* ÖÃ¶ÌÕûÊı */
+		/* ç½®çŸ­æ•´æ•° */
 		void SetShort(INT16);
-		/* ÖÃ³¤ÕûÊı */
+		/* ç½®é•¿æ•´æ•° */
 		void SetLong(INT64);
-		/* ÖÃÎÄ±¾ */
+		/* ç½®æ–‡æœ¬ */
 		void SetStr(string);
-		/* ÖÃ? */
+		/* ç½®? */
 		void SetLenStr(string);
-		/* ÖÃÁîÅÆ */
+		/* ç½®ä»¤ç‰Œ */
 		void SetToken(BYTES);
 };

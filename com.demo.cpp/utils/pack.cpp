@@ -7,7 +7,7 @@ void Pack::Empty()
 	this->m_bin.clear();
 }
 
-BYTES & Pack::GetAll()
+BYTES Pack::GetAll()
 {
 	return this->m_bin;
 }
