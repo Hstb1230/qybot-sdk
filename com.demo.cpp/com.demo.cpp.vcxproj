@@ -188,7 +188,6 @@
     <ClInclude Include="utils\base64.h" />
     <ClInclude Include="utils\bins.h" />
     <ClInclude Include="utils\encodingConvert.h" />
-    <ClInclude Include="utils\nstring.h" />
     <ClInclude Include="utils\pack.h" />
     <ClInclude Include="utils\unPack.h" />
     <ClInclude Include="utils\utils.h" />
@@ -246,7 +245,6 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="utils\encodingconvert.cpp" />
-    <ClCompile Include="utils\nstring.cpp" />
     <ClCompile Include="utils\pack.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../stdafx.h</PrecompiledHeaderFile>

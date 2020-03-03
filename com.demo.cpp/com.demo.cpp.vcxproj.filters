@@ -75,6 +75,9 @@
     <ClInclude Include="qy\code.h">
       <Filter>头文件\qy</Filter>
     </ClInclude>
+    <ClInclude Include="utils\encodingConvert.h">
+      <Filter>头文件\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -115,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="qy\code.cpp">
       <Filter>源文件\qy</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\encodingconvert.cpp">
+      <Filter>源文件\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
