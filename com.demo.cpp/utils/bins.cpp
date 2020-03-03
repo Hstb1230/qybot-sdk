@@ -6,15 +6,12 @@
 
 
 string Dec2Hex(int dec) {
-	string hex;
-	do{
-		int mod = dec % 16;
-		if(mod < 10)
-			hex = char('0' + mod) + hex;
-		else
-			hex = char('A' + (mod - 10)) + hex;
+	static const char * hex = "0123456789ABCDEF";
+	string hexs("0");
+	while(dec > 0) {
+		hexs.push_back(hex[dec % 16]);
 		dec /= 16;
-	 } while(dec > 0);
+	} 
 	return hex;
 }
 

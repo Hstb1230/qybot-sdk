@@ -34,35 +34,28 @@ void Pack::SetData(BYTES bin)
 
 void Pack::SetInt(INT32 _int_32)
 {
-	BYTES bin = Int2Bin(_int_32);
-	this->SetBin(bin);
+	this->SetBin(Int2Bin(_int_32));
 }
 
 void Pack::SetShort(INT16 _int_16)
 {
-	BYTES bin = Short2Bin(_int_16);
-	this->SetBin(bin);
+	this->SetBin(Short2Bin(_int_16));
 }
 
 void Pack::SetLong(INT64 _int_64)
 {
-	BYTES bin = Long2Bin(_int_64);
-	this->SetBin(bin);
+	this->SetBin(Long2Bin(_int_64));
 }
 
 void Pack::SetStr(string str)
 {
-	BYTES bin;
-	for(CSTRING i = str.c_str(); *i != '\0'; i++) 
-		bin.push_back(*i);
+	BYTES bin(str.cbegin(), str.cend());
 	this->SetBin(bin);
 }
 
 void Pack::SetLenStr(string str)
 {
-	BYTES bin;
-	for(CSTRING i = str.c_str(); *i != '\0'; i++)
-		bin.push_back(*i);
+	BYTES bin(str.cbegin(), str.cend());
 	this->SetToken(bin);
 }
 
