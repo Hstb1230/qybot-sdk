@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class UnPack
 {
@@ -13,28 +13,28 @@ class UnPack
 		{
 			m_bin.assign(bin.begin(), bin.end());
 		}
-		/* Çå³ı */
+		/* æ¸…é™¤ */
 		void Empty();
-		/* È¡ËùÓĞÊı¾İ */
-		BYTES & GetAll();
-		/* È¡×Ö½Ú¼¯ */
+		/* å–æ‰€æœ‰æ•°æ® */
+		BYTES GetAll();
+		/* å–å­—èŠ‚é›† */
 		BYTES GetBin(INT32);
-		/* È¡×Ö½Ú */
+		/* å–å­—èŠ‚ */
 		BYTE GetByte();
-		/* È¡ÕûÊı */
+		/* å–æ•´æ•° */
 		INT32 GetInt();
-		/* È¡³¤ÕûÊı */
+		/* å–é•¿æ•´æ•° */
 		INT64 GetLong();
-		/* È¡¶ÌÕûÊı */
+		/* å–çŸ­æ•´æ•° */
 		INT16 GetShort();
-		/* È¡ÎÄ±¾ */
+		/* å–æ–‡æœ¬ */
 		string GetLenStr();
-		/* È¡? */
+		/* å–? */
 		BYTES GetLenBin();
-		/* È¡ÁîÅÆ */
+		/* å–ä»¤ç‰Œ */
 		BYTES GetToken();
-		/* È¡³¤¶È */
+		/* å–é•¿åº¦ */
 		INT32 Len();
-		/* ÖÃÊı¾İ */
+		/* ç½®æ•°æ® */
 		void SetData(BYTES);
 };

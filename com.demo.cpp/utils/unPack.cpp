@@ -1,4 +1,4 @@
-#include "../stdafx.h"
+﻿#include "../stdafx.h"
 #include "bins.h"
 #include "unPack.h"
 
@@ -7,7 +7,7 @@ void UnPack::Empty()
 	this->m_bin.clear();
 }
 
-BYTES & UnPack::GetAll()
+BYTES UnPack::GetAll()
 {
 	BYTES::const_iterator from = this->m_bin.cbegin() + this->location;
 	BYTES::const_iterator to = from + (this->m_bin.size() - this->location + 1);
