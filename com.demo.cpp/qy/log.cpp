@@ -1,103 +1,104 @@
-#include "../stdafx.h"
+ï»¿#include "../stdafx.h"
 #include "dll.h"
 #include "log.h"
 
 /**
- * Ìí¼ÓÈÕÖ¾
- * ²»½¨ÒéÖ±½ÓÊ¹ÓÃ±¾·½·¨
- * @param	INT32	 level		ÈÕÖ¾µÈ¼¶£¬ÇëÓÃ LOG_ ¿ªÍ·µÄ¶ÔÓ¦³£Á¿
- * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
- * @param	string	 event		ÊÂ¼şÃû³Æ
- * @param	string	 contents	ÊÂ¼şÄÚÈİ
- * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+ * æ·»åŠ æ—¥å¿—
+ * ä¸å»ºè®®ç›´æ¥ä½¿ç”¨æœ¬æ–¹æ³•
+ * @param	INT32				level		æ—¥å¿—ç­‰çº§ï¼Œè¯·ç”¨ LOG_ å¼€å¤´çš„å¯¹åº”å¸¸é‡
+ * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+ * @param	string | wstring	eventName	äº‹ä»¶åç§°
+ * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+ * @return	INT32				unknown	å›ºå®šè¿”å›0
  */
 INT32 QYLOG::addLog(
-	INT32	level,		//ÈÕÖ¾µÈ¼¶£¬ÇëÓÃ LOG_ ¿ªÍ·µÄ¶ÔÓ¦³£Á¿
-	INT64	robotID,	//»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-	string	event,		//ÊÂ¼şÃû³Æ
-	string	contents	//ÊÂ¼şÄÚÈİ
+	INT32       level,		//æ—¥å¿—ç­‰çº§ï¼Œè¯·ç”¨ LOG_ å¼€å¤´çš„å¯¹åº”å¸¸é‡
+	INT64       robotID,	//æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+	nstring     eventName,	//äº‹ä»¶åç§°
+	nstring     contents	//äº‹ä»¶å†…å®¹
 )
 {
-	return QY_addLog(QY::getAuthCode(), robotID, level, event.c_str(), contents.c_str());
+ //   string cEventName(eventName), cContents(contents);
+    //return QY_addLog(QY::getAuthCode(), robotID, level, cEventName.c_str(), cContents.c_str());
+    return QY_addLog(QY::getAuthCode(), robotID, level, eventName, contents);
 }
 
 /**
- * Ìí¼Óµ÷ÊÔÈÕÖ¾
- * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
- * @param	string	 event		ÊÂ¼şÃû³Æ
- * @param	string	 contents	ÊÂ¼şÄÚÈİ
- * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+ * æ·»åŠ è°ƒè¯•æ—¥å¿—
+ * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+ * @param	string | wstring	eventName	äº‹ä»¶åç§°
+ * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+ * @return	INT32				unknown		å›ºå®šè¿”å›0
  */
 INT32 QYLOG::Debug(
-	INT64	robotID,	//»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-	string	event,		//ÊÂ¼şÃû³Æ
-	string	contents	//ÊÂ¼şÄÚÈİ
+    INT64      robotID,	//æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+    nstring     eventName,	//äº‹ä»¶åç§°
+    nstring     contents	//äº‹ä»¶å†…å®¹
 )
 {
-	return QYLOG::addLog(LOG_DEBUG, robotID, event, contents);
+	return QYLOG::addLog(LOG_DEBUG, robotID, eventName, contents);
 }
 
-
 /**
- * Ìí¼ÓĞÅÏ¢ÈÕÖ¾
- * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
- * @param	string	 event		ÊÂ¼şÃû³Æ
- * @param	string	 contents	ÊÂ¼şÄÚÈİ
- * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+ * æ·»åŠ ä¿¡æ¯æ—¥å¿—
+ * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+ * @param	string | wstring	eventName	äº‹ä»¶åç§°
+ * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+ * @return	INT32				unknown		å›ºå®šè¿”å›0
  */
 INT32 QYLOG::Info(
-	INT64	robotID,	//»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-	string	event,		//ÊÂ¼şÃû³Æ
-	string	contents	//ÊÂ¼şÄÚÈİ
+    INT64       robotID,	//æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+    nstring     eventName,	//äº‹ä»¶åç§°
+    nstring     contents	//äº‹ä»¶å†…å®¹
 )
 {
-	return QYLOG::addLog(LOG_INFO, robotID, event, contents);
+	return QYLOG::addLog(LOG_INFO, robotID, eventName, contents);
 }
 
 /**
- * Ìí¼Ó¾¯¸æÈÕÖ¾
- * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
- * @param	string	 event		ÊÂ¼şÃû³Æ
- * @param	string	 contents	ÊÂ¼şÄÚÈİ
- * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+ * æ·»åŠ è­¦å‘Šæ—¥å¿—
+ * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+ * @param	string | wstring	eventName	äº‹ä»¶åç§°
+ * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+ * @return	INT32				unknown		å›ºå®šè¿”å›0
  */
 INT32 QYLOG::Warning(
-	INT64	robotID,	//»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-	string	event,		//ÊÂ¼şÃû³Æ
-	string	contents	//ÊÂ¼şÄÚÈİ
+    INT64       robotID,	//æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+    nstring     eventName,	//äº‹ä»¶åç§°
+    nstring     contents	//äº‹ä»¶å†…å®¹
 )
 {
-	return QYLOG::addLog(LOG_WARNING, robotID, event, contents);
+	return QYLOG::addLog(LOG_WARNING, robotID, eventName, contents);
 }
 
 /**
- * Ìí¼Ó´íÎóÈÕÖ¾
- * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
- * @param	string	 event		ÊÂ¼şÃû³Æ
- * @param	string	 contents	ÊÂ¼şÄÚÈİ
- * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+ * æ·»åŠ é”™è¯¯æ—¥å¿—
+ * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+ * @param	string | wstring	eventName	äº‹ä»¶åç§°
+ * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+ * @return	INT32				unknown		å›ºå®šè¿”å›0
  */
 INT32 QYLOG::Error(
-	INT64	robotID,	//»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-	string	event,		//ÊÂ¼şÃû³Æ
-	string	contents	//ÊÂ¼şÄÚÈİ
+    INT64       robotID,	//æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+    nstring     eventName,	//äº‹ä»¶åç§°
+    nstring     contents	//äº‹ä»¶å†…å®¹
 )
 {
-	return QYLOG::addLog(LOG_ERROR, robotID, event, contents);
+	return QYLOG::addLog(LOG_ERROR, robotID, eventName, contents);
 }
 
 /**
- * Ìí¼ÓÖÂÃü´íÎóÈÕÖ¾
- * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
- * @param	string	 event		ÊÂ¼şÃû³Æ
- * @param	string	 contents	ÊÂ¼şÄÚÈİ
- * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+ * æ·»åŠ è‡´å‘½é”™è¯¯æ—¥å¿—
+ * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+ * @param	string | wstring	eventName	äº‹ä»¶åç§°
+ * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+ * @return	INT32				unknown		å›ºå®šè¿”å›0
  */
 INT32 QYLOG::Fatal(
-	INT64	robotID,	//»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-	string	event,		//ÊÂ¼şÃû³Æ
-	string	contents	//ÊÂ¼şÄÚÈİ
+	INT64       robotID,	//æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+	nstring     eventName,	//äº‹ä»¶åç§°
+	nstring     contents	//äº‹ä»¶å†…å®¹
 )
 {
-	return QYLOG::addLog(LOG_FATAL, robotID, event, contents);
+	return QYLOG::addLog(LOG_FATAL, robotID, eventName, contents);
 }

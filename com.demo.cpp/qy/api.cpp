@@ -2,8 +2,7 @@
 #include "../utils/utils.h"
 #include "../resource.h"
 #include "api.h"
-//#include "dll.h"
-#include <qy\dll.h>
+#include "qy/dll.h"
 
 #ifndef QYAPI_TOLOG
 #define QYAPI_TOLOG true // 调用API时输出调试日志，用来判断是否触发API
@@ -14,7 +13,7 @@ bool QYAPI::appEnable = false;
 INT32 QYAPI::authCode = 0;
 INT32 QYAPI::protocolType = 0;
 string QYAPI::appDirectory = "";
-
+INT64 QYAPI::robotID = NULL;
 
 
 /**
@@ -25,7 +24,7 @@ CSTRING QYAPI::getJsonInfo()
 {
 	static char * info = nullptr;
 	if(info) return info;
-	//ofstream out("test.log");
+	//std::ofstream out("test.log");
 
 	string source = GetResourceFile("JSON", IDR_JSON1);
 	//out << source;
@@ -150,10 +149,10 @@ bool QYAPI::getAppEnable()
 }
 
 /**
- * 取框架名
- * @return	string		框架名
+ * 取框架名ANSI
+ * @return	nstring		框架名
  */
-string QYAPI::getFrameName()
+nstring QYAPI::getFrameNameA()
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(true), __func__, "");
@@ -233,8 +232,9 @@ bool QYAPI::getLoginQQList(
 	INT64List & bindLoginQQList	// 登录QQ数组
 )
 {
-	if(QYAPI_TOLOG)
+	if(QYAPI_TOLOG && QYAPI::robotID != NULL) {
 		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(true), __func__, "");
+	}
 	string strLoginQQList = QY_getLoginQQList(QYAPI::authCode);
 	if(!strLoginQQList.length()) return false;
 	return decodeLoginQQList(strLoginQQList, bindLoginQQList);
@@ -271,15 +271,17 @@ bool QYAPI::getLoginQQList(
  */
 INT64 QYAPI::getRandomLoginQQ(bool useCache)
 {
-	static INT64 loginQQ = 0;
-	if(useCache && loginQQ) return loginQQ;
-	INT64List loginQQList;
-	if(!QYAPI::getLoginQQList(loginQQList)) return false;
-	std::random_device seed;
-	std::mt19937 mt(seed());
-	std::uniform_int_distribution<int> dist(1, loginQQList.size());
-	loginQQ = loginQQList[dist(mt) - 1];
-	return loginQQ;
+	while(!useCache || robotID == NULL) {
+		INT64List loginQQList;
+		if(!QYAPI::getLoginQQList(loginQQList)) break;
+		std::random_device seed;
+		std::mt19937 mt(seed());
+		std::uniform_int_distribution<int> dist(1, loginQQList.size());
+		robotID = loginQQList[dist(mt) - 1];
+		break;
+	}
+	//MessageBox(NULL, to_string(robotID).c_str(), __func__, 0);
+	return robotID;
 }
 
 /*
@@ -418,25 +420,26 @@ bool decodeQQSummaryInfo(
 	bindQSummaryInfo.uin = u.GetLong();
 	bindQSummaryInfo.sex = u.GetInt();
 	bindQSummaryInfo.nick = u.GetLenStr();
-	u.GetToken();
+	bindQSummaryInfo.nickBuffer = nstring(u.GetToken());
 	bindQSummaryInfo.signature = u.GetLenStr();
-	u.GetToken();
+	bindQSummaryInfo.signatureBuffer = nstring(u.GetToken());
 	bindQSummaryInfo.birthday = u.GetLenStr();
 	if(bindQSummaryInfo.birthday == "0/0/0" || bindQSummaryInfo.birthday == "")
 		bindQSummaryInfo.age = -1;
 	else {
+		string birthday = bindQSummaryInfo.birthday.cStr();
 		// 获取实际时间
-		int AgeYear = static_cast<int>(strtoll(bindQSummaryInfo.birthday.c_str(), nullptr, 10));
+		int AgeYear = static_cast<int>(strtoll(birthday.c_str(), nullptr, 10));
 		int AgeMonth = static_cast<int>(
 			strtoll(
-				bindQSummaryInfo.birthday.substr(
-					bindQSummaryInfo.birthday.find_first_of('/') + 1, 
-					bindQSummaryInfo.birthday.find_last_of('/') - bindQSummaryInfo.birthday.find_first_of('/')
+				birthday.substr(
+					birthday.find_first_of('/') + 1, 
+					birthday.find_last_of('/') - birthday.find_first_of('/')
 				).c_str(),
 				nullptr, 
 				10
 			));
-		int AgeDay = static_cast<int>(strtoll(bindQSummaryInfo.birthday.substr(bindQSummaryInfo.birthday.find_last_of('/') + 1).c_str(), nullptr, 10));
+		int AgeDay = static_cast<int>(strtoll(birthday.substr(birthday.find_last_of('/') + 1).c_str(), nullptr, 10));
 		/*
 		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(), "TransformBirthday", 
 			to_string(AgeYear) + "/" + to_string(AgeMonth) + "/" + to_string(AgeDay));
@@ -549,6 +552,7 @@ bool decodeGroupInfo(
 	bindGroupInfo.memberNum = u.GetInt();
 	bindGroupInfo.name = u.GetLenStr();
 	bindGroupInfo.nameBuffer = u.GetToken();
+	//MessageBox(NULL, bindGroupInfo.nameBuffer.u8Str(), "u8String", 0);
 	bindGroupInfo.level = u.GetInt();
 	bindGroupInfo.introduction = u.GetLenStr();
 	bindGroupInfo.introductionBuffer = u.GetToken();
@@ -805,7 +809,7 @@ bool decodeDiscussList(
 	bindDiscussList.resize(count);
 	for(int i = 0; i < count; i++) {
 		bindDiscussList[i].id = u.GetLong();
-		bindDiscussList[i].nameBuffer = u.GetToken();
+		//bindDiscussList[i].nameBuffer = u.GetToken();
 		bindDiscussList[i].name = u.GetLenStr();
 		u.GetInt();  // 错误代码
 		bindDiscussList[i].createTimeStamp = u.GetInt();
@@ -847,55 +851,44 @@ bool QYAPI::getDiscussList(
 
 /**
  * 编码_UTF8转Ansi
- * @param	BYTES		contents		UTF-8编码文本
- * @return	CSTRING		GB2312编码文本
+ * @param	nstring		contents		UTF-8编码文本
+ * @return	nstring		GB2312编码文本
  */
-CSTRING QYAPI::convertUtf8ToAnsi(
-	BYTES contents	// UTF-8编码文本
+nstring QYAPI::convertUtf8ToAnsi(
+	nstring contents	// UTF-8编码文本
 )
 {
-	BYTE * bin = new BYTE[contents.size()];
-	for(size_t i = 0; i < contents.size(); i++)
-		bin[i] = contents[i];
-	string str = base64_encode(bin, contents.size());
-	delete[] bin;
-	return QY_setEncodeUtf8ToAnsi(QYAPI::authCode, str.c_str());
-}
-/**
- * 编码_UTF8转Ansi
- * @param	string		contents		UTF-8编码文本
- * @return	CSTRING		GB2312编码文本
- */
-CSTRING QYAPI::convertUtf8ToAnsi(
-	string contents	// UTF-8编码文本
-)
-{
-	if(QYAPI_TOLOG)
-		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(true), __func__,
-			"待解码的utf-8文本：" + contents
-		);
-	BYTES bin(contents.cbegin(), contents.cend());
-	return QYAPI::convertUtf8ToAnsi(bin);
+	const string u8string(contents.u8Str());
+	nstring ansi(base64_encode(reinterpret_cast<const unsigned char*>(u8string.c_str()), u8string.length()));
+	return QY_setEncodeUtf8ToAnsi(QYAPI::authCode, ansi);
 }
 
 /**
  * 编码_GB2312转UTF8
- * @param	string		contents	GB2312编码文本
- * @return	BYTES		UTF-8编码文本
+ * @param	nstring		contents	GB2312编码文本
+ * @return	nstring		UTF-8编码文本
  */
-BYTES QYAPI::convertAnsiToUtf8(
-	string contents	// GB2312编码文本
+nstring QYAPI::convertAnsiToUtf8(
+	nstring contents	// GB2312编码文本
 )
 {
 	if(QYAPI_TOLOG)
 		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(true), __func__,
-			"待解码的gb2312文本：" + contents
+			"待编码的gb2312文本：" + contents
 		);
-	string utf8 = QY_setEncodeAnsiToUtf8(QYAPI::authCode, contents.c_str());
-	if(utf8 == "") return BYTES();
-	utf8 = base64_decode(utf8);
-	BYTES bin(utf8.cbegin(), utf8.cend());
-	return bin;
+	// 经过API转换的文本依旧是ANSI编码, 只是Base64化, 不能算作UTF-8编码文本
+	nstring b64_string(QY_setEncodeAnsiToUtf8(QYAPI::authCode, contents), false);
+	if(QYAPI_TOLOG)
+		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(true), __func__,
+							 "待解码的utf-8文本：" + b64_string
+		);
+	if(b64_string == "") return nstring("", true);
+	nstring u8_string(base64_decode(b64_string), true);
+	if(QYAPI_TOLOG)
+		QYAPI::addLog::Debug(QYAPI::getRandomLoginQQ(true), __func__,
+							 "解码后的utf-8文本长度：" + to_string(string(u8_string.u8Str()).length() / 3)
+		);
+	return u8_string;
 }
 
 /**
@@ -1034,15 +1027,15 @@ INT32 QYAPI::sendLikeFavorite(
 
 /*
  * 发送好友消息
- * @param	INT64	 robotID	使用的机器人QQ
- * @param	INT64	 uin		目标QQ
- * @param	CSTRING	 msg		消息内容
- * @return	INT32	 unknown	(推测)状态码
+ * @param	INT64				robotID	使用的机器人QQ
+ * @param	INT64				uin			目标QQ
+ * @param	string | wstring	msg			消息内容
+ * @return	INT32				unknown	(推测)状态码
  */
 INT32 QYAPI::sendFriendMsg(
-	INT64 robotID,	// 使用机器人QQ
-	INT64 uin,		// 目标QQ
-	string msg		// 消息内容
+	INT64	robotID,	// 使用机器人QQ
+	INT64	uin,		// 目标QQ
+	nstring	msg			// 消息内容
 )
 {
 	if(msg == "") return -1;
@@ -1052,7 +1045,7 @@ INT32 QYAPI::sendFriendMsg(
 			+ "，发送到好友：" + to_string(uin) \
 			+ "，消息内容：" + msg
 		);
-	return QY_sendFriendMsg(QYAPI::authCode, robotID, uin, msg.c_str());
+	return QY_sendFriendMsg(QYAPI::authCode, robotID, uin, msg);
 }
 
 /*
@@ -1063,9 +1056,9 @@ INT32 QYAPI::sendFriendMsg(
  * @return	INT32	 unknown	(推测)状态码
  */
 INT32 QYAPI::sendGroupMsg(
-	INT64 robotID,	// 使用的机器人QQ
-	INT64 dwGroup,	// 目标群
-	string msg		// 消息内容
+	INT64	robotID,	// 使用的机器人QQ
+	INT64	dwGroup,	// 目标群
+	nstring msg			// 消息内容
 )
 {
 	if(msg == "") return -1;
@@ -1075,13 +1068,13 @@ INT32 QYAPI::sendGroupMsg(
 			+ "，发送到群：" + to_string(dwGroup) \
 			+ "，消息内容：" + msg
 		);
-	return QY_sendGroupMsg(QYAPI::authCode, robotID, dwGroup, msg.c_str());
+	return QY_sendGroupMsg(QYAPI::authCode, robotID, dwGroup, msg);
 }
 
 /*
  * 发送群临时消息
  * @param	INT64	 robotID	使用的机器人QQ
- * @param	INT64	 dwGroup	所在群
+ * @param	INT64	 dwGroup	目标所在群
  * @param	INT64	 uin		目标QQ
  * @param	string	 msg		消息内容
  * @return	INT32	 unknown	(推测)状态码

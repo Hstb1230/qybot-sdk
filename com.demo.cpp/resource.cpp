@@ -1,86 +1,43 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "resource.h"
+#include "utils/encodingConvert.h"
 
-/* È¡DLL×ÔÉí¾ä±ú */
+/* å–DLLè‡ªèº«å¥æŸ„ */
 HMODULE GetSelfModuleHandle()
 {
 	MEMORY_BASIC_INFORMATION mbi;
 	return ((::VirtualQuery(GetSelfModuleHandle, &mbi, sizeof(mbi)) != 0) ? (HMODULE)mbi.AllocationBase : NULL);
 }
 
-/* LPCWSTR×ªLPCSTR */
-LPCSTR w2c(LPCWSTR wText)
+const char * GetResourceFileW(nstring lpType, int lpName)
 {
-	DWORD dwNum = WideCharToMultiByte(CP_ACP, NULL, wText, -1, NULL, 0, NULL, FALSE);//°ÑµÚÎå¸ö²ÎÊıÉè³ÉNULLµÄµ½¿í×Ö·û´®µÄ³¤¶È°üÀ¨½áÎ²·û
-	LPSTR psText = NULL;
-	psText = new char[dwNum];
-	if(!psText)
-	{
-		delete[] psText;
-		psText = NULL;
-	}
-	WideCharToMultiByte(CP_ACP, NULL, wText, -1, psText, dwNum, NULL, FALSE);
-	LPCSTR pscTest = psText;
-	//delete[] psText;
-	return pscTest;
-}
-
-/* LPCSTR×ªLPCWSTR */
-LPCWSTR c2w(LPCSTR sText)
-{
-	DWORD dwNum = MultiByteToWideChar(CP_ACP, 0, sText, -1, NULL, 0);//°ÑµÚÎå¸ö²ÎÊıÉè³ÉNULLµÄµ½¿í×Ö·û´®µÄ³¤¶È°üÀ¨½áÎ²·û
-
-	LPWSTR pwText = NULL;
-	pwText = new wchar_t[dwNum];
-	if(!pwText)
-	{
-		delete[] pwText;
-		pwText = NULL;
-	}
-	unsigned nLen = MultiByteToWideChar(CP_ACP, 0, sText, -1, pwText, dwNum + 10);
-	if(nLen >= 0)
-	{
-		pwText[nLen] = 0;
-	}
-	return pwText;
-}
-
-const char * GetResourceFileW(LPCSTR lpType, int lpName)
-{
-	return GetResourceFileW(c2w(lpType), lpName);
-}
-
-const char * GetResourceFileW(LPCWSTR lpType, int lpName)
-{
-	//È¡DLL×ÔÉí¾ä±ú
+	//å–DLLè‡ªèº«å¥æŸ„
 	HMODULE hModule = GetSelfModuleHandle();
-	//¶ÁÈ¡×ÊÔ´°üÎÄ¼ş
-	HRSRC hRsrc = FindResourceW(hModule, MAKEINTRESOURCEW(lpName), lpType);
+	//è¯»å–èµ„æºåŒ…æ–‡ä»¶
+	wstring wlpType(lpType);
+	HRSRC hRsrc = FindResourceW(hModule, MAKEINTRESOURCEW(lpName), wlpType.c_str());
 	return GetResourceFileData(hModule, hRsrc);
 }
 
-const char * GetResourceFileA(LPCWSTR lpType, int lpName) {
-	return GetResourceFileA(w2c(lpType), lpName);
-}
-
-const char * GetResourceFileA(LPCSTR lpType, int lpName) {
-	//È¡DLL×ÔÉí¾ä±ú
+const char * GetResourceFileA(nstring lpType, int lpName) {
+	//å–DLLè‡ªèº«å¥æŸ„
 	HMODULE hModule = GetSelfModuleHandle();
-	//¶ÁÈ¡×ÊÔ´°üÎÄ¼ş
-	HRSRC hRsrc = FindResourceA(hModule, MAKEINTRESOURCEA(lpName), lpType);
+	//è¯»å–èµ„æºåŒ…æ–‡ä»¶
+	string clpType(lpType);
+	HRSRC hRsrc = FindResourceA(hModule, MAKEINTRESOURCEA(lpName), clpType.c_str());
 	return GetResourceFileData(hModule, hRsrc);
 }
 
 const char * GetResourceFileData(HMODULE hModule, HRSRC hRsrc)
 {
 	if(NULL == hRsrc) return nullptr;
-	//»ñÈ¡×ÊÔ´µÄ´óĞ¡
+	//è·å–èµ„æºçš„å¤§å°
 	DWORD dwSize = SizeofResource(hModule, hRsrc);
 	if(0 == dwSize) return nullptr;
-	//¼ÓÔØ×ÊÔ´
+	//åŠ è½½èµ„æº
 	HGLOBAL hGlobal = LoadResource(hModule, hRsrc);
 	if(NULL == hGlobal) return nullptr;
-	//Ëø¶¨×ÊÔ´
+	//é”å®šèµ„æº
 	LPVOID pBuffer = LockResource(hGlobal);
 	if(NULL == pBuffer) {
 		GlobalUnlock(hGlobal);

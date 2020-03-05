@@ -1,53 +1,57 @@
-#pragma once
+ï»¿#pragma once
 #include "log.h"
 
 class QYLOG_INFO
 {
 	private:
-		/* ÈÕÖ¾³£Á¿ */
-		static const auto LOG_INFO_SUCCESS = 11;	//ĞÅÏ¢(³É¹¦)		Éî×ÏÂŞÀ¼µÄÀ¶É«(BlueViolet)	14822282  #8A2BE2  RGB(138,43,226)
-		static const auto LOG_INFO_FAIL = 12;		//ĞÅÏ¢(Ê§°Ü)		×ØÉ«(Brown)					2763429   #A52A2A  RGB(165,42,42)
-		static const auto LOG_INFO_RECEIVE = 13;	//ĞÅÏ¢(½ÓÊÕ)		´¿À¶(Blue)					16711680  #0000FF  RGB(0,0,255)
-		static const auto LOG_INFO_SEND = 14;		//ĞÅÏ¢(·¢ËÍ)		´¿ÂÌ(Green)					32768     #008000  RGB(0,128,0)
+		/* æ—¥å¿—å¸¸é‡ */
+		//	ä¿¡æ¯(æˆåŠŸ)	æ·±ç´«ç½—å…°çš„è“è‰²(BlueViolet)	14822282  #8A2BE2  RGB(138,43,226)
+		static const auto LOG_INFO_SUCCESS	=	11;
+		//	ä¿¡æ¯(å¤±è´¥)	æ£•è‰²(Brown)					2763429   #A52A2A  RGB(165,42,42)
+		static const auto LOG_INFO_FAIL		=	12;
+		//	ä¿¡æ¯(æ¥æ”¶)	çº¯è“(Blue)					16711680  #0000FF  RGB(0,0,255)
+		static const auto LOG_INFO_RECEIVE	=	13;
+		//	ä¿¡æ¯(å‘é€)	çº¯ç»¿(Green)					32768     #008000  RGB(0,128,0)
+		static const auto LOG_INFO_SEND		=	14;
 
 	public:
 
 		/**
-		 * Ìí¼Ó³É¹¦ĞÅÏ¢ÈÕÖ¾
-		 * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-		 * @param	string	 event		ÊÂ¼şÃû³Æ
-		 * @param	string	 contents	ÊÂ¼şÄÚÈİ
-		 * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+		 * æ·»åŠ æˆåŠŸä¿¡æ¯æ—¥å¿—
+		 * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+		 * @param	string | wstring	eventName	äº‹ä»¶åç§°
+		 * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+		 * @return	INT32				unknown		å›ºå®šè¿”å›0
 		 */
-		static INT32 Success(INT64 robotID, string event, string contents);
+		static INT32 Success(INT64 robotID, nstring eventName, nstring contents);
 
 
 		/**
-		 * Ìí¼ÓÊ§°ÜĞÅÏ¢ÈÕÖ¾
-		 * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-		 * @param	string	 event		ÊÂ¼şÃû³Æ
-		 * @param	string	 contents	ÊÂ¼şÄÚÈİ
-		 * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+		 * æ·»åŠ å¤±è´¥ä¿¡æ¯æ—¥å¿—
+		 * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+		 * @param	string | wstring	eventName	äº‹ä»¶åç§°
+		 * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+		 * @return	INT32				unknown		å›ºå®šè¿”å›0
 		 */
-		static INT32 Fail(INT64 robotID, string event, string contents);
+		static INT32 Fail(INT64 robotID, nstring eventName, nstring contents);
 
 
 		/**
-		 * Ìí¼Ó½ÓÊÕĞÅÏ¢ÈÕÖ¾
-		 * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-		 * @param	string	 event		ÊÂ¼şÃû³Æ
-		 * @param	string	 contents	ÊÂ¼şÄÚÈİ
-		 * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+		 * æ·»åŠ æ¥æ”¶ä¿¡æ¯æ—¥å¿—
+		 * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+		 * @param	string | wstring	eventName	äº‹ä»¶åç§°
+		 * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+		 * @return	INT32				unknown		å›ºå®šè¿”å›0
 		 */
-		static INT32 Receive(INT64 robotID, string event, string contents);
+		static INT32 Receive(INT64 robotID, nstring eventName, nstring contents);
 
 
 		/**
-		 * Ìí¼Ó·¢ËÍĞÅÏ¢ÈÕÖ¾
-		 * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-		 * @param	string	 event		ÊÂ¼şÃû³Æ
-		 * @param	string	 contents	ÊÂ¼şÄÚÈİ
-		 * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+		 * æ·»åŠ å‘é€ä¿¡æ¯æ—¥å¿—
+		 * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+		 * @param	string | wstring	eventName	äº‹ä»¶åç§°
+		 * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+		 * @return	INT32				unknown		å›ºå®šè¿”å›0
 		 */
-		static INT32 Send(INT64 robotID, string event, string contents);
+		static INT32 Send(INT64 robotID, nstring eventName, nstring contents);
 };

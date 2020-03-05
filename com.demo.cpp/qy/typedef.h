@@ -1,130 +1,132 @@
-#pragma once
+ï»¿#pragma once
 
 class QYTYPE
 {
 	public:
 
 	typedef struct {
-		INT64	uin;	// QQºÅ
-		string	nick;	// êÇ³Æ
-	} Friend; // ºÃÓÑĞÅÏ¢
-	typedef std::vector<Friend> FriendList; // ºÃÓÑÁĞ±í
+		INT64		uin;	// QQå·
+		nstring		nick;	// æ˜µç§°
+	} Friend; // å¥½å‹ä¿¡æ¯
+	typedef std::vector<Friend> FriendList; // å¥½å‹åˆ—è¡¨
 
 	typedef struct {
-		INT64	tempID;		// ÁÙÊ±ÈººÅ
-		INT64	id;			// ÈººÅ
-		string	name;		// ÈºÃû
-	} Group; // ÈºĞÅÏ¢
-	typedef std::vector<Group> GroupList; // ÈºÁĞ±í
+		INT64		tempID;		// ä¸´æ—¶ç¾¤å·
+		INT64		id;			// ç¾¤å·
+		nstring		name;		// ç¾¤å
+	} Group; // ç¾¤ä¿¡æ¯
+	typedef std::vector<Group> GroupList; // ç¾¤åˆ—è¡¨
 
 	typedef struct {
-		INT64	id;					// ÌÖÂÛ×éID
-		string	name;				// ÌÖÂÛ×éÃû³Æ(GB2312±àÂë)
-		BYTES	nameBuffer;			// ÌÖÂÛ×éÃû³Æ(Utf-8±àÂë)
-		INT32	createTimeStamp;	// ´´½¨Ê±¼ä´Á
-		INT64	createUin;			// ´´½¨Õß
-		INT32	infoSeq;			// ĞÅÏ¢ĞòÁĞ
-		INT32	lastInfoTimeStamp;	// ×îºóĞÅÏ¢Ê±¼ä´Á
-		INT32	msgSeq;				// ÏûÏ¢ĞòÁĞ
-		INT32	lastMsgTimeStamp;	// ×îºóÏûÏ¢Ê±¼ä´Á
-		INT32	memberNum;			// ³ÉÔ±ÊıÁ¿
-		INT32	flag;				// Î´Öª
-		INT64	inheritOwnerUin;	// ¼Ì³Ğ´´½¨Õß
-		INT64	groupID;			// ÈººÅ
-		INT64	groupTempID;		// ÁÙÊ±ÈººÅ
-		INT32	confMeetingOrigin;	// Î´Öª
-		INT32	qidianConfType;		// Î´Öª
-		INT32	confMeetingOption;	// Î´Öª
-	} Discuss; // ÌÖÂÛ×éĞÅÏ¢
-	typedef std::vector<Discuss> DiscussList; // ÌÖÂÛ×éÁĞ±í
+		INT64		id;					// è®¨è®ºç»„ID
+		nstring		name;				// è®¨è®ºç»„åç§°(GB2312ç¼–ç )
+		nstring		nameBuffer;			// è®¨è®ºç»„åç§°(Utf-8ç¼–ç )
+		INT32		createTimeStamp;	// åˆ›å»ºæ—¶é—´æˆ³
+		INT64		createUin;			// åˆ›å»ºè€…
+		INT32		infoSeq;			// ä¿¡æ¯åºåˆ—
+		INT32		lastInfoTimeStamp;	// æœ€åä¿¡æ¯æ—¶é—´æˆ³
+		INT32		msgSeq;				// æ¶ˆæ¯åºåˆ—
+		INT32		lastMsgTimeStamp;	// æœ€åæ¶ˆæ¯æ—¶é—´æˆ³
+		INT32		memberNum;			// æˆå‘˜æ•°é‡
+		INT32		flag;				// æœªçŸ¥
+		INT64		inheritOwnerUin;	// ç»§æ‰¿åˆ›å»ºè€…
+		INT64		groupID;			// ç¾¤å·
+		INT64		groupTempID;		// ä¸´æ—¶ç¾¤å·
+		INT32		confMeetingOrigin;	// æœªçŸ¥
+		INT32		qidianConfType;		// æœªçŸ¥
+		INT32		confMeetingOption;	// æœªçŸ¥
+	} Discuss; // è®¨è®ºç»„ä¿¡æ¯
+	typedef std::vector<Discuss> DiscussList; // è®¨è®ºç»„åˆ—è¡¨
 
 	typedef struct {
-		INT64	uin;					// QQºÅ
-		string	nick;					// êÇ³Æ
-		string	card;					// ÃûÆ¬
-		INT32	sex;					// ĞÔ±ğ£¬0/ÄĞ 1/Å® 255/Î´Öª
-		INT32	age;					// ÄêÁä
-		string	area;					// µØÇø
-		INT32	joinTimeStamp;			// ¼ÓÈºÊ±¼ä(Ê±¼ä´Á)
-		INT32	lastSpeakTimeStamp;		// ×îºó·¢ÑÔÊ±¼ä(Ê±¼ä´Á)
-		string	gLevelName;				// Ëù´¦ÈºµÈ¼¶Ãû³Æ
-		INT32	permission;				// ¹ÜÀíÈ¨ÏŞ£¬1/³ÉÔ± 2/¹ÜÀíÔ± 3/ÈºÖ÷
-		string	sTitle;					// ×¨ÊôÍ·ÏÎ
-		INT32	sTitleValidPeriod;		// ×¨ÊôÍ·ÏÎÓĞĞ§ÆÚ
-		bool	isBadMember;			// ÊÇ·ñÎª²»Á¼³ÉÔ±
-		bool	allowChangeCard;		// ÔÊĞíĞŞ¸ÄÃûÆ¬
-	} GroupMember; // Èº³ÉÔ±ĞÅÏ¢
-	typedef std::vector<GroupMember> GroupMemberList; // Èº³ÉÔ±ÁĞ±í
+		INT64		uin;					// QQå·
+		nstring		nick;					// æ˜µç§°
+		nstring		card;					// åç‰‡
+		INT32		sex;					// æ€§åˆ«ï¼Œ0/ç”· 1/å¥³ 255/æœªçŸ¥
+		INT32		age;					// å¹´é¾„
+		nstring		area;					// åœ°åŒº
+		INT32		joinTimeStamp;			// åŠ ç¾¤æ—¶é—´(æ—¶é—´æˆ³)
+		INT32		lastSpeakTimeStamp;		// æœ€åå‘è¨€æ—¶é—´(æ—¶é—´æˆ³)
+		nstring		gLevelName;				// æ‰€å¤„ç¾¤ç­‰çº§åç§°
+		INT32		permission;				// ç®¡ç†æƒé™ï¼Œ1/æˆå‘˜ 2/ç®¡ç†å‘˜ 3/ç¾¤ä¸»
+		nstring		sTitle;					// ä¸“å±å¤´è¡”
+		INT32		sTitleValidPeriod;		// ä¸“å±å¤´è¡”æœ‰æ•ˆæœŸ
+		bool		isBadMember;			// æ˜¯å¦ä¸ºä¸è‰¯æˆå‘˜
+		bool		allowChangeCard;		// å…è®¸ä¿®æ”¹åç‰‡
+	} GroupMember; // ç¾¤æˆå‘˜ä¿¡æ¯
+	typedef std::vector<GroupMember> GroupMemberList; // ç¾¤æˆå‘˜åˆ—è¡¨
 
 	typedef struct {
-		INT64	id;						// ÈººÅ
-		INT64	ownerUin;				// ÈºÖ÷QQ
-		INT32	createTimeStamp;		// ´´½¨Ê±¼ä(Ê±¼ä´Á)
-		INT32	memberNum;				// ÈºÄ¿Ç°ÈËÊı
-		INT32	maxMemberNum;			// ÈºÈËÊıÉÏÏŞ
-		string	name;					// ÈºÃû³Æ(GB2312±àÂë)
-		BYTES	nameBuffer;				// ÈºÃû³Æ(UTF-8±àÂë)
-		INT32	level;					// ÈºµÈ¼¶£¬ËùÓĞÈº¶¼¿ÉÒÔ»ñÈ¡µ½£¬µ«ÊÇÓĞÌõ¼şÊÇ·ñÏÔÊ¾£¬ÓĞĞ©Èº²»Âú×ãÌõ¼şÓĞµÈ¼¶Ò²²»ÏÔÊ¾
-		string	introduction;			// Èº½éÉÜ(GB2312±àÂë)
-		BYTES	introductionBuffer;		// Èº½éÉÜ(UTF-8±àÂë)
-	} GroupInfo; // Èº×ÊÁÏ
+		INT64		id					=	0;		// ç¾¤å·
+		INT64		ownerUin			=	0;		// ç¾¤ä¸»QQ
+		INT32		createTimeStamp		=	0;		// åˆ›å»ºæ—¶é—´(æ—¶é—´æˆ³)
+		INT32		memberNum			=	0;		// ç¾¤ç›®å‰äººæ•°
+		INT32		maxMemberNum		=	0;		// ç¾¤äººæ•°ä¸Šé™
+		nstring		name;							// ç¾¤åç§°(GB2312ç¼–ç )
+		nstring		nameBuffer;						// ç¾¤åç§°(UTF-8ç¼–ç )
+		INT32		level				=	0;		// ç¾¤ç­‰çº§ï¼Œæ‰€æœ‰ç¾¤éƒ½å¯ä»¥è·å–åˆ°ï¼Œä½†æ˜¯æœ‰æ¡ä»¶æ˜¯å¦æ˜¾ç¤ºï¼Œæœ‰äº›ç¾¤ä¸æ»¡è¶³æ¡ä»¶æœ‰ç­‰çº§ä¹Ÿä¸æ˜¾ç¤º
+		nstring		introduction;					// ç¾¤ä»‹ç»(GB2312ç¼–ç )
+		nstring		introductionBuffer;				// ç¾¤ä»‹ç»(UTF-8ç¼–ç )
+	} GroupInfo; // ç¾¤èµ„æ–™
 
 	typedef struct {
-		INT64	uin;				// QQºÅ
-		INT32	permission;		// È¨ÏŞ£¬0/ÈºÖ÷ 1/¹ÜÀíÔ±
-	} GroupAdmin; // Èº¹ÜÀí
-	typedef std::vector<GroupAdmin> GroupAdminList; // Èº¹ÜÀíÁĞ±í
+		INT64		uin;				// QQå·
+		INT32		permission;		// æƒé™ï¼Œ0/ç¾¤ä¸» 1/ç®¡ç†å‘˜
+	} GroupAdmin; // ç¾¤ç®¡ç†
+	typedef std::vector<GroupAdmin> GroupAdminList; // ç¾¤ç®¡ç†åˆ—è¡¨
 
 	typedef struct {
-		INT64	uin;			// QQºÅ
-		INT32	sex;			// ĞÔ±ğ£¬0/ÄĞ 1/Å® 2/Î´Öª
-		string	nick;			// êÇ³Æ
-		string	signature;		// Ç©Ãû
-		string	birthday;		// ÉúÈÕ£¬¸ñÊ½Àı£º1990/12/12
-		INT32	age;			// ÄêÁä£¬-1ÎªÎ´Öª
-		INT32	level;			// QQµÈ¼¶
-		INT32	qAge;			// QÁä£¬½öPCQQĞ­ÒéÖ§³Ö -1/255 ±íÊ¾²éÑ¯Ê§°Ü
-		INT32	likeCount;		// ÔŞÊıÁ¿
-		INT32	isLike;			// ÊÇ·ñ¿ÉÔŞ£¬0/ÒÑÔŞ 1/Î´ÔŞ£¬½ö°²×¿QQĞ­ÒéÖ§³Ö
-	} QQSummaryInfo; // QQ¼òÒª×ÊÁÏ
+		INT64		uin					=	0;		// QQå·
+		INT32		sex					=	0;		// æ€§åˆ«ï¼Œ0/ç”· 1/å¥³ 2/æœªçŸ¥
+		nstring		nick;							// æ˜µç§°
+		nstring		nickBuffer;						// (ç›²çŒœ)æ˜µç§°(UTF-8ç¼–ç )
+		nstring		signature;						// ç­¾å
+		nstring		signatureBuffer;				// (ç›²çŒœ)ç­¾å(UTF-8ç¼–ç )
+		nstring		birthday;						// ç”Ÿæ—¥ï¼Œæ ¼å¼ä¾‹ï¼š1990/12/12
+		INT32		age					=	0;		// å¹´é¾„ï¼Œ-1ä¸ºæœªçŸ¥
+		INT32		level				=	0;		// QQç­‰çº§
+		INT32		qAge				=	0;		// Qé¾„ï¼Œä»…PCQQåè®®æ”¯æŒ -1/255 è¡¨ç¤ºæŸ¥è¯¢å¤±è´¥
+		INT32		likeCount			=	0;		// èµæ•°é‡
+		INT32		isLike				=	0;		// æ˜¯å¦å¯èµï¼Œ0/å·²èµ 1/æœªèµï¼Œä»…å®‰å“QQåè®®æ”¯æŒ
+	} QQSummaryInfo; // QQç®€è¦èµ„æ–™
 
 	typedef struct {
-		BYTES	token;				// ÄäÃûÓÃ»§Token
-		string	card;				// ÄäÃûÓÃ»§ÃûÆ¬ Èç¡°´óÁ¦¹íÍõ¡±
-		INT64	headMark;			// ÄäÃûÓÃ»§µÄÍ·Ïñ±êÊ¶
-		INT64	expireTimeStamp;	// ÄäÃûÓÃ»§µ½ÆÚÊ±¼ä´Á
-	} Anonymous; // ÄäÃûĞÅÏ¢
+		BYTES		token;							// åŒ¿åç”¨æˆ·Token
+		nstring		card;							// åŒ¿åç”¨æˆ·åç‰‡ å¦‚â€œå¤§åŠ›é¬¼ç‹â€
+		INT64		headMark			=	0;		// åŒ¿åç”¨æˆ·çš„å¤´åƒæ ‡è¯†
+		INT64		expireTimeStamp		=	0;		// åŒ¿åç”¨æˆ·åˆ°æœŸæ—¶é—´æˆ³
+	} Anonymous; // åŒ¿åä¿¡æ¯
 
 	typedef struct {
-		string	nick;		// êÇ³Æ		ÓĞêÇ³Æ±íÊ¾Ã»ÓĞÈºêÇ³Æ	NickºÍGCard²»ÄÜ¹²´æ
-		string	gCard;		// ÈºêÇ³Æ	ÓĞÈºêÇ³Æ±íÊ¾Ã»ÓĞêÇ³Æ	NickºÍGCard²»ÄÜ¹²´æ
-		INT32	level;		// Èº¸öÈËµÈ¼¶
-		INT32	flags;		// Î´Öª
-		INT32	gLevel;		// ÈºµÈ¼¶
-		string	sTitle;		// ÈºÍ·ÏÎ
-		INT32	MTID;		// Î´Öª
-	} GroupAdditionalInfo; // ¸½¼ÓĞÅÏ¢
+		nstring		nick;				// æ˜µç§°		æœ‰æ˜µç§°è¡¨ç¤ºæ²¡æœ‰ç¾¤æ˜µç§°	Nickå’ŒGCardä¸èƒ½å…±å­˜
+		nstring		gCard;				// ç¾¤æ˜µç§°	æœ‰ç¾¤æ˜µç§°è¡¨ç¤ºæ²¡æœ‰æ˜µç§°	Nickå’ŒGCardä¸èƒ½å…±å­˜
+		INT32		level	=	0;		// ç¾¤ä¸ªäººç­‰çº§
+		INT32		flags	=	0;		// æœªçŸ¥
+		INT32		gLevel	=	0;		// ç¾¤ç­‰çº§
+		nstring		sTitle;				// ç¾¤å¤´è¡”
+		INT32		MTID	=	0;		// æœªçŸ¥
+	} GroupAdditionalInfo; // é™„åŠ ä¿¡æ¯
 
 	typedef struct {
-		string	name;			// Ãû³Æ
-		INT32	size;			// ×ÖºÅ
-		INT32	color;			// ÑÕÉ«
-		INT32	effect;			// ÑùÊ½ 1/´ÖÌå 2/Ğ±Ìå 4/ÏÂ»®Ïß
-		INT32	colorTextID;	// ÆøÅİID
-	} Font; // ×ÖÌåĞÅÏ¢
+		nstring		name;						// åç§°
+		INT32		size			=	0;		// å­—å·
+		INT32		color			=	0;		// é¢œè‰²
+		INT32		effect			=	0;		// æ ·å¼ 1/ç²—ä½“ 2/æ–œä½“ 4/ä¸‹åˆ’çº¿
+		INT32		colorTextID		=	0;		// æ°”æ³¡ID
+	} Font; // å­—ä½“ä¿¡æ¯
 
 	typedef struct {
-		string	name;		// ÎÄ¼şÃû
-		string	id;			// ÎÄ¼şID
-		string	size;		// ÎÄ¼ş´óĞ¡
-		INT64	busID;		// ·´Õı¾ÍÕâÃû×Ö
-		INT64	byteSize;	// ÎÄ¼ş´óĞ¡£¬µ¥Î»£º×Ö½Ú
-	} File; // ÎÄ¼şĞÅÏ¢
+		nstring		name;				// æ–‡ä»¶å
+		nstring		id;					// æ–‡ä»¶ID
+		nstring		size;				// æ–‡ä»¶å¤§å°
+		INT64		busID		=	0;	// åæ­£å°±è¿™åå­—
+		INT64		byteSize	=	0;	// æ–‡ä»¶å¤§å°ï¼Œå•ä½ï¼šå­—èŠ‚
+	} File; // æ–‡ä»¶ä¿¡æ¯
 
 	typedef struct {
-		INT64 id;			// QQºÅ
-		INT32 state = 0;	// ÔÚÏß×´Ì¬£¬0/ÀëÏß 1/ÔÚÏß
+		INT64	 id;			// QQå·
+		INT32	 state = 0;		// åœ¨çº¿çŠ¶æ€ï¼Œ0/ç¦»çº¿ 1/åœ¨çº¿
 	} LoginQQ;
-	typedef std::vector<LoginQQ> LoginQQList; // µÇÂ¼QQÁĞ±í
+	typedef std::vector<LoginQQ> LoginQQList; // ç™»å½•QQåˆ—è¡¨
 
 };

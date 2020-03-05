@@ -80,233 +80,6 @@ QYEVENT(INT32) QY_Event_Disable()
 	return 0; //请固定返回0。
 }
 
-//#include <fstream>
-void test()
-{
-	/* 部分测试代码使用「 false && 」代替注释，如需使用，请自行删除 */
-
-	// 停用插件自身
-	//QY::setAppSelfDiscontinue();
-	// 卸载插件自身
-	//QY::setAppSelfUninstall();
-
-	// 测试部分LQ码
-	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::Escape", QY::Code::Escape("&[,]"));
-	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::Escape", QY::Code::Escape("&[,]", true));
-	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::AntiEscape", QY::Code::AntiEscape("&amp;&#91;&#93;&#44;"));
-
-	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::Face", QY::Code::Face(1));
-	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::At", QY::Code::At(10001));
-	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::At", QY::Code::At(10001, false));
-	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::At", QY::Code::At(-1));
-	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::LocalImage", QY::Code::LocalImage("E:\\robot\\image\\1.jpg"));
-	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::OnlineImage", QY::Code::OnlineImage("http://dwz.cn/2ZJkzQ"));
-	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::FlashPic", QY::Code::FlashPic("E:\\robot\\image,\\1.jpg"));
-	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::Record", QY::Code::Record("E:\\robot\\record\\1.amr"));
-
-	/*
-	// 测试日志函数
-	QY::addLog::Debug(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
-	QY::addLog::Infos::Success(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
-	QY::addLog::Infos::Fail(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
-	QY::addLog::Infos::Receive(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
-	QY::addLog::Infos::Send(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
-	QY::addLog::Warning(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
-	QY::addLog::Error(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
-	QY::addLog::Fatal(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
-	*/
-
-	// 获取应用目录
-	//QY::addLog::Debug(QY::getRandomLoginQQ(), "getAppDirectory", QY::getAppDirectory());
-	// 获取框架名
-	//QY::addLog::Debug(QY::getRandomLoginQQ(), "getFrameName", QY::getFrameName());
-	
-	// 机器人QQ列表(含在线状态)
-	//QY::Type::LoginQQList rList; 
-	//QY::getLoginQQList(true, rList);
-
-	INT64List rList; // 机器人QQ列表
-	QY::getLoginQQList(rList);
-	for(size_t i = 0; i < rList.size(); i++) {
-		// 获取在线状态
-		//QY::addLog::Debug(rList[i], to_string(rList[i]), to_string(QY::getFrameAccountState(rList[i])));
-
-		// 获取机器人昵称
-		//QY::addLog::Debug(rList[i], to_string(rList[i]), QY::getLoginQQName(rList[i]));
-
-		// 获取Cookies、CsrfToken、指定域名Cookies
-		//QY::addLog::Debug(rList[i], "getCookies", QY::getCookies(rList[i]));
-		//QY::addLog::Debug(rList[i], "getCsrfToken", to_string(QY::getCsrfToken(rList[i])));
-		//QY::addLog::Debug(rList[i], "getDomainCookies", QY::getDomainCookies(rList[i]));
-
-		
-		// 输出讨论组列表
-		QY::Type::DiscussList disList;
-		if(false && QY::getDiscussList(rList[i], disList)) {
-			for(size_t j = 0; j < disList.size(); j++) {
-				break;
-				//QY::addLog::Debug(rList[i], "createUin", to_string(disList[j].createUin));
-				if(disList[j].createUin != rList[i]) {
-					// 退出讨论组
-					//QY::setDiscussExit(rList[i], disList[j].id);
-				} else {
-					// 移除讨论组成员
-					//QY::setDiscussMembersKick(rList[i], disList[j].id, 10001);
-				}
-				continue;
-
-				QY::sendDiscussMsg(rList[i], disList[j].id, "123");
-				QY::sendDiscussTmpMsg(rList[i], disList[j].id, 12345, "123");
-				continue;
-				
-				// 输出讨论组资料
-				QY::addLog::Debug(rList[i], "id", to_string(disList[j].id));
-				QY::addLog::Debug(rList[i], "name", disList[j].name);
-				QY::addLog::Debug(rList[i], "nameBuffer", QY::convertUtf8ToAnsi(disList[i].nameBuffer));
-				QY::addLog::Debug(rList[i], "createTimeStamp", to_string(disList[j].createTimeStamp));
-				QY::addLog::Debug(rList[i], "createUin", to_string(disList[j].createUin));
-				QY::addLog::Debug(rList[i], "infoSeq", to_string(disList[j].infoSeq));
-				QY::addLog::Debug(rList[i], "lastInfoTimeStamp", to_string(disList[j].lastInfoTimeStamp));
-				QY::addLog::Debug(rList[i], "msgSeq", to_string(disList[j].msgSeq));
-				QY::addLog::Debug(rList[i], "lastMsgTimeStamp", to_string(disList[j].lastMsgTimeStamp));
-				QY::addLog::Debug(rList[i], "memberNum", to_string(disList[j].memberNum));
-				QY::addLog::Debug(rList[i], "flag", to_string(disList[j].flag));
-				QY::addLog::Debug(rList[i], "inheritOwnerUin", to_string(disList[j].inheritOwnerUin));
-				QY::addLog::Debug(rList[i], "groupID", to_string(disList[j].groupID));
-				QY::addLog::Debug(rList[i], "groupTempID", to_string(disList[j].groupTempID));
-				QY::addLog::Debug(rList[i], "confMeetingOrigin", to_string(disList[j].confMeetingOrigin));
-				QY::addLog::Debug(rList[i], "qidianConfType", to_string(disList[j].qidianConfType));
-				QY::addLog::Debug(rList[i], "confMeetingOption", to_string(disList[j].confMeetingOption));
-			}
-		}
-		
-		//QY::setGroupAdd(rList[i], 10001, "测试加群");
-
-		// 输出群列表
-		QY::Type::GroupList gList;
-		if(false && QY::getGroupList(rList[i], gList)) {
-			for(size_t j = 0; j < gList.size(); j++) {
-				//QY::sendGroupMsg(rList[i], gList[j].id, "123");
-				//QY::sendGroupTmpMsg(rList[i], gList[j].id, 12345, "123");
-				//continue;
-
-				//QY::addLog::Debug(rList[i], "GroupID", to_string(gList[j].id));
-				//QY::addLog::Debug(rList[i], "Name", gList[j].name);
-				//QY::addLog::Debug(rList[i], "TempGroupID", to_string(gList[j].tempID));
-				//QY::addLog::Debug(rList[i], to_string(gList[j].id), gList[j].name);
-
-				
-				// 输出群资料
-				QY::Type::GroupInfo gInfo;
-				QY::getGroupInfo(rList[i], gList[j].id, gInfo);
-				/*
-				QY::addLog::Debug(rList[i], to_string(gInfo.id), to_string(gInfo.ownerUin));
-				QY::addLog::Debug(rList[i], to_string(gInfo.id), to_string(gInfo.createTimeStamp));
-				QY::addLog::Debug(rList[i], to_string(gInfo.id), to_string(gInfo.memberNum));
-				QY::addLog::Debug(rList[i], to_string(gInfo.id), to_string(gInfo.maxMemberNum));
-				QY::addLog::Debug(rList[i], to_string(gInfo.id), to_string(gInfo.level));
-				QY::addLog::Debug(rList[i], to_string(gInfo.id), gInfo.name);
-				QY::addLog::Debug(rList[i], to_string(gInfo.id), gInfo.introduction);
-				QY::addLog::Debug(rList[i], to_string(gInfo.id), QY::convertUtf8ToAnsi(gInfo.nameBuffer));
-				QY::addLog::Debug(rList[i], to_string(gInfo.id), QY::convertUtf8ToAnsi(gInfo.introduction));
-				*/
-
-				// 如果机器人是群主
-				if(gInfo.ownerUin == rList[i]) {
-					/*
-					// 设置群临时会话开关
-					QY::setGroupPrivateSession(rList[i], gInfo.id, false);
-					QY::setGroupPrivateSession(rList[i], gInfo.id, true);
-					QY::setGroupPrivateSession(rList[i], gInfo.id, false);
-
-					// 设置群多人聊天开关
-					QY::setGroupManyPeopleChat(rList[i], gInfo.id, false);
-					QY::setGroupManyPeopleChat(rList[i], gInfo.id, true);
-					QY::setGroupManyPeopleChat(rList[i], gInfo.id, false);
-					*/
-
-					// 退群(一定失败，因为是群主)
-					//QY::setGroupExit(rList[i], gInfo.id, false);
-					// 解散群(PC端似乎不允许使用)
-					//QY::setGroupExit(rList[i], gInfo.id, true);
-				}
-
-
-				// 输出群管理员列表
-				QY::Type::GroupAdminList gAdminList;
-				if(false && QY::getGroupAdminList(rList[i], gList[j].id, gAdminList)) {
-					string card;
-					for(size_t k = 0; k < gAdminList.size(); k++) {
-						QY::getGroupMemberCard(rList[i], gList[j].id, gAdminList[k].uin, card, true);
-						QY::addLog::Debug(
-							rList[i],
-							to_string(gList[j].id),
-							to_string(gAdminList[k].uin) + " " \
-							+ to_string(gAdminList[k].permission) + " " \
-							// + QY::getGroupMemberCard(rList[i], gList[j].id, gAdminList[k].uin)
-							+ card
-						);
-					}
-				}
-				
-
-				/*
-				// 输出群成员列表
-				QY::Type::GroupMemberList gMemberList;
-				if(QY::getGroupMemberList(rList[i], gList[j].id, gMemberList)) {
-					// 使用ofstream时，记得把函数上面的「 #include <fstream> 」解除注释
-					std::ofstream o(std::to_string(gList[j].id) + ".log");
-					for(size_t k = 0; k < gMemberList.size(); k++) {
-						o << gMemberList[k].uin << " ";
-						o << gMemberList[k].nick << " ";
-						o << gMemberList[k].card << " ";
-						o << gMemberList[k].sex << " ";
-						o << gMemberList[k].age << " ";
-						o << gMemberList[k].age << " ";
-						o << gMemberList[k].joinTimeStamp << " ";
-						o << gMemberList[k].lastSpeakTimeStamp << " ";
-						o << gMemberList[k].gLevelName << " ";
-						o << gMemberList[k].permission << " ";
-						o << gMemberList[k].sTitle << " ";
-						o << gMemberList[k].sTitleValidPeriod << " ";
-						o << (int)gMemberList[k].isBadMember << " ";
-						o << (int)gMemberList[k].allowChangeCard << " ";
-						o << std::endl;
-					}
-					o.close();
-
-				}
-				*/
-
-			}
-		}
-
-		// 取机器人自己的概要资料
-		QY::Type::QQSummaryInfo QQSummaryInfo;
-		if(false && QY::getQQSummaryInfo(rList[i], rList[i], QQSummaryInfo)) {
-			QY::addLog::Debug(rList[i], "QQID", to_string(QQSummaryInfo.uin));
-			QY::addLog::Debug(rList[i], "Sex", to_string(QQSummaryInfo.sex));
-			QY::addLog::Debug(rList[i], "Nick", QQSummaryInfo.nick);
-			QY::addLog::Debug(rList[i], "Signature", QQSummaryInfo.signature);
-			QY::addLog::Debug(rList[i], "Birthday", QQSummaryInfo.birthday);
-			QY::addLog::Debug(rList[i], "Age", to_string(QQSummaryInfo.age));
-			QY::addLog::Debug(rList[i], "Level", to_string(QQSummaryInfo.level));
-			QY::addLog::Debug(rList[i], "qAge", to_string(QQSummaryInfo.qAge));
-			QY::addLog::Debug(rList[i], "LikeCount", to_string(QQSummaryInfo.likeCount));
-			QY::addLog::Debug(rList[i], "IsLike", to_string(QQSummaryInfo.isLike));
-		}
-
-		// 输出好友列表
-		QY::Type::FriendList friendList;
-		if(false && QY::getFriendList(rList[i], friendList)) {
-			for(size_t i = 0; i < friendList.size(); i++) {
-				QY::addLog::Debug(rList[i], "Uin", std::to_string(friendList[i].uin).c_str());
-				QY::addLog::Debug(rList[i], "Nick", friendList[i].nick.c_str());
-			}
-		}
-	}
-}
-
 /*
  * [166]私聊消息
  * 本子程序会在【线程】中被调用，请注意使用对象等需要初始化(CoInitialize,CoUninitialize)。
@@ -325,9 +98,7 @@ QYEVENT(INT32) QY_Event_PrivateMsg(
 {
 	// 发送私聊消息
 	QY::sendFriendMsg(robotID, fromQQ, string("你发送了这样的消息：") + msg);
-	if(fromQQ == 10001)
-		test();
-	if(string(msg) == "test") {
+ 	if(string(msg) == "1") {
 		// 点赞1次
 		QY::sendLikeFavorite(robotID, fromQQ, 1);
 		// 删除好友
@@ -336,7 +107,14 @@ QYEVENT(INT32) QY_Event_PrivateMsg(
 		switch(subType) {
 			case 11: // 好友消息
 			{
-				QY::sendOfflineFile(robotID, 1, 0, fromQQ, R"(D:\QYBot\QY.robot.Update.exe)");
+				//QY::sendOfflineFile(robotID, 1, 0, fromQQ, R"(D:\QYBot\QY.robot.Update.exe)");
+				nstring ns(L"你好");
+				QY::sendFriendMsg(robotID, fromQQ, ns);
+				ns = "我是小娜";
+				QY::sendFriendMsg(robotID, fromQQ, ns);
+				ns = "请问你是我的闺蜜Sir吗";
+				ns += "?";
+				QY::sendFriendMsg(robotID, fromQQ, ns);
 				break;
 			}
 			case 2: // 群临时消息
@@ -393,7 +171,8 @@ QYEVENT(INT32) QY_Event_GroupMsg(
 		QY::Type::GroupAdditionalInfo gAdditionalInfo;
 		if(QY::decodeGroupAdditionalInfo(u.read("GExtraInfo"), gAdditionalInfo)) {
 			string strTips = "";
-			strTips += "Nick：" + gAdditionalInfo.nick;
+			strTips += "Nick：";
+			strTips += gAdditionalInfo.nick;
 			strTips += "，gCard：" + gAdditionalInfo.gCard;
 			strTips += "，Level：" + to_string(gAdditionalInfo.level);
 			strTips += "，Flags：" + to_string(gAdditionalInfo.flags);
@@ -662,7 +441,7 @@ QYEVENT(INT32) QY_Event_Request_AddFriend(
 	//QY::addLog::Debug(robotID, "Request_AddFriend", res);
 
 	//QY::setFriendAddRequest(robotID, responseFlag, QY::REQUEST_DENY, "这是拒绝理由");
-	//QY::setFriendAddRequest(robotID, responseFlag, QY::REQUEST_ALLOW, "这是备注");
+	QY::setFriendAddRequest(robotID, responseFlag, QY::REQUEST_ALLOW, "备注");
 	return QY::EVENT_IGNORE; //关于返回值说明, 见「QY_Event_PrivateMsg」函数
 }
 
@@ -742,13 +521,245 @@ QYEVENT(INT32) _menuA()
 
 QYEVENT(INT32) _menuB()
 {
-#ifdef UNICODE
-	//MessageBox(NULL, L"这是menuB，在这里载入窗口，或者进行其他工作。", L"信息框", 0);
-	MessageBoxA(NULL, "这是menuB，在这里载入窗口，或者进行其他工作。", "信息框", 0);
-#else
-	MessageBoxA(NULL, "这是menuB，在这里载入窗口，或者进行其他工作。", "信息框", 0);
-#endif // !UNICODE
+	test();
 	return 0; //请固定返回0
+}
+
+//#include <fstream>
+void test()
+{
+	nstring ns(QY::convertAnsiToUtf8("你好"));
+	QY::addLog::Debug(QY::getRandomLoginQQ(), "convertAnsiToUtf8", to_string(strlen(ns.u8Str())));
+	QY::addLog::Debug(QY::getRandomLoginQQ(), "convertAnsiToUtf8", ns);
+	ns = QY::convertUtf8ToAnsi(ns);
+	QY::addLog::Debug(QY::getRandomLoginQQ(), "convertUtf8ToAnsi", ns);
+	//return;
+	/* 部分测试代码使用「 if(i == 0) break; 」代替代码注释，如需使用，请自行删除 */
+
+	// 停用插件自身
+	//QY::setAppSelfDiscontinue();
+	// 卸载插件自身
+	//QY::setAppSelfUninstall();
+
+	// 测试部分LQ码
+	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::Escape", QY::Code::Escape("&[,]"));
+	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::Escape", QY::Code::Escape("&[,]", true));
+	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::AntiEscape", QY::Code::AntiEscape("&amp;&#91;&#93;&#44;"));
+
+	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::Face", QY::Code::Face(1));
+	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::At", QY::Code::At(10001));
+	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::At", QY::Code::At(10001, false));
+	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::At", QY::Code::At(-1));
+	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::LocalImage", QY::Code::LocalImage("E:\\robot\\image\\1.jpg"));
+	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::OnlineImage", QY::Code::OnlineImage("http://dwz.cn/2ZJkzQ"));
+	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::FlashPic", QY::Code::FlashPic("E:\\robot\\image,\\1.jpg"));
+	//QY::addLog::Debug(QY::getRandomLoginQQ(), "Code::Record", QY::Code::Record("E:\\robot\\record\\1.amr"));
+
+	/*
+	// 测试日志函数
+	QY::addLog::Debug(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
+	QY::addLog::Infos::Success(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
+	QY::addLog::Infos::Fail(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
+	QY::addLog::Infos::Receive(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
+	QY::addLog::Infos::Send(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
+	QY::addLog::Warning(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
+	QY::addLog::Error(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
+	QY::addLog::Fatal(QY::getRandomLoginQQ(), "AuthCode", std::to_string(QY::getAuthCode()).c_str());
+	*/
+
+	// 获取应用目录
+	//QY::addLog::Debug(QY::getRandomLoginQQ(), "getAppDirectory", QY::getAppDirectory());
+	// 获取框架名
+	//QY::addLog::Debug(QY::getRandomLoginQQ(), "getFrameName", QY::getFrameName());
+
+	// 机器人QQ列表(含在线状态)
+	//QY::Type::LoginQQList rList; 
+	//QY::getLoginQQList(true, rList);
+
+	INT64List rList; // 机器人QQ列表
+	QY::getLoginQQList(rList);
+	for(size_t i = 0; i < rList.size(); i++) {
+		// 获取在线状态
+		//QY::addLog::Debug(rList[i], to_string(rList[i]), to_string(QY::getFrameAccountState(rList[i])));
+
+		// 获取机器人昵称
+		//QY::addLog::Debug(rList[i], to_string(rList[i]), QY::getLoginQQName(rList[i]));
+
+		// 获取Cookies、CsrfToken、指定域名Cookies
+		//QY::addLog::Debug(rList[i], "getCookies", QY::getCookies(rList[i]));
+		//QY::addLog::Debug(rList[i], "getCsrfToken", to_string(QY::getCsrfToken(rList[i])));
+		//QY::addLog::Debug(rList[i], "getDomainCookies", QY::getDomainCookies(rList[i]));
+
+
+		// 输出讨论组列表
+		QY::Type::DiscussList disList;
+		if(QY::getDiscussList(rList[i], disList)) {
+			for(size_t j = 0; j < disList.size(); j++) {
+				// 只是为了在不警告的情况下跳过执行
+				if(j == 0) break;
+				QY::addLog::Debug(rList[i], "createUin", to_string(disList[j].createUin));
+				if(disList[j].createUin != rList[i]) {
+					// 退出讨论组
+					//QY::setDiscussExit(rList[i], disList[j].id);
+				}
+				else {
+					// 移除讨论组成员
+					//QY::setDiscussMembersKick(rList[i], disList[j].id, 10001);
+				}
+
+				// 测试发送消息
+				//QY::sendDiscussMsg(rList[i], disList[j].id, "123");
+				//QY::sendDiscussTmpMsg(rList[i], disList[j].id, 12345, "123");
+
+				// 输出讨论组资料
+				QY::addLog::Debug(rList[i], "id", to_string(disList[j].id));
+				QY::addLog::Debug(rList[i], "name", disList[j].name);
+				QY::addLog::Debug(rList[i], "nameBuffer", QY::convertUtf8ToAnsi(disList[i].nameBuffer));
+				QY::addLog::Debug(rList[i], "createTimeStamp", to_string(disList[j].createTimeStamp));
+				QY::addLog::Debug(rList[i], "createUin", to_string(disList[j].createUin));
+				QY::addLog::Debug(rList[i], "infoSeq", to_string(disList[j].infoSeq));
+				QY::addLog::Debug(rList[i], "lastInfoTimeStamp", to_string(disList[j].lastInfoTimeStamp));
+				QY::addLog::Debug(rList[i], "msgSeq", to_string(disList[j].msgSeq));
+				QY::addLog::Debug(rList[i], "lastMsgTimeStamp", to_string(disList[j].lastMsgTimeStamp));
+				QY::addLog::Debug(rList[i], "memberNum", to_string(disList[j].memberNum));
+				QY::addLog::Debug(rList[i], "flag", to_string(disList[j].flag));
+				QY::addLog::Debug(rList[i], "inheritOwnerUin", to_string(disList[j].inheritOwnerUin));
+				QY::addLog::Debug(rList[i], "groupID", to_string(disList[j].groupID));
+				QY::addLog::Debug(rList[i], "groupTempID", to_string(disList[j].groupTempID));
+				QY::addLog::Debug(rList[i], "confMeetingOrigin", to_string(disList[j].confMeetingOrigin));
+				QY::addLog::Debug(rList[i], "qidianConfType", to_string(disList[j].qidianConfType));
+				QY::addLog::Debug(rList[i], "confMeetingOption", to_string(disList[j].confMeetingOption));
+			}
+		}
+
+		//QY::setGroupAdd(rList[i], 10001, "测试加群");
+
+		// 输出群列表
+		QY::Type::GroupList gList;
+		if(QY::getGroupList(rList[i], gList)) {
+			for(size_t j = 0; j < gList.size(); j++) {
+				//QY::sendGroupMsg(rList[i], gList[j].id, "123");
+				//QY::sendGroupTmpMsg(rList[i], gList[j].id, 12345, "123");
+				//continue;
+
+				//QY::addLog::Debug(rList[i], "GroupID", to_string(gList[j].id));
+				//QY::addLog::Debug(rList[i], "Name", gList[j].name);
+				//QY::addLog::Debug(rList[i], "TempGroupID", to_string(gList[j].tempID));
+				//QY::addLog::Debug(rList[i], to_string(gList[j].id), gList[j].name);
+
+
+				// 输出群资料
+				QY::Type::GroupInfo gInfo;
+				QY::getGroupInfo(rList[i], gList[j].id, gInfo);
+
+				QY::addLog::Debug(rList[i], to_string(gInfo.id), to_string(gInfo.ownerUin));
+				QY::addLog::Debug(rList[i], to_string(gInfo.id), to_string(gInfo.createTimeStamp));
+				QY::addLog::Debug(rList[i], to_string(gInfo.id), to_string(gInfo.memberNum));
+				QY::addLog::Debug(rList[i], to_string(gInfo.id), to_string(gInfo.maxMemberNum));
+				QY::addLog::Debug(rList[i], to_string(gInfo.id), to_string(gInfo.level));
+				QY::addLog::Debug(rList[i], to_string(gInfo.id), gInfo.name);
+				QY::addLog::Debug(rList[i], to_string(gInfo.id), QY::convertUtf8ToAnsi(gInfo.nameBuffer));
+				QY::addLog::Debug(rList[i], to_string(gInfo.id), gInfo.introduction);
+				QY::addLog::Debug(rList[i], to_string(gInfo.id), QY::convertUtf8ToAnsi(gInfo.introductionBuffer));
+
+				break;
+
+				// 如果机器人是群主
+				if(gInfo.ownerUin == rList[i]) {
+					/*
+					// 设置群临时会话开关
+					QY::setGroupPrivateSession(rList[i], gInfo.id, false);
+					QY::setGroupPrivateSession(rList[i], gInfo.id, true);
+					QY::setGroupPrivateSession(rList[i], gInfo.id, false);
+
+					// 设置群多人聊天开关
+					QY::setGroupManyPeopleChat(rList[i], gInfo.id, false);
+					QY::setGroupManyPeopleChat(rList[i], gInfo.id, true);
+					QY::setGroupManyPeopleChat(rList[i], gInfo.id, false);
+					*/
+
+					// 退群(一定失败，因为是群主)
+					//QY::setGroupExit(rList[i], gInfo.id, false);
+					// 解散群(PC端似乎不允许使用)
+					//QY::setGroupExit(rList[i], gInfo.id, true);
+				}
+
+
+				// 输出群管理员列表
+				QY::Type::GroupAdminList gAdminList;
+				if(QY::getGroupAdminList(rList[i], gList[j].id, gAdminList)) {
+					string card;
+					for(size_t k = 0; k < gAdminList.size(); k++) {
+						QY::getGroupMemberCard(rList[i], gList[j].id, gAdminList[k].uin, card, true);
+						QY::addLog::Debug(
+							rList[i],
+							to_string(gList[j].id),
+							to_string(gAdminList[k].uin) + " " \
+							+ to_string(gAdminList[k].permission) + " " \
+							// + QY::getGroupMemberCard(rList[i], gList[j].id, gAdminList[k].uin)
+							+ card
+						);
+					}
+				}
+
+
+				/*
+				// 输出群成员列表
+				QY::Type::GroupMemberList gMemberList;
+				if(QY::getGroupMemberList(rList[i], gList[j].id, gMemberList)) {
+					// 使用ofstream时，记得把函数上面的「 #include <fstream> 」解除注释
+					std::ofstream o(std::to_string(gList[j].id) + ".log");
+					for(size_t k = 0; k < gMemberList.size(); k++) {
+						o << gMemberList[k].uin << " ";
+						o << gMemberList[k].nick << " ";
+						o << gMemberList[k].card << " ";
+						o << gMemberList[k].sex << " ";
+						o << gMemberList[k].age << " ";
+						o << gMemberList[k].age << " ";
+						o << gMemberList[k].joinTimeStamp << " ";
+						o << gMemberList[k].lastSpeakTimeStamp << " ";
+						o << gMemberList[k].gLevelName << " ";
+						o << gMemberList[k].permission << " ";
+						o << gMemberList[k].sTitle << " ";
+						o << gMemberList[k].sTitleValidPeriod << " ";
+						o << (int)gMemberList[k].isBadMember << " ";
+						o << (int)gMemberList[k].allowChangeCard << " ";
+						o << std::endl;
+					}
+					o.close();
+
+				}
+				*/
+
+			}
+		}
+
+		continue;
+
+		// 取机器人自己的概要资料
+		QY::Type::QQSummaryInfo QQSummaryInfo;
+		if(QY::getQQSummaryInfo(rList[i], rList[i], QQSummaryInfo)) {
+			QY::addLog::Debug(rList[i], "QQID", to_string(QQSummaryInfo.uin));
+			QY::addLog::Debug(rList[i], "Sex", to_string(QQSummaryInfo.sex));
+			QY::addLog::Debug(rList[i], "Nick", QQSummaryInfo.nick);
+			QY::addLog::Debug(rList[i], "Signature", QQSummaryInfo.signature);
+			QY::addLog::Debug(rList[i], "Birthday", QQSummaryInfo.birthday);
+			QY::addLog::Debug(rList[i], "Age", to_string(QQSummaryInfo.age));
+			QY::addLog::Debug(rList[i], "Level", to_string(QQSummaryInfo.level));
+			QY::addLog::Debug(rList[i], "qAge", to_string(QQSummaryInfo.qAge));
+			QY::addLog::Debug(rList[i], "LikeCount", to_string(QQSummaryInfo.likeCount));
+			QY::addLog::Debug(rList[i], "IsLike", to_string(QQSummaryInfo.isLike));
+		}
+
+		// 输出好友列表
+		QY::Type::FriendList friendList;
+		if(QY::getFriendList(rList[i], friendList)) {
+			for(size_t i = 0; i < friendList.size(); i++) {
+				QY::addLog::Debug(rList[i], "Uin", std::to_string(friendList[i].uin).c_str());
+				QY::addLog::Debug(rList[i], "Nick", friendList[i].nick);
+			}
+		}
+	}
 }
 
 #undef QYEVENT

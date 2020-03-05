@@ -1,80 +1,85 @@
-#pragma once
+ï»¿#pragma once
 #include "logInfo.h"
 
 class QYLOG
 {	
 	private:
-		/* ÈÕÖ¾³£Á¿ */
-		static const auto LOG_DEBUG = 0;			//µ÷ÊÔ			°µµ­µÄ»ÒÉ«(DimGray)			6908265   #696969  RGB(105,105,105)
-		static const auto LOG_INFO = 10;			//ĞÅÏ¢			´¿ºÚ(Black)					0         #000000  RGB(0,0,0)
-		static const auto LOG_WARNING = 20;			//¾¯¸æ			Éî³ÈÉ«(DarkOrange)			36095     #FF8C00  RGB(255,140,0)
-		static const auto LOG_ERROR = 30;			//´íÎó			Éî·ÛÉ«(DeepPink)				9639167   #FF1493  RGB(255,20,147)
-		static const auto LOG_FATAL = 40;			//ÖÂÃü´íÎó		´¿ºì(Red)					255       #FF0000  RGB(255,0,0)
+		/* æ—¥å¿—å¸¸é‡ */
+		//	è°ƒè¯•			æš—æ·¡çš„ç°è‰²(DimGray)		6908265   #696969	RGB(105,105,105)
+		static const auto LOG_DEBUG		=	0;
+		//	ä¿¡æ¯			çº¯é»‘(Black)				0         #000000	RGB(0,0,0)
+		static const auto LOG_INFO		=	10;
+		//	è­¦å‘Š			æ·±æ©™è‰²(DarkOrange)		36095     #FF8C00	RGB(255,140,0)
+		static const auto LOG_WARNING	=	20;
+		//	é”™è¯¯			æ·±ç²‰è‰²(DeepPink)			9639167   #FF1493	RGB(255,20,147)
+		static const auto LOG_ERROR		=	30;
+		//	è‡´å‘½é”™è¯¯		çº¯çº¢(Red)				255       #FF0000	RGB(255,0,0)
+		static const auto LOG_FATAL		=	40;
 
 		/** 
-		 * Ìí¼ÓÈÕÖ¾
-		 * ²»½¨ÒéÖ±½ÓÊ¹ÓÃ±¾·½·¨
-		 * @param	INT32	 level		ÈÕÖ¾µÈ¼¶£¬ÇëÓÃ LOG_ ¿ªÍ·µÄ¶ÔÓ¦³£Á¿
-		 * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-		 * @param	string	 event		ÊÂ¼şÃû³Æ
-		 * @param	string	 contents	ÊÂ¼şÄÚÈİ
-		 * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+		 * æ·»åŠ æ—¥å¿—
+		 * ä¸å»ºè®®ç›´æ¥ä½¿ç”¨æœ¬æ–¹æ³•
+		 * @param	INT32				level		æ—¥å¿—ç­‰çº§ï¼Œè¯·ç”¨ LOG_ å¼€å¤´çš„å¯¹åº”å¸¸é‡
+		 * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+		 * @param	string | wstring	eventName	äº‹ä»¶åç§°
+		 * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+		 * @return	INT32				unknown		å›ºå®šè¿”å›0
 		 */
-		static INT32 addLog(INT32 level, INT64 robotID, string event, string contents);
+		static INT32 addLog(INT32 level, INT64 robotID, nstring eventName, nstring contents);
 
 	public:
 		/**
-		 * Ìí¼Óµ÷ÊÔÈÕÖ¾
-		 * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-		 * @param	string	 event		ÊÂ¼şÃû³Æ
-		 * @param	string	 contents	ÊÂ¼şÄÚÈİ
-		 * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+		 * æ·»åŠ è°ƒè¯•æ—¥å¿—
+		 * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+		 * @param	string | wstring	eventName	äº‹ä»¶åç§°
+		 * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+		 * @return	INT32				unknown		å›ºå®šè¿”å›0
 		 */
-		static INT32 Debug(INT64 robotID, string event, string contents);
+		static INT32 Debug(INT64 robotID, nstring eventName, nstring contents);
 
 
 		/**
-		 * Ìí¼ÓĞÅÏ¢ÈÕÖ¾
-		 * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-		 * @param	string	 event		ÊÂ¼şÃû³Æ
-		 * @param	string	 contents	ÊÂ¼şÄÚÈİ
-		 * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+		 * æ·»åŠ ä¿¡æ¯æ—¥å¿—
+		 * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+		 * @param	string | wstring	eventName	äº‹ä»¶åç§°
+		 * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+		 * @return	INT32				unknown		å›ºå®šè¿”å›0
 		 */
-		static INT32 Info(INT64 robotID, string event, string contents);
+		static INT32 Info(INT64 robotID, nstring eventName, nstring contents);
 
 
 		friend class QYLOG_INFO;
-		typedef QYLOG_INFO Infos; // ĞÅÏ¢ÀàÈÕÖ¾×ÓÀà
+		typedef QYLOG_INFO Infos; // ä¿¡æ¯ç±»æ—¥å¿—å­ç±»
 
 
 		/**
-		 * Ìí¼Ó¾¯¸æÈÕÖ¾
-		 * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-		 * @param	string	 event		ÊÂ¼şÃû³Æ
-		 * @param	string	 contents	ÊÂ¼şÄÚÈİ
-		 * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+		 * æ·»åŠ è­¦å‘Šæ—¥å¿—
+		 * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+		 * @param	string | wstring	eventName	äº‹ä»¶åç§°
+		 * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+		 * @return	INT32				unknown		å›ºå®šè¿”å›0
 		 */
-		static INT32 Warning(INT64 robotID, string event, string contents);
+		static INT32 Warning(INT64 robotID, nstring eventName, nstring contents);
 
 
 		/**
-		 * Ìí¼Ó´íÎóÈÕÖ¾
-		 * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-		 * @param	string	 event		ÊÂ¼şÃû³Æ
-		 * @param	string	 contents	ÊÂ¼şÄÚÈİ
-		 * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+		 * æ·»åŠ é”™è¯¯æ—¥å¿—
+		 * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+		 * @param	string | wstring	eventName	äº‹ä»¶åç§°
+		 * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+		 * @return	INT32				unknown		å›ºå®šè¿”å›0
 		 */
-		static INT32 Error(INT64 robotID, string event, string contents);
+		static INT32 Error(INT64 robotID, nstring eventName, nstring contents);
 
 
 		/**
-		 * Ìí¼ÓÖÂÃü´íÎóÈÕÖ¾
-		 * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
-		 * @param	string	 event		ÊÂ¼şÃû³Æ
-		 * @param	string	 contents	ÊÂ¼şÄÚÈİ
-		 * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+		 * æ·»åŠ è‡´å‘½é”™è¯¯æ—¥å¿—
+		 * @param	INT64				robotID		æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+		 * @param	string | wstring	eventName	äº‹ä»¶åç§°
+		 * @param	string | wstring	contents	äº‹ä»¶å†…å®¹
+		 * @return	INT32				unknown		å›ºå®šè¿”å›0
 		 */
-		static INT32 Fatal(INT64 robotID, string event, string contents);
+		static INT32 Fatal(INT64 robotID, nstring eventName, nstring contents);
 
 
 };

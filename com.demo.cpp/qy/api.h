@@ -11,6 +11,7 @@ class QYAPI
 		static INT32	authCode;		//应用标识，用于调用API
 		static INT32	protocolType;	//协议类型，1/安卓QQ协议 2/PCQQ协议
 		static string	appDirectory;	//框架分配的唯一数据存放目录
+		static INT64	robotID;		//静态
 	
 	public:
 		static const auto EVENT_IGNORE = 0;				//事件_忽略
@@ -34,6 +35,7 @@ class QYAPI
 		 * @return	CSTRING		Json文本
 		 */
 		static CSTRING getJsonInfo();
+
 		
 		/**
 		 * 置AuthCode
@@ -73,9 +75,9 @@ class QYAPI
 
 		/**
 		 * 取框架名
-		 * @return	string		框架名
+		 * @return	nstring		框架名
 		 */
-		static string getFrameName();
+		static nstring getFrameNameA();
 
 		/*
 		 * 置应用自停用
@@ -243,23 +245,17 @@ class QYAPI
 
 		/**
 		 * 编码_UTF8转Ansi
-		 * @param	BYTES		contents		UTF-8编码文本
-		 * @return	CSTRING		GB2312编码文本
+		 * @param	nstring		contents		UTF-8编码文本
+		 * @return	nstring		GB2312编码文本
 		 */
-		static CSTRING convertUtf8ToAnsi(BYTES contents);
-		/**
-		 * 编码_UTF8转Ansi
-		 * @param	string		contents		UTF-8编码文本
-		 * @return	CSTRING		GB2312编码文本
-		 */
-		static CSTRING convertUtf8ToAnsi(string contents);
+		static nstring convertUtf8ToAnsi(nstring contents);
 
 		/**
 		 * 编码_GB2312转UTF8
-		 * @param	string		contents	GB2312编码文本
-		 * @return	BYTES		UTF-8编码文本
+		 * @param	nstring		contents	GB2312编码文本
+		 * @return	nstring		UTF-8编码文本
 		 */
-		static BYTES convertAnsiToUtf8(string contents);
+		static nstring convertAnsiToUtf8(nstring contents);
 
 		/**
 		 * 解析到匿名信息
@@ -311,21 +307,21 @@ class QYAPI
 
 		/*
 		 * 发送好友消息
-		 * @param	INT64	 robotID	使用的机器人QQ
-		 * @param	INT64	 uin		目标QQ
-		 * @param	string	 msg		消息内容
-		 * @return	INT32	 unknown	(推测)状态码
+		 * @param	INT64				robotID		使用的机器人QQ
+		 * @param	INT64				uin			目标QQ
+		 * @param	string | wstring	msg			消息内容
+		 * @return	INT32				unknown		(推测)状态码
 		 */
-		static INT32 sendFriendMsg(INT64 robotID, INT64 uin, string msg);
+		static INT32 sendFriendMsg(INT64 robotID, INT64 uin, nstring msg);
 
 		/*
 		 * 发送群消息
-		 * @param	INT64	 robotID	使用的机器人QQ
-		 * @param	INT64	 dwGroup	目标群
-		 * @param	string	 msg		消息内容
-		 * @return	INT32	 unknown	(推测)状态码
+		 * @param	INT64				robotID		使用的机器人QQ
+		 * @param	INT64				dwGroup		目标群
+		 * @param	string | wstring	msg			消息内容
+		 * @return	INT32				unknown		(推测)状态码
 		 */
-		static INT32 sendGroupMsg(INT64 robotID, INT64 dwGroup, string msg);
+		static INT32 sendGroupMsg(INT64 robotID, INT64 dwGroup, nstring msg);
 
 		/*
 		 * 发送群临时消息

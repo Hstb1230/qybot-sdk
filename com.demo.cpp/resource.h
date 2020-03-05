@@ -1,6 +1,6 @@
-//{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ Éú³ÉµÄ°üº¬ÎÄ¼ş¡£
-// ¹© com.demo.cpp.rc Ê¹ÓÃ
+ï»¿//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ ç”Ÿæˆçš„åŒ…å«æ–‡ä»¶ã€‚
+// ä¾› com.demo.cpp.rc ä½¿ç”¨
 //
 #define IDR_JSON1                       101
 
@@ -16,19 +16,13 @@
 #endif
 
 /*
-	ÒÔÏÂ¶¼ÊÇ»ñÈ¡×ÊÔ´ÎÄ¼ş·½·¨
-	´øWµÄÊÇUnicodeÏÂÓÃµÄ
-	LPCSTRÊÇ´«ÈëÆÕÍ¨×Ö·û´®Ê±µ÷ÓÃ
-	LPCWSTRÊÇ´«Èë¿í×Ö·û´®Ê±µ÷ÓÃ
-	GetResourceFileDataÊÇËÄ¸öº¯Êı¶¼»áµ÷ÓÃµÄºóĞøº¯Êı
+	ä»¥ä¸‹éƒ½æ˜¯è·å–èµ„æºæ–‡ä»¶æ–¹æ³•
+	å¸¦Wçš„æ˜¯Unicodeä¸‹ç”¨çš„
+	GetResourceFileDataæ˜¯å››ä¸ªå‡½æ•°éƒ½ä¼šè°ƒç”¨çš„åç»­å‡½æ•°
 */
-const char * GetResourceFileW(LPCSTR lpType, int lpName);
+const char * GetResourceFileW(nstring lpType, int lpName);
 
-const char * GetResourceFileW(LPCWSTR lpType, int lpName);
-
-const char * GetResourceFileA(LPCWSTR lpType, int lpName);
-
-const char * GetResourceFileA(LPCSTR lpType, int lpName);
+const char * GetResourceFileA(nstring lpType, int lpName);
 
 const char * GetResourceFileData(HMODULE hModule, HRSRC hRsrc);
 
