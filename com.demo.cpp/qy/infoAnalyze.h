@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class QYInfoAnalyze
 {
@@ -20,40 +20,40 @@ class QYInfoAnalyze
 			this->clear();
 		}
 
-		/* Çå¿Õ */
+		/* æ¸…ç©º */
 		void clear();
 
 		/**
-		 * Ğ´Èë
-		 * @param	string	msg		ÏûÏ¢´®
-		 * @return	bool	Ğ´Èë½á¹û
+		 * å†™å…¥
+		 * @param	string	msg		æ¶ˆæ¯ä¸²
+		 * @return	bool	å†™å…¥ç»“æœ
 		 */
 		bool write(string msg);
 
 		/**
-		 * Ìí¼Óµ¥¸ö
+		 * æ·»åŠ å•ä¸ª
 		 * @param	string	key
 		 * @param	string	value
 		 */
 		void addSingle(string key, string value);
 
 		/**
-		 * ¶ÁÈ¡
+		 * è¯»å–
 		 * @param	string	key
 		 * @return	string	value
 		 */
 		string read(string key);
 
 		/**
-		 * Êä³ö
-		 * @return	string	ĞÅÏ¢ÄÚÈİ
+		 * è¾“å‡º
+		 * @return	string	ä¿¡æ¯å†…å®¹
 		 */
 		string print();
 
 		/**
-		 * É¾³ıµ¥¸ö
+		 * åˆ é™¤å•ä¸ª
 		 * @param	string	key
-		 * @return	bool	É¾³ı½á¹û
+		 * @return	bool	åˆ é™¤ç»“æœ
 		 */
 		bool delSingle(string key);
 };

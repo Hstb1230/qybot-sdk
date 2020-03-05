@@ -1,63 +1,63 @@
-#pragma once
-// LQÂë
+ï»¿#pragma once
+// LQç 
 class QYCODE
 {
 	public:
 		/**
-		 * ×ªÒå
-		 * @param	string	text			Ô­ÎÄ±¾
-		 * @param	bool	escapeComma		×ªÒå¶ººÅ£¬Ä¬ÈÏ²»×ªÒå
-		 * @return	string	×ªÒå½á¹û
+		 * è½¬ä¹‰
+		 * @param	string	text			åŸæ–‡æœ¬
+		 * @param	bool	escapeComma		è½¬ä¹‰é€—å·ï¼Œé»˜è®¤ä¸è½¬ä¹‰
+		 * @return	string	è½¬ä¹‰ç»“æœ
 		 */
 		static string Escape(string text, bool escapeComma = false);
 
 		/**
-		 * ·´×ªÒå
-		 * @param	string	text		ĞèÒª·´×ªÒåµÄÎÄ±¾
-		 * @return	string	·´×ªÒå½á¹û
+		 * åè½¬ä¹‰
+		 * @param	string	text		éœ€è¦åè½¬ä¹‰çš„æ–‡æœ¬
+		 * @return	string	åè½¬ä¹‰ç»“æœ
 		 */
 		static string AntiEscape(string text);
 
 		/**
-		 * ·¢ËÍ±íÇé(face)
-		 * @param	INT32	faceID		±íÇéID
-		 * @return	string	LQÂë_±íÇé
+		 * å‘é€è¡¨æƒ…(face)
+		 * @param	INT32	faceID		è¡¨æƒ…ID
+		 * @return	string	LQç _è¡¨æƒ…
 		 */
 		static string Face(INT32 faceID);
 
 		/**
-		 * @Ä³ÈË(at) - ½öÖ§³ÖÈº
-		 * @param	INT64	uin			ĞèÒª@µÄ¶ÔÏó£¬-1ÎªÈ«Ìå³ÉÔ±
-		 * @param	bool	needSpace	Atºó¼Ó¿Õ¸ñ£¬Ä¬ÈÏÎªTrue£¬¿ÉÊ¹At¸ü¹æ·¶ÃÀ¹Û
-		 * @return	string	LQÂë_AT
+		 * @æŸäºº(at) - ä»…æ”¯æŒç¾¤
+		 * @param	INT64	uin			éœ€è¦@çš„å¯¹è±¡ï¼Œ-1ä¸ºå…¨ä½“æˆå‘˜
+		 * @param	bool	needSpace	AtååŠ ç©ºæ ¼ï¼Œé»˜è®¤ä¸ºTrueï¼Œå¯ä½¿Atæ›´è§„èŒƒç¾è§‚
+		 * @return	string	LQç _AT
 		 */
 		static string At(INT64 uin, bool needSpace = true);
 
 		/**
-		 * ·¢ËÍ±¾µØÍ¼Æ¬
-		 * @param	string	localPath	Í¼Æ¬Â·¾¶£¬ÇëÌîĞ´È«Â·¾¶¡£Àı E:\robot\image\1.jpg 
-		 * @return	string	LQÂë_Í¼Æ¬
+		 * å‘é€æœ¬åœ°å›¾ç‰‡
+		 * @param	string	localPath	å›¾ç‰‡è·¯å¾„ï¼Œè¯·å¡«å†™å…¨è·¯å¾„ã€‚ä¾‹ E:\robot\image\1.jpg 
+		 * @return	string	LQç _å›¾ç‰‡
 		 */
 		static string LocalImage(string localPath);
 
 		/**
-		 * ·¢ËÍÍøÂçÍ¼Æ¬
-		 * @param	string	url		ÍøÂçÍ¼Æ¬Â·¾¶£¬ÇëÌîĞ´ÍøÂçÍ¼Æ¬µÄÍøÖ·¡£ Àı http://dwz.cn/2ZJkzQ
-		 * @return	string	LQÂë_Í¼Æ¬
+		 * å‘é€ç½‘ç»œå›¾ç‰‡
+		 * @param	string	url		ç½‘ç»œå›¾ç‰‡è·¯å¾„ï¼Œè¯·å¡«å†™ç½‘ç»œå›¾ç‰‡çš„ç½‘å€ã€‚ ä¾‹ http://dwz.cn/2ZJkzQ
+		 * @return	string	LQç _å›¾ç‰‡
 		 */
 		static string OnlineImage(string url);
 
 		/**
-		 * ·¢ËÍÉÁÕÕ
-		 * @param	string	localPath	Í¼Æ¬Â·¾¶£¬ÇëÌîĞ´È«Â·¾¶¡£Àı E:\robot\image\1.jpg
-		 * @return	string	LQÂë_ÉÁÕÕ
+		 * å‘é€é—ªç…§
+		 * @param	string	localPath	å›¾ç‰‡è·¯å¾„ï¼Œè¯·å¡«å†™å…¨è·¯å¾„ã€‚ä¾‹ E:\robot\image\1.jpg
+		 * @return	string	LQç _é—ªç…§
 		 */
 		static string FlashPic(string localPath);
 
 		/**
-		 * ·¢ËÍ±¾µØÓïÒô
-		 * @param	string	localPath	ÓïÒôÂ·¾¶£¬ÇëÌîĞ´È«Â·¾¶¡£Àı E:\robot\record\1.amr
-		 * @return	string	LQÂë_ÓïÒô
+		 * å‘é€æœ¬åœ°è¯­éŸ³
+		 * @param	string	localPath	è¯­éŸ³è·¯å¾„ï¼Œè¯·å¡«å†™å…¨è·¯å¾„ã€‚ä¾‹ E:\robot\record\1.amr
+		 * @return	string	LQç _è¯­éŸ³
 		 */
 		static string Record(string localPath);
 

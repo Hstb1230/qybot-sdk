@@ -1,4 +1,4 @@
-// ´ËÎÄ¼şÊ¹ÓÃÓÚ Pack Óë UnPack Àà
+ï»¿// æ­¤æ–‡ä»¶ä½¿ç”¨äº Pack ä¸ UnPack ç±»
 #pragma once
 
 BYTE Bin2Byte(BYTES bin);

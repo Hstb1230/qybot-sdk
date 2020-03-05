@@ -1,20 +1,20 @@
-#include "../stdafx.h"
+ï»¿#include "../stdafx.h"
 #include "../utils/utils.h"
 #include "infoAnalyze.h"
 
-/* Çå¿Õ */
+/* æ¸…ç©º */
 void QYInfoAnalyze::clear()
 {
 	this->infoList.clear();
 }
 
 /**
- * Ğ´Èë
- * @param	string	msg		ÏûÏ¢´®
- * @return	bool	Ğ´Èë½á¹û
+ * å†™å…¥
+ * @param	string	msg		æ¶ˆæ¯ä¸²
+ * @return	bool	å†™å…¥ç»“æœ
  */
 bool QYInfoAnalyze::write(
-	string msg	// ÏûÏ¢´®
+	string msg	// æ¶ˆæ¯ä¸²
 )
 {
 	string source = base64_decode(msg);
@@ -39,7 +39,7 @@ bool QYInfoAnalyze::write(
 }
 
 /**
- * Ìí¼Óµ¥¸ö
+ * æ·»åŠ å•ä¸ª
  * @param	string	key
  * @param	string	value
  */
@@ -61,7 +61,7 @@ void QYInfoAnalyze::addSingle(
 }
 
 /**
- * ¶ÁÈ¡
+ * è¯»å–
  * @param	string	key
  * @return	string	value
  */
@@ -78,8 +78,8 @@ string QYInfoAnalyze::read(
 }
 
 /**
- * Êä³ö
- * @return	string	ĞÅÏ¢ÄÚÈİ
+ * è¾“å‡º
+ * @return	string	ä¿¡æ¯å†…å®¹
  */
 string QYInfoAnalyze::print()
 {
@@ -101,9 +101,9 @@ string QYInfoAnalyze::print()
 }
 
 /**
- * É¾³ıµ¥¸ö
+ * åˆ é™¤å•ä¸ª
  * @param	string	key
- * @return	bool	É¾³ı½á¹û
+ * @return	bool	åˆ é™¤ç»“æœ
  */
 bool QYInfoAnalyze::delSingle(
 	string key

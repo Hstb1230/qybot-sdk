@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 /* wstring转string */
 std::string wstringToAnsi(std::wstring wText);

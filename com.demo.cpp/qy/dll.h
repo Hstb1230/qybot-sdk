@@ -1,6 +1,6 @@
-// ´ËÎÄ¼ş¶¨ÒåAPIÈë¿Ú
-// ÇëÎğËæÒâ¸Ä¶¯
-// Ó¦ÔÚQYÀàÖĞÒıÓÃ
+ï»¿// æ­¤æ–‡ä»¶å®šä¹‰APIå…¥å£
+// è¯·å‹¿éšæ„æ”¹åŠ¨
+// åº”åœ¨QYç±»ä¸­å¼•ç”¨
 #pragma once
 #pragma comment(lib, "dll")
 
@@ -10,491 +10,491 @@
 
 
 /**
- * Ìí¼ÓÈÕÖ¾
- * @param	INT32	 authCode	Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID	»úÆ÷ÈËQQ£¬ÓÃÓÚÇø·Ö¶àºÅµÇÂ¼
- * @param	INT32	 level		ÈÕÖ¾µÈ¼¶£¬ÇëÓÃ LOG_ ¿ªÍ·µÄ¶ÔÓ¦³£Á¿
- * @param	CSTRING	 event		ÊÂ¼şÃû³Æ
- * @param	CSTRING	 contents	ÊÂ¼şÄÚÈİ
- * @return	INT32	 unknown	¹Ì¶¨·µ»Ø0
+ * æ·»åŠ æ—¥å¿—
+ * @param	INT32	 authCode	åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID	æœºå™¨äººQQï¼Œç”¨äºåŒºåˆ†å¤šå·ç™»å½•
+ * @param	INT32	 level		æ—¥å¿—ç­‰çº§ï¼Œè¯·ç”¨ LOG_ å¼€å¤´çš„å¯¹åº”å¸¸é‡
+ * @param	CSTRING	 event		äº‹ä»¶åç§°
+ * @param	CSTRING	 contents	äº‹ä»¶å†…å®¹
+ * @return	INT32	 unknown	å›ºå®šè¿”å›0
  */
 QYAPI(INT) QY_addLog(INT32 authCode, INT64 robotID, INT32 level, CSTRING event, CSTRING contents);
 
 /*
- * È¡¿ò¼ÜÃû
- * @param	INT32	 authCode	Ó¦ÓÃ±êÊ¶
- * @return	CSTRING	 frameName	¿ò¼ÜÃû
+ * å–æ¡†æ¶å
+ * @param	INT32	 authCode	åº”ç”¨æ ‡è¯†
+ * @return	CSTRING	 frameName	æ¡†æ¶å
  */
 QYAPI(CSTRING) QY_getFrameName(INT32 authCode);
 
 /*
- * ÖÃÓ¦ÓÃ×ÔÍ£ÓÃ
- * @param	INT32	authCode	Ó¦ÓÃ±êÊ¶
- * @param	INT64	waitTime	µÈ´ıÊ±¼ä£¬µ¥Î»£ººÁÃë
+ * ç½®åº”ç”¨è‡ªåœç”¨
+ * @param	INT32	authCode	åº”ç”¨æ ‡è¯†
+ * @param	INT64	waitTime	ç­‰å¾…æ—¶é—´ï¼Œå•ä½ï¼šæ¯«ç§’
  * @return	INT32	unknown
  */
 QYAPI(INT32) QY_setAppSelfDiscontinue(INT32 authCode, INT64 waitTime);
 
 /*
- * ÖÃÓ¦ÓÃ×ÔĞ¶ÔØ
- * @param	INT32	authCode	Ó¦ÓÃ±êÊ¶
- * @param	INT64	waitTime	µÈ´ıÊ±¼ä£¬µ¥Î»£ººÁÃë
+ * ç½®åº”ç”¨è‡ªå¸è½½
+ * @param	INT32	authCode	åº”ç”¨æ ‡è¯†
+ * @param	INT64	waitTime	ç­‰å¾…æ—¶é—´ï¼Œå•ä½ï¼šæ¯«ç§’
  * @return	INT32	unknown
  */
 QYAPI(INT32) QY_setAppSelfUninstall(INT32 authCode, INT64 waitTime);
 
 /*
- * È¡Ó¦ÓÃÄ¿Â¼
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @return	CSTRING	 appDirectory	²å¼şÄ¿Â¼
+ * å–åº”ç”¨ç›®å½•
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @return	CSTRING	 appDirectory	æ’ä»¶ç›®å½•
  */
 QYAPI(CSTRING) QY_getAppDirectory(INT32 authCode);
 
 /*
- * È¡µÇÂ¼QQÁĞ±í
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @return	CSTRING	 strLoginQQList	µÇÂ¼QQÁĞ±íÊı¾İ£¬ĞèÒª½âÂë
+ * å–ç™»å½•QQåˆ—è¡¨
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @return	CSTRING	 strLoginQQList	ç™»å½•QQåˆ—è¡¨æ•°æ®ï¼Œéœ€è¦è§£ç 
  */
 QYAPI(CSTRING) QY_getLoginQQList(INT32 authCode);
 
 /*
- * È¡¿ò¼ÜÕËºÅ×´Ì¬
- * @param	INT32	authCode	Ó¦ÓÃ±êÊ¶
- * @param	INT64	robotID		Òª²éÑ¯µÄÕËºÅ
- * @return	INT32	ÕËºÅ×´Ì¬
+ * å–æ¡†æ¶è´¦å·çŠ¶æ€
+ * @param	INT32	authCode	åº”ç”¨æ ‡è¯†
+ * @param	INT64	robotID		è¦æŸ¥è¯¢çš„è´¦å·
+ * @return	INT32	è´¦å·çŠ¶æ€
  */
 QYAPI(INT32) QY_getFrameAccountState(INT32 authCode, INT64 robotID);
 
 /*
- * È¡µÇÂ¼êÇ³Æ
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Éæ¼°µÄ»úÆ÷ÈËQQ
- * @return	CSTRING	 loginNick		êÇ³Æ
+ * å–ç™»å½•æ˜µç§°
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		æ¶‰åŠçš„æœºå™¨äººQQ
+ * @return	CSTRING	 loginNick		æ˜µç§°
  */
 QYAPI(CSTRING) QY_getLoginNick(INT32 authCode, INT64 robotID);
 
 /*
- * È¡cookies
- * ´Ë½Ó¿ÚĞèÒªÑÏ¸ñÊÚÈ¨
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Éæ¼°µÄ»úÆ÷ÈËQQ
+ * å–cookies
+ * æ­¤æ¥å£éœ€è¦ä¸¥æ ¼æˆæƒ
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		æ¶‰åŠçš„æœºå™¨äººQQ
  * @return	CSTRING	 cookies		cookies
  */
 QYAPI(CSTRING) QY_getCookies(INT32 authCode, INT64 robotID);
 
 /*
- * È¡csrfToken
- * ´Ë½Ó¿ÚĞèÒªÑÏ¸ñÊÚÈ¨
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Éæ¼°µÄ»úÆ÷ÈËQQ
+ * å–csrfToken
+ * æ­¤æ¥å£éœ€è¦ä¸¥æ ¼æˆæƒ
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		æ¶‰åŠçš„æœºå™¨äººQQ
  * @return	INT32	 csrfToken		csrfToken
  */
 QYAPI(INT32) QY_getCsrfToken(INT32 authCode, INT64 robotID);
 
 /*
- * ¸ù¾İÓòÃûÈ¡cookie
- * ´Ë½Ó¿ÚĞèÒªÑÏ¸ñÊÚÈ¨
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Éæ¼°µÄ»úÆ÷ÈËQQ
- * @param	CSTRING	 domain			Òª»ñÈ¡µÄÓòÃû£¬http://qun.qq.com »ò http://qun.qzone.qq.com 
- * @return	CSTRING	 cookie			µÇÂ¼Ö¸¶¨ÓòÃûÔÚÌø×ª³É¹¦ºóµÄcookies
+ * æ ¹æ®åŸŸåå–cookie
+ * æ­¤æ¥å£éœ€è¦ä¸¥æ ¼æˆæƒ
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		æ¶‰åŠçš„æœºå™¨äººQQ
+ * @param	CSTRING	 domain			è¦è·å–çš„åŸŸåï¼Œhttp://qun.qq.com æˆ– http://qun.qzone.qq.com 
+ * @return	CSTRING	 cookie			ç™»å½•æŒ‡å®šåŸŸååœ¨è·³è½¬æˆåŠŸåçš„cookies
  */
 QYAPI(CSTRING) QY_getDomainCookie(INT32 authCode, INT64 robotID, CSTRING domain);
 
 /*
- * È¡ÈºÁĞ±í
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Òª²éÑ¯µÄ»úÆ÷ÈËQQ
- * @return	CSTRING	 strGroupList	ÈºÁĞ±íÊı¾İ£¬ĞèÒª½âÂë
+ * å–ç¾¤åˆ—è¡¨
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+ * @return	CSTRING	 strGroupList	ç¾¤åˆ—è¡¨æ•°æ®ï¼Œéœ€è¦è§£ç 
  */
 QYAPI(CSTRING) QY_getGroupList(INT32 authCode, INT64 robotID);
 
 /*
- * È¡ÈºĞÅÏ¢/×ÊÁÏ
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		Òª²éÑ¯µÄÈººÅ
- * @return	CSTRING	 strGroupInfo	Èº×ÊÁÏÊı¾İ£¬ĞèÒª½âÂë
+ * å–ç¾¤ä¿¡æ¯/èµ„æ–™
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		è¦æŸ¥è¯¢çš„ç¾¤å·
+ * @return	CSTRING	 strGroupInfo	ç¾¤èµ„æ–™æ•°æ®ï¼Œéœ€è¦è§£ç 
  */
 QYAPI(CSTRING) QY_getGroupInfo(INT32 authCode, INT64 robotID, INT64 dwGroup);
 
 /*
- * È¡Èº¹ÜÀí×éÁĞ±í
- * °üÀ¨ÈºÖ÷
- * @param	INT32	 authCode				Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID				»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup				Òª²éÑ¯µÄÈººÅ
- * @return	CSTRING	 strGroupAdminList		Èº¹ÜÀí×éÁĞ±íÊı¾İ£¬ĞèÒª½âÂë
+ * å–ç¾¤ç®¡ç†ç»„åˆ—è¡¨
+ * åŒ…æ‹¬ç¾¤ä¸»
+ * @param	INT32	 authCode				åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID				æœºå™¨äººQQ
+ * @param	INT64	 dwGroup				è¦æŸ¥è¯¢çš„ç¾¤å·
+ * @return	CSTRING	 strGroupAdminList		ç¾¤ç®¡ç†ç»„åˆ—è¡¨æ•°æ®ï¼Œéœ€è¦è§£ç 
  */
 QYAPI(CSTRING) QY_getGroupAdminList(INT32 authCode, INT64 robotID, INT64 dwGroup);
 
 /*
- * È¡Èº³ÉÔ±ÁĞ±í
- * @param	INT32	 authCode				Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID				»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup				Òª²éÑ¯µÄÈººÅ
- * @return	CSTRING	 strGroupMemberList		Èº³ÉÔ±ÁĞ±íÊı¾İ£¬ĞèÒª½âÂë
+ * å–ç¾¤æˆå‘˜åˆ—è¡¨
+ * @param	INT32	 authCode				åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID				æœºå™¨äººQQ
+ * @param	INT64	 dwGroup				è¦æŸ¥è¯¢çš„ç¾¤å·
+ * @return	CSTRING	 strGroupMemberList		ç¾¤æˆå‘˜åˆ—è¡¨æ•°æ®ï¼Œéœ€è¦è§£ç 
  */
 QYAPI(CSTRING) QY_getGroupMemberList(INT32 authCode, INT64 robotID, INT64 dwGroup);
 
 /*
- * È¡Èº³ÉÔ±ÃûÆ¬
- * @param	INT32	 authCode				Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID				»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup				ËùÔÚÈº
- * @param	INT64	 uin					Òª²éÑ¯µÄQQ
- * @param	BOOLEAN  ignoreCache			²»Ê¹ÓÃ»º´æ£¬true/²»Ê¹ÓÃ»º´æ false/Ê¹ÓÃ»º´æ
- * @return	CSTRING	 strGroupMemberCard		¸ÃÈº³ÉÔ±ÃûÆ¬
+ * å–ç¾¤æˆå‘˜åç‰‡
+ * @param	INT32	 authCode				åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID				æœºå™¨äººQQ
+ * @param	INT64	 dwGroup				æ‰€åœ¨ç¾¤
+ * @param	INT64	 uin					è¦æŸ¥è¯¢çš„QQ
+ * @param	BOOLEAN  ignoreCache			ä¸ä½¿ç”¨ç¼“å­˜ï¼Œtrue/ä¸ä½¿ç”¨ç¼“å­˜ false/ä½¿ç”¨ç¼“å­˜
+ * @return	CSTRING	 strGroupMemberCard		è¯¥ç¾¤æˆå‘˜åç‰‡
  */
 QYAPI(CSTRING) QY_getGroupMemberCard(INT32 authCode, INT64 robotID, INT64 dwGroup, INT64 uin, BOOLEAN ignoreCache);
 
 /*
- * È¡QQĞÅÏ¢/×ÊÁÏ
- * @param	INT32	 authCode			Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID			»úÆ÷ÈËQQ
- * @param	INT64	 uin				Òª²éÑ¯µÄQQ
- * @return	CSTRING	 strSummaryInfo		QQĞÅÏ¢Êı¾İ£¬ĞèÒª½âÂë
+ * å–QQä¿¡æ¯/èµ„æ–™
+ * @param	INT32	 authCode			åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID			æœºå™¨äººQQ
+ * @param	INT64	 uin				è¦æŸ¥è¯¢çš„QQ
+ * @return	CSTRING	 strSummaryInfo		QQä¿¡æ¯æ•°æ®ï¼Œéœ€è¦è§£ç 
  */
 QYAPI(CSTRING) QY_getSummaryInfo(INT32 authCode, INT64 robotID, INT64 uin);
 
 /*
- * È¡ºÃÓÑÁĞ±í
- * @param	INT32	 authCode			Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID			Òª²éÑ¯µÄ»úÆ÷ÈËQQ
- * @return	CSTRING	 strFriendList		ºÃÓÑÁĞ±íÊı¾İ£¬ĞèÒª½âÂë
+ * å–å¥½å‹åˆ—è¡¨
+ * @param	INT32	 authCode			åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID			è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+ * @return	CSTRING	 strFriendList		å¥½å‹åˆ—è¡¨æ•°æ®ï¼Œéœ€è¦è§£ç 
  */
 QYAPI(CSTRING) QY_getFriendList(INT32 authCode, INT64 robotID);
 
 /*
- * È¡ÌÖÂÛ×éÁĞ±í
- * @param	INT32	 authCode			Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID			Òª²éÑ¯µÄ»úÆ÷ÈËQQ
- * @return	CSTRING	 strDiscussList		ÌÖÂÛ×éÁĞ±íÊı¾İ£¬ĞèÒª½âÂë
+ * å–è®¨è®ºç»„åˆ—è¡¨
+ * @param	INT32	 authCode			åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID			è¦æŸ¥è¯¢çš„æœºå™¨äººQQ
+ * @return	CSTRING	 strDiscussList		è®¨è®ºç»„åˆ—è¡¨æ•°æ®ï¼Œéœ€è¦è§£ç 
  */
 QYAPI(CSTRING) QY_getDiscussList(INT32 authCode, INT64 robotID);
 
 /*
- * ·¢ËÍÃûÆ¬µãÔŞ
- * @param	INT32	 authCode	Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 uin		Ä¿±êQQ
- * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+ * å‘é€åç‰‡ç‚¹èµ
+ * @param	INT32	 authCode	åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 uin		ç›®æ ‡QQ
+ * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_sendLikeFavorite(INT32 authCode, INT64 robotID, INT64 uin);
 
 /*
- * ·¢ËÍºÃÓÑÏûÏ¢
- * @param	INT32	 authCode	Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 uin		Ä¿±êQQ
- * @param	CSTRING	 msg		ÏûÏ¢ÄÚÈİ
- * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+ * å‘é€å¥½å‹æ¶ˆæ¯
+ * @param	INT32	 authCode	åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 uin		ç›®æ ‡QQ
+ * @param	CSTRING	 msg		æ¶ˆæ¯å†…å®¹
+ * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_sendFriendMsg(INT32 authCode, INT64 robotID, INT64 uin, CSTRING msg);
 
 /*
- * ·¢ËÍÈºÏûÏ¢
- * @param	INT32	 authCode	Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup	Ä¿±êÈº
- * @param	CSTRING	 msg		ÏûÏ¢ÄÚÈİ
- * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+ * å‘é€ç¾¤æ¶ˆæ¯
+ * @param	INT32	 authCode	åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup	ç›®æ ‡ç¾¤
+ * @param	CSTRING	 msg		æ¶ˆæ¯å†…å®¹
+ * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_sendGroupMsg(INT32 authCode, INT64 robotID, INT64 dwGroup, CSTRING msg);
 
 /*
- * ·¢ËÍÈºÁÙÊ±ÏûÏ¢
- * @param	INT32	 authCode	Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup	ËùÔÚÈº
- * @param	INT64	 uin		Ä¿±êQQ
- * @param	CSTRING	 msg		ÏûÏ¢ÄÚÈİ
- * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+ * å‘é€ç¾¤ä¸´æ—¶æ¶ˆæ¯
+ * @param	INT32	 authCode	åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup	æ‰€åœ¨ç¾¤
+ * @param	INT64	 uin		ç›®æ ‡QQ
+ * @param	CSTRING	 msg		æ¶ˆæ¯å†…å®¹
+ * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_sendGroupTmpMsg(INT32 authCode, INT64 robotID, INT64 dwGroup, INT64 uin, CSTRING msg);
 
 /*
- * ·¢ËÍÌÖÂÛ×éÏûÏ¢
- * @param	INT32		authCode	Ó¦ÓÃ±êÊ¶
- * @param	INT64		robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64		dwDiscuss	Ä¿±êÌÖÂÛ×é
- * @param	CSTRING		msg			ÏûÏ¢ÄÚÈİ
- * @return	INT32		unknown		(ÍÆ²â)×´Ì¬Âë
+ * å‘é€è®¨è®ºç»„æ¶ˆæ¯
+ * @param	INT32		authCode	åº”ç”¨æ ‡è¯†
+ * @param	INT64		robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64		dwDiscuss	ç›®æ ‡è®¨è®ºç»„
+ * @param	CSTRING		msg			æ¶ˆæ¯å†…å®¹
+ * @return	INT32		unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_sendDiscussMsg(INT32 authCode, INT64 robotID, INT64 dwDiscuss, CSTRING msg);
 
 /*
- * ·¢ËÍÌÖÂÛ×éÁÙÊ±ÏûÏ¢
- * @param	INT32	 authCode	Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwDiscuss	ËùÔÚÌÖÂÛ×é
- * @param	INT64	 uin		Ä¿±êQQ
- * @param	CSTRING	 msg		ÏûÏ¢ÄÚÈİ
- * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+ * å‘é€è®¨è®ºç»„ä¸´æ—¶æ¶ˆæ¯
+ * @param	INT32	 authCode	åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwDiscuss	æ‰€åœ¨è®¨è®ºç»„
+ * @param	INT64	 uin		ç›®æ ‡QQ
+ * @param	CSTRING	 msg		æ¶ˆæ¯å†…å®¹
+ * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_sendDiscussTmpMsg(INT32 authCode, INT64 robotID, INT64 dwDiscuss, INT64 uin, CSTRING msg);
 
 /*
- * ·¢ËÍÀëÏßÎÄ¼ş
- * @param	INT32		authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64		robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64		dwUin			Ä¿±ê¶ÔÏó£¬ÈººÅ / ÌÖÂÛ×éID / ºÃÓÑQQ
- * @param	INT64		dwToUin			QQºÅ£¬·¢ËÍÁÙÊ±ÏûÏ¢Ê±Ê¹ÓÃ
- * @param	INT32		dwMsgType		ÏûÏ¢ÀàĞÍ£¬83/ÌÖÂÛ×éÏûÏ¢ 141/ÁÙÊ±ÏûÏ¢ 166/ºÃÓÑÏûÏ¢
- * @param	INT32		dwSubMsgType	ÁÙÊ±ÏûÏ¢ÀàĞÍ£¬0/ÈºÁÙÊ± 1/ÌÖÂÛ×éÁÙÊ±
- * @param	CSTRING		strLocalPath	ÎÄ¼şÂ·¾¶
- * @return	INT32		unknown			(ÍÆ²â)×´Ì¬Âë
+ * å‘é€ç¦»çº¿æ–‡ä»¶
+ * @param	INT32		authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64		robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64		dwUin			ç›®æ ‡å¯¹è±¡ï¼Œç¾¤å· / è®¨è®ºç»„ID / å¥½å‹QQ
+ * @param	INT64		dwToUin			QQå·ï¼Œå‘é€ä¸´æ—¶æ¶ˆæ¯æ—¶ä½¿ç”¨
+ * @param	INT32		dwMsgType		æ¶ˆæ¯ç±»å‹ï¼Œ83/è®¨è®ºç»„æ¶ˆæ¯ 141/ä¸´æ—¶æ¶ˆæ¯ 166/å¥½å‹æ¶ˆæ¯
+ * @param	INT32		dwSubMsgType	ä¸´æ—¶æ¶ˆæ¯ç±»å‹ï¼Œ0/ç¾¤ä¸´æ—¶ 1/è®¨è®ºç»„ä¸´æ—¶
+ * @param	CSTRING		strLocalPath	æ–‡ä»¶è·¯å¾„
+ * @return	INT32		unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_sendOfflineFile(INT32 authCode, INT64 robotID, INT64 dwUin, INT64 dwToUin, INT32 dwMsgType, INT32 dwSubMsgType, CSTRING strLocalPath);
 
 /*
- * ÖÃÏûÏ¢³·»Ø
- * ²¿·ÖÇé¿öĞèÒª¹ÜÀíÔ±È¨ÏŞ
- * @param	INT32	 authCode	Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	CSTRING	 msgInfo	ÏûÏ¢Êı¾İ£¬ÎªÁÄÌìÊÂ¼şµÄ²ÎÊı
- * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+ * ç½®æ¶ˆæ¯æ’¤å›
+ * éƒ¨åˆ†æƒ…å†µéœ€è¦ç®¡ç†å‘˜æƒé™
+ * @param	INT32	 authCode	åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	CSTRING	 msgInfo	æ¶ˆæ¯æ•°æ®ï¼Œä¸ºèŠå¤©äº‹ä»¶çš„å‚æ•°
+ * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setMessageSvcMsgWithDraw(INT32 authCode, INT64 robotID, CSTRING msgInfo);
 
 /*
- * É¾³ıºÃÓÑ
- * @param	INT32	 authCode	Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID	Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 QQUin		Ä¿±êQQ
- * @return	INT32	 unknown	(ÍÆ²â)×´Ì¬Âë
+ * åˆ é™¤å¥½å‹
+ * @param	INT32	 authCode	åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID	ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 QQUin		ç›®æ ‡QQ
+ * @return	INT32	 unknown	(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setDelFriend(INT32 authCode, INT64 robotID, INT64 uin);
 
 /*
- * ÖÃÈºÎÄ¼şÉÏ´«
- * @param	INT32	 authCode			Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup			Ä¿±êÈº
- * @param	CSTRING	 strParentFolder	ÈºÎÄ¼ş¼ĞÂ·¾¶£¬Èç ¡¸/¡¹Îª¸ùÄ¿Â¼
- * @param	CSTRING	 strLocalPath		±¾µØÎÄ¼şÂ·¾¶
- * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤æ–‡ä»¶ä¸Šä¼ 
+ * @param	INT32	 authCode			åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup			ç›®æ ‡ç¾¤
+ * @param	CSTRING	 strParentFolder	ç¾¤æ–‡ä»¶å¤¹è·¯å¾„ï¼Œå¦‚ ã€Œ/ã€ä¸ºæ ¹ç›®å½•
+ * @param	CSTRING	 strLocalPath		æœ¬åœ°æ–‡ä»¶è·¯å¾„
+ * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setGroupFileUpload(INT32 authCode, INT64 robotID, INT64 dwGroup, CSTRING strParentFolder, CSTRING strLocalPath);
 
 /*
- * ÖÃÈºÎÄ¼şÉ¾³ı
- * @param	INT32	 authCode			Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup			Ä¿±êÈº
- * @param	INT64	 fileBusID			ÎÄ¼ş×ÜÏßID
- * @param	CSTRING	 strParentFolder	¸¸ÎÄ¼ş¼ĞID Ä¿±ê ÈºÎÄ¼ş¼ĞÂ·¾¶£¬Èç ¡¸/¡¹Îª¸ùÄ¿Â¼
- * @param	CSTRING	 fileID				ÎÄ¼şID
- * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤æ–‡ä»¶åˆ é™¤
+ * @param	INT32	 authCode			åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup			ç›®æ ‡ç¾¤
+ * @param	INT64	 fileBusID			æ–‡ä»¶æ€»çº¿ID
+ * @param	CSTRING	 strParentFolder	çˆ¶æ–‡ä»¶å¤¹ID ç›®æ ‡ ç¾¤æ–‡ä»¶å¤¹è·¯å¾„ï¼Œå¦‚ ã€Œ/ã€ä¸ºæ ¹ç›®å½•
+ * @param	CSTRING	 fileID				æ–‡ä»¶ID
+ * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setDelGroupFile(INT32 authCode, INT64 robotID, INT64 dwGroup, INT64 fileBusID, CSTRING strParentFolder, CSTRING fileID);
 
 
 /*
- * ÖÃÈºÔ±ÒÆ³ı
- * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
- * @param	INT32	 authCode			Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup			ËùÔÚÈº
- * @param	INT64	 uin				Ä¿±êQQ
- * @param	INT32	 ignoreAddRequest	²»ÔÙ½ÓÊÕ´ËÈË¼ÓÈºÉêÇë£¬ÇëÉ÷ÓÃ
- * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤å‘˜ç§»é™¤
+ * éœ€è¦ç®¡ç†å‘˜æƒé™
+ * @param	INT32	 authCode			åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup			æ‰€åœ¨ç¾¤
+ * @param	INT64	 uin				ç›®æ ‡QQ
+ * @param	INT32	 ignoreAddRequest	ä¸å†æ¥æ”¶æ­¤äººåŠ ç¾¤ç”³è¯·ï¼Œè¯·æ…ç”¨
+ * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setGroupMembersKick(INT32 authCode, INT64 robotID, INT64 dwGroup, INT64 uin, INT32 ignoreAddRequest);
 
 /*
- * ÖÃÈ«Èº½ûÑÔ
- * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		Ä¿±êÈº
- * @param	INT32	 newStatus		¿ª¹Ø
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®å…¨ç¾¤ç¦è¨€
+ * éœ€è¦ç®¡ç†å‘˜æƒé™
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		ç›®æ ‡ç¾¤
+ * @param	INT32	 newStatus		å¼€å…³
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setGroupWholeBanSpeak(INT32 authCode, INT64 robotID, INT64 dwGroup, INT32 newStatus);
 
 /*
- * ÖÃÈºÔ±½ûÑÔ
- * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		ËùÔÚÈº
- * @param	INT64	 uin			Ä¿±êQQ
- * @param	INT64	 timeStamp		½ûÑÔÊ±¼ä£¬µ¥Î»ÎªÃë¡£Èç¹ûÒª½â½û£¬ÕâÀïÌîĞ´0
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤å‘˜ç¦è¨€
+ * éœ€è¦ç®¡ç†å‘˜æƒé™
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+ * @param	INT64	 uin			ç›®æ ‡QQ
+ * @param	INT64	 timeStamp		ç¦è¨€æ—¶é—´ï¼Œå•ä½ä¸ºç§’ã€‚å¦‚æœè¦è§£ç¦ï¼Œè¿™é‡Œå¡«å†™0
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setGroupMembersBanSpeak(INT32 authCode, INT64 robotID, INT64 dwGroup, INT64 uin, INT64 timeStamp);
 
 /*
- * ÖÃÈºÄäÃû³ÉÔ±½ûÑÔ
- * ½ûÑÔºóÎŞ·¨½â³ı
- * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		ËùÔÚÈº
- * @param	INT32	 anonHead		ÄäÃûÓÃ»§µÄÍ·Ïñ±êÊ¶
- * @param	CSTRING	 anonToken		ÄäÃûÓÃ»§Token
- * @param	CSTRING	 anonCard		ÄäÃûÓÃ»§ÃûÆ¬
- * @param	INT64	 timeStamp		½ûÑÔÊ±¼ä£¬µ¥Î»ÎªÃë
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤åŒ¿åæˆå‘˜ç¦è¨€
+ * ç¦è¨€åæ— æ³•è§£é™¤
+ * éœ€è¦ç®¡ç†å‘˜æƒé™
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+ * @param	INT32	 anonHead		åŒ¿åç”¨æˆ·çš„å¤´åƒæ ‡è¯†
+ * @param	CSTRING	 anonToken		åŒ¿åç”¨æˆ·Token
+ * @param	CSTRING	 anonCard		åŒ¿åç”¨æˆ·åç‰‡
+ * @param	INT64	 timeStamp		ç¦è¨€æ—¶é—´ï¼Œå•ä½ä¸ºç§’
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setGroupAnonymousBanSpeak(INT32 authCode, INT64 robotID, INT64 dwGroup, INT32 anonHead, CSTRING token, CSTRING anonCard, INT64 timeStamp);
 
 /*
- * ÉèÖÃÈºÄäÃûÁÄÌì¿ª¹Ø
- * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		Ä¿±êÈº
- * @param	INT32	 newStatus		ĞÂ×´Ì¬£¬0/½ûÖ¹ 1/ÔÊĞí
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * è®¾ç½®ç¾¤åŒ¿åèŠå¤©å¼€å…³
+ * éœ€è¦ç®¡ç†å‘˜æƒé™
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		ç›®æ ‡ç¾¤
+ * @param	INT32	 newStatus		æ–°çŠ¶æ€ï¼Œ0/ç¦æ­¢ 1/å…è®¸
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setGroupAnonymousBan(INT32 authCode, INT64 robotID, INT64 dwGroup, INT32 newStatus);
 
 /*
- * ÖÃÈºÁÙÊ±»á»°¿ª¹Ø
- * ĞèÒªÈºÖ÷È¨ÏŞ
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		Ä¿±êÈº
- * @param	INT32	 newStatus		ĞÂ×´Ì¬£¬0/½ûÖ¹ 1/ÔÊĞí
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤ä¸´æ—¶ä¼šè¯å¼€å…³
+ * éœ€è¦ç¾¤ä¸»æƒé™
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		ç›®æ ‡ç¾¤
+ * @param	INT32	 newStatus		æ–°çŠ¶æ€ï¼Œ0/ç¦æ­¢ 1/å…è®¸
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setGroupPrivateSession(INT32 authCode, INT64 robotID, INT64 dwGroup, INT32 newStatus);
 
 /*
- * ÖÃÈº³ÉÔ±·¢Æğ¶àÈËÁÄÌì¿ª¹Ø
- * ĞèÒªÈºÖ÷È¨ÏŞ
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		Ä¿±êÈº
- * @param	INT32	 newStatus		ĞÂ×´Ì¬£¬0/½ûÖ¹ 1/ÔÊĞí
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤æˆå‘˜å‘èµ·å¤šäººèŠå¤©å¼€å…³
+ * éœ€è¦ç¾¤ä¸»æƒé™
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		ç›®æ ‡ç¾¤
+ * @param	INT32	 newStatus		æ–°çŠ¶æ€ï¼Œ0/ç¦æ­¢ 1/å…è®¸
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setGroupManyPeopleChat(INT32 authCode, INT64 robotID, INT64 dwGroup, INT32 newStatus);
 
 /*
- * ÉèÖÃÈº¹ÜÀíÔ±
- * ĞèÒªÈºÖ÷È¨ÏŞ
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		ËùÔÚÈº
- * @param	INT64	 uin			Ä¿±êQQ
- * @param	INT32	 newStatus		ĞÂ×´Ì¬£¬0/È¡Ïû¹ÜÀíÔ± 1/ÉèÖÃÎª¹ÜÀíÔ±
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * è®¾ç½®ç¾¤ç®¡ç†å‘˜
+ * éœ€è¦ç¾¤ä¸»æƒé™
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+ * @param	INT64	 uin			ç›®æ ‡QQ
+ * @param	INT32	 newStatus		æ–°çŠ¶æ€ï¼Œ0/å–æ¶ˆç®¡ç†å‘˜ 1/è®¾ç½®ä¸ºç®¡ç†å‘˜
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setGroupAdmini(INT32 authCode, INT64 robotID, INT64 dwGroup, INT64 uin, INT32 newStatus);
 
 /*
- * ÉèÖÃÈº³ÉÔ±ÃûÆ¬
- * ĞèÒª¹ÜÀíÔ±È¨ÏŞ
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		ËùÔÚÈº
- * @param	INT64	 uin			Ä¿±êQQ
- * @param	CSTRING	 newCard		ĞÂÃûÆ¬
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * è®¾ç½®ç¾¤æˆå‘˜åç‰‡
+ * éœ€è¦ç®¡ç†å‘˜æƒé™
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+ * @param	INT64	 uin			ç›®æ ‡QQ
+ * @param	CSTRING	 newCard		æ–°åç‰‡
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setModifyGroupMemberCard(INT32 authCode, INT64 robotID, INT64 dwGroup, INT64 uin, CSTRING newCard);
 
 /*
- * ÉèÖÃÈº³ÉÔ±×¨ÊôÍ·ÏÎ
- * ĞèÒªÈºÖ÷È¨ÏŞ
- * Ä¿Ç°½ö°²×¿QQĞ­ÒéÖ§³Ö
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		ËùÔÚÈº
- * @param	INT64	 uin			Ä¿±êQQ
- * @param	CSTRING	 specialTitle	Í·ÏÎ£¬ÈçĞèÉ¾³ı£¬ÇëÌî¿ÕÎÄ±¾
- * @param	INT32	 expireTime		ÓĞĞ§ÆÚ£¬µ¥Î»ÎªÃë¡£Èç¹ûÓÀ¾ÃÓĞĞ§£¬ÇëÌî-1
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * è®¾ç½®ç¾¤æˆå‘˜ä¸“å±å¤´è¡”
+ * éœ€è¦ç¾¤ä¸»æƒé™
+ * ç›®å‰ä»…å®‰å“QQåè®®æ”¯æŒ
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+ * @param	INT64	 uin			ç›®æ ‡QQ
+ * @param	CSTRING	 specialTitle	å¤´è¡”ï¼Œå¦‚éœ€åˆ é™¤ï¼Œè¯·å¡«ç©ºæ–‡æœ¬
+ * @param	INT32	 expireTime		æœ‰æ•ˆæœŸï¼Œå•ä½ä¸ºç§’ã€‚å¦‚æœæ°¸ä¹…æœ‰æ•ˆï¼Œè¯·å¡«-1
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setGroupSpecialTitle(INT32 authCode, INT64 robotID, INT64 dwGroup, INT64 uin, CSTRING specialTitle, INT32 expireTime);
 
 /*
- * ÖÃÈºÍË³ö
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup		ËùÔÚÈº
- * @param	INT32	 disband		ÊÇ·ñ½âÉ¢Èº£¬1/½âÉ¢ 0/ÍË³ö
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®ç¾¤é€€å‡º
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup		æ‰€åœ¨ç¾¤
+ * @param	INT32	 disband		æ˜¯å¦è§£æ•£ç¾¤ï¼Œ1/è§£æ•£ 0/é€€å‡º
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setExitGroupChat(INT32 authCode, INT64 robotID, INT64 dwGroup, INT32 disband);
 
 /*
- * ÖÃÌÖÂÛ×éÍË³ö
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwDiscuss		Ä¿±êÌÖÂÛ×é
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®è®¨è®ºç»„é€€å‡º
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwDiscuss		ç›®æ ‡è®¨è®ºç»„
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setExitDiscussChat(INT32 authCode, INT64 robotID, INT64 dwDiscuss);
 
 /*
- * ÖÃÌÖÂÛ×é³ÉÔ±ÒÆ³ı
- * ĞèÒª´´½¨ÕßÈ¨ÏŞ
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID		Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwDiscuss		ËùÔÚÌÖÂÛ×é
- * @param	INT64	 uin			Ä¿±êQQ
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®è®¨è®ºç»„æˆå‘˜ç§»é™¤
+ * éœ€è¦åˆ›å»ºè€…æƒé™
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID		ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwDiscuss		æ‰€åœ¨è®¨è®ºç»„
+ * @param	INT64	 uin			ç›®æ ‡QQ
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setDiscussMembersKick(INT32 authCode, INT64 robotID, INT64 dwDiscuss, INT64 uin);
 
 /*
- * ÖÃÌí¼ÓÈº
- * @param	INT32	 authCode			Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	INT64	 dwGroup			Ä¿±êÈº
- * @param	CSTRING	 additionalMsg		¸½¼ÓĞÅÏ¢
- * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+ * ç½®æ·»åŠ ç¾¤
+ * @param	INT32	 authCode			åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	INT64	 dwGroup			ç›®æ ‡ç¾¤
+ * @param	CSTRING	 additionalMsg		é™„åŠ ä¿¡æ¯
+ * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setAddGroup(INT32 authCode, INT64 robotID, INT64 dwGroup, CSTRING additionalMsg);
 
 /*
- * ÖÃ´¦ÀíÈºÌí¼ÓÇëÇó
- * @param	INT32	 authCode			Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	CSTRING	 responseFlag		ÇëÇóÊÂ¼şÊÕµ½µÄ¡¸·´À¡±êÊ¶¡¹²ÎÊı
- * @param	INT32	 requestType		ÇëÇóÀàĞÍ£¬ÑûÇë/REQUEST_GROUP_INVITE »ò ¼ÓÈº/REQUEST_GROUP_INVITE
- * @param	INT32	 resultFlag			´¦Àí½á¹û£¬Í¨¹ı/REQUEST_ALLOW »ò ¾Ü¾ø/REQUEST_DENY
- * @param	CSTRING	 reason				¾Ü¾øÀíÓÉ£¬½öÔÚ ¼ÓÈº ÇÒ ¾Ü¾ø Ê±¿ÉÓÃ
- * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+ * ç½®å¤„ç†ç¾¤æ·»åŠ è¯·æ±‚
+ * @param	INT32	 authCode			åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	CSTRING	 responseFlag		è¯·æ±‚äº‹ä»¶æ”¶åˆ°çš„ã€Œåé¦ˆæ ‡è¯†ã€å‚æ•°
+ * @param	INT32	 requestType		è¯·æ±‚ç±»å‹ï¼Œé‚€è¯·/REQUEST_GROUP_INVITE æˆ– åŠ ç¾¤/REQUEST_GROUP_INVITE
+ * @param	INT32	 resultFlag			å¤„ç†ç»“æœï¼Œé€šè¿‡/REQUEST_ALLOW æˆ– æ‹’ç»/REQUEST_DENY
+ * @param	CSTRING	 reason				æ‹’ç»ç†ç”±ï¼Œä»…åœ¨ åŠ ç¾¤ ä¸” æ‹’ç» æ—¶å¯ç”¨
+ * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setGroupAddRequest(INT32 authCode, INT64 robotID, CSTRING responseFlag, INT32 requestType, INT32 resultFlag, CSTRING reason);
 
 /*
- * ÖÃ´¦ÀíºÃÓÑÌí¼ÓÇëÇó
- * @param	INT32	 authCode			Ó¦ÓÃ±êÊ¶
- * @param	INT64	 robotID			Ê¹ÓÃµÄ»úÆ÷ÈËQQ
- * @param	CSTRING	 responseFlag		ÇëÇóÊÂ¼şÊÕµ½µÄ¡¸·´À¡±êÊ¶¡¹²ÎÊı
- * @param	INT32	 resultFlag			´¦Àí½á¹û£¬Í¨¹ı/REQUEST_ALLOW »ò ¾Ü¾ø/REQUEST_DENY
- * @param	CSTRING	 remarks			Í¨¹ıÊ±ÎªÌí¼ÓºóµÄºÃÓÑ±¸×¢£¬¾Ü¾øÊ±Îª¾Ü¾øÀíÓÉ
- * @return	INT32	 unknown			(ÍÆ²â)×´Ì¬Âë
+ * ç½®å¤„ç†å¥½å‹æ·»åŠ è¯·æ±‚
+ * @param	INT32	 authCode			åº”ç”¨æ ‡è¯†
+ * @param	INT64	 robotID			ä½¿ç”¨çš„æœºå™¨äººQQ
+ * @param	CSTRING	 responseFlag		è¯·æ±‚äº‹ä»¶æ”¶åˆ°çš„ã€Œåé¦ˆæ ‡è¯†ã€å‚æ•°
+ * @param	INT32	 resultFlag			å¤„ç†ç»“æœï¼Œé€šè¿‡/REQUEST_ALLOW æˆ– æ‹’ç»/REQUEST_DENY
+ * @param	CSTRING	 remarks			é€šè¿‡æ—¶ä¸ºæ·»åŠ åçš„å¥½å‹å¤‡æ³¨ï¼Œæ‹’ç»æ—¶ä¸ºæ‹’ç»ç†ç”±
+ * @return	INT32	 unknown			(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setFriendAddRequest(INT32 authCode, INT64 robotID, CSTRING responseFlag, INT32 resultFlag, CSTRING remarks);
 
 /*
- * ÖÃÖÂÃü´íÎóÌáÊ¾
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	CSTRING	 errorInfo		´íÎóĞÅÏ¢
- * @return	INT32	 unknown		(ÍÆ²â)×´Ì¬Âë
+ * ç½®è‡´å‘½é”™è¯¯æç¤º
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	CSTRING	 errorInfo		é”™è¯¯ä¿¡æ¯
+ * @return	INT32	 unknown		(æ¨æµ‹)çŠ¶æ€ç 
  */
 QYAPI(INT32) QY_setFatal(INT32 authCode, CSTRING errorInfo);
 
 /*
- * ±àÂëUtf8µ½Ansi
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	CSTRING	 utf8Content	ĞèÒª×ª»»µÄUTF-8±àÂëÎÄ±¾
- * @return	CSTRING	 ansiContent	×ª»»ºóµÄANSI±àÂëÎÄ±¾
+ * ç¼–ç Utf8åˆ°Ansi
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	CSTRING	 utf8Content	éœ€è¦è½¬æ¢çš„UTF-8ç¼–ç æ–‡æœ¬
+ * @return	CSTRING	 ansiContent	è½¬æ¢åçš„ANSIç¼–ç æ–‡æœ¬
  */
 QYAPI(CSTRING) QY_setEncodeUtf8ToAnsi(INT32 authCode, CSTRING utf8Content);
 
 /*
- * ±àÂëAnsiµ½Utf8
- * @param	INT32	 authCode		Ó¦ÓÃ±êÊ¶
- * @param	CSTRING	 ansiContent	ĞèÒª×ª»»µÄANSI±àÂëÎÄ±¾
- * @return	CSTRING	 utf8Content	×ª»»ºóµÄUTF-8±àÂëÎÄ±¾
+ * ç¼–ç Ansiåˆ°Utf8
+ * @param	INT32	 authCode		åº”ç”¨æ ‡è¯†
+ * @param	CSTRING	 ansiContent	éœ€è¦è½¬æ¢çš„ANSIç¼–ç æ–‡æœ¬
+ * @return	CSTRING	 utf8Content	è½¬æ¢åçš„UTF-8ç¼–ç æ–‡æœ¬
  */
 QYAPI(CSTRING) QY_setEncodeAnsiToUtf8(INT32 authCode, CSTRING ansiContent);
 
