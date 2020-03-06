@@ -13,7 +13,7 @@ QYBot SDK
 | C++ | `2018` | Hstb1230 | github | [![C++ by Hstb1230 Last Commit]][tree/cpp] |
 | C++ | `2018` | huise | gitee | [![C++ by huise Last Commit]][shangg/QYSDK-VC] |
 | C# | `2018` | huise | gitee | [![C# by huise Last Commit]][shangg/QYSDK-NET] |
-| E | `2018` | 机器人作者 | github | [![E by Hstb1230 Last Commit]][tree/e] |
+| E | `2018` | Hstb1230 | github | [![E by Hstb1230 Last Commit]][tree/e] |
 
 注：
 * 部分SDK使用 _`branch`_ 直接收录于此 _`repo`_ 下，想要补充的同学发起PR请求即可。
