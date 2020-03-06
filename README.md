@@ -8,7 +8,7 @@ QYBot SDK
 
 ---
 
-| 语言 | API版本 | 作者 | 托管平台 | 最后更新时间 \| 地址导向 |
+| 语言 | API版本 | 作者 | 托管平台 | 最后更新时间 \| 点击跳转 |
 | --- | --- | --- | --- | --- |
 | C++ | `2018` | Hstb1230 | github | [![C++ by Hstb1230 Last Commit]][tree/cpp] |
 | C++ | `2018` | huise | gitee | [![C++ by huise Last Commit]][shangg/QYSDK-VC] |
