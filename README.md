@@ -6,7 +6,7 @@ QYBot SDK
 
 此项目(_`repo`_)用于收录 契约机器人 的各种语言SDK
 
-SDK List
+Demo List
 ---
 
 | 语言 | API版本 | 作者 | 托管平台 | 最后更新时间 \| 点击跳转 |
@@ -17,7 +17,7 @@ SDK List
 | E | `2018` | Hstb1230 | github | [![E by Hstb1230 Last Commit]][tree/e] |
 
 注：
-* 部分SDK使用 _`branch`_ 直接收录于此 _`repo`_ 下，想要补充的同学发起PR请求即可。
+* 部分demo使用 _`branch`_ 直接收录于此 _`repo`_ 下，想要补充的同学发起PR请求即可。
 
 Wiki
 ---
