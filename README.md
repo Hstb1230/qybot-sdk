@@ -6,6 +6,7 @@ QYBot SDK
 
 此项目(_`repo`_)用于收录 契约机器人 的各种语言SDK
 
+SDK List
 ---
 
 | 语言 | API版本 | 作者 | 托管平台 | 最后更新时间 \| 点击跳转 |
@@ -17,6 +18,11 @@ QYBot SDK
 
 注：
 * 部分SDK使用 _`branch`_ 直接收录于此 _`repo`_ 下，想要补充的同学发起PR请求即可。
+
+Wiki
+---
+* [Github Wiki] (测试)
+* [官方文库] (正在编写)
 
 [License Image]: https://shields.proxy.1sls.cn/github/license/Hstb1230/qybot-sdk.svg "LICENSE"
 [Q群 Image]: https://img.shields.io/badge/Q%20%E7%BE%A4-529483966-orange.svg "Q群"
@@ -33,3 +39,6 @@ QYBot SDK
 [shangg/QYSDK-VC]: https://gitee.com/shangg/QYSDK-VC
 [shangg/QYSDK-NET]: https://gitee.com/shangg/QYSDK-NET
 [tree/e]: https://github.com/Hstb1230/qybot-sdk/tree/e
+
+[Github Wiki]: https://github.com/Hstb1230/qybot-sdk/wiki
+[官方文库]: https://doc.qybot.net/
