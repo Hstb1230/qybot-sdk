@@ -21,7 +21,7 @@ QYBot SDK
 [License Image]: https://shields.proxy.1sls.cn/github/license/Hstb1230/qybot-sdk.svg "LICENSE"
 [Q群 Image]: https://img.shields.io/badge/Q%20%E7%BE%A4-529483966-orange.svg "Q群"
 [Q群]: https://jq.qq.com/?_wv=1027&k=5McnWRW
-[社区 Image]: https://shields.proxy.1sls.cn/badge/%E7%A4%BE%E5%8C%BA-qyue.cc-blue.svg?like "社区"
+[社区 Image]: https://shields.proxy.1sls.cn/badge/%E7%A4%BE%E5%8C%BA-qyue.cc-blue.svg?233 "社区"
 [社区]: https://qyue.cc
 
 [C++ by Hstb1230 Last Commit]: https://shields.proxy.1sls.cn/github/last-commit/Hstb1230/qybot-sdk/cpp "tree/cpp"
