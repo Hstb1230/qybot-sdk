@@ -40,5 +40,5 @@ Wiki
 [shangg/QYSDK-NET]: https://gitee.com/shangg/QYSDK-NET
 [tree/e]: https://github.com/Hstb1230/qybot-sdk/tree/e
 
-[Github Wiki]: https://github.com/Hstb1230/qybot-sdk/wiki
+[Github Wiki]: https://github.com/Hstb1230/qybot-sdk/wiki/%E6%AC%A2%E8%BF%8E%E4%BD%BF%E7%94%A8QYbot
 [官方文库]: https://doc.qybot.net/
