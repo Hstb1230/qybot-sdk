@@ -22,7 +22,7 @@ Demo List
 Wiki
 ---
 * [Github Wiki] (测试)
-* [官方文库] (正在编写)
+* [官方文库] (待编写)
 
 [License Image]: https://shields.proxy.1sls.cn/github/license/Hstb1230/qybot-sdk.svg "LICENSE"
 [Q群 Image]: https://img.shields.io/badge/Q%20%E7%BE%A4-529483966-orange.svg "Q群"
