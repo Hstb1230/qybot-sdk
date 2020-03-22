@@ -86,7 +86,7 @@ QYEVENT(INT32) QY_Event_Disable()
  */
 QYEVENT(INT32) QY_Event_PrivateMsg(
 	INT64		robotID,		// 机器人QQ，用于区分多号登录
-	INT32		subType,		// 子类型，11/来自好友 1/来自在线状态 2/来自群 3/来自讨论组 4/来自公众号
+	INT32		subType,		// 消息渠道，11/来自好友 1/来自在线状态 2/来自群 3/来自讨论组 4/来自公众号
 	INT64		sendTime,		// 发送时间(13位时间戳)
 	INT64		fromQQ,			// 来源对象
 	INT64		fromGroup,		// 来源群组(仅子类型为2/3时使用)
@@ -393,7 +393,7 @@ QYEVENT(INT32) QY_Event_System_GroupMemberDecrease(
  */
 QYEVENT(INT32) QY_Event_System_GroupMemberIncrease(
 	INT64	robotID,		// 机器人QQ，用于区分多号
-	INT32	subType,		// 子类型，1/群解散 2/群员离开 3/群员被踢。
+	INT32	subType,		// 子类型，1/管理员已同意 2/管理员邀请。
 	INT64	sendTime,		// 发送时间(13位时间戳)
 	INT64	fromGroup,		// 来源群组
 	INT64	fromQQ,			// 操作对象(仅子类型为2、3时存在)
@@ -404,12 +404,12 @@ QYEVENT(INT32) QY_Event_System_GroupMemberIncrease(
 }
 
 /*
- * [201]好友事件
+ * [201]添加他人为好友结果事件
  * 本子程序会在【线程】中被调用，请注意使用对象等需要初始化(CoInitialize,CoUninitialize)。
  */
 QYEVENT(INT32) QY_Event_FriendEvent(
 	INT64		robotID,		// 机器人QQ，用于区分多号
-	INT32		subType,		// 子类型，1/好友已同意 2/好友已拒绝
+	INT32		subType,		// 子类型，1/对方同意添加 2/对方拒绝添加
 	INT64		sendTime,		// 发送时间(13位时间戳)
 	INT64		fromQQ,			// 来源对象
 	CSTRING		info			// 信息
@@ -419,7 +419,7 @@ QYEVENT(INT32) QY_Event_FriendEvent(
 }
 
 /*
- * [301]请求-好友添加
+ * [301]请求-他人添加好友
  * 本子程序会在【线程】中被调用，请注意使用对象等需要初始化(CoInitialize,CoUninitialize)。
  */
 QYEVENT(INT32) QY_Event_Request_AddFriend(
