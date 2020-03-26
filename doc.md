@@ -44,7 +44,7 @@
  2. 修改工程名称
 
  3. 修改`info.json` 参考如下 
-```json
+```javascript
      {
        "ret": 1, // 返回码，固定为1
        "apiver": 2018, // Api版本，本SDK为2018
