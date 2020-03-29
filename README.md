@@ -21,9 +21,9 @@ Demo List
 
 Wiki
 ---
-* [Github Wiki] (测试)
+* [Github Wiki by Hstb1230] (测试)
 * [官方文库] (待编写)
-* [文档(By S·c)](doc.md)
+* [文档(By S·c)]
 
 [License Image]: https://shields.proxy.1sls.cn/github/license/Hstb1230/qybot-sdk.svg "LICENSE"
 [Q群 Image]: https://img.shields.io/badge/Q%20%E7%BE%A4-529483966-orange.svg "Q群"
@@ -41,5 +41,6 @@ Wiki
 [shangg/QYSDK-NET]: https://gitee.com/shangg/QYSDK-NET
 [tree/e]: https://github.com/Hstb1230/qybot-sdk/tree/e
 
-[Github Wiki]: https://github.com/Hstb1230/qybot-sdk/wiki/%E6%AC%A2%E8%BF%8E%E4%BD%BF%E7%94%A8QYbot
+[Github Wiki by Hstb1230]: https://github.com/Hstb1230/qybot-sdk/wiki/%E6%AC%A2%E8%BF%8E%E4%BD%BF%E7%94%A8QYbot
 [官方文库]: https://doc.qybot.net/
+[文档(By S·c)]: doc.md
